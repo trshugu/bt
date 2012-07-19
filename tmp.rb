@@ -3,14 +3,9 @@
 =begin
 =end
 
-class Tmp
-  def str
-    return "TmpOut"
-  end
-end
 
-#ttt = Tmp.new
-#puts ttt.str
+
+
 
 
 
@@ -19,6 +14,42 @@ end
 
 
 =begin
+class Tmp
+  def initialize(x, y)
+    @x = x
+    @y = y
+  end
+  
+  def getX()
+    return @x
+  end
+  
+  def getY()
+    return @y
+  end
+  
+  # 演算子オーバーライド というものらしい・・・
+  def ==(point)
+    return (@x == point.getX()) && (@y == point.getY())
+  end
+end
+
+aaa = Tmp.new(1,2)
+puts aaa.getX
+puts aaa.getY
+puts aaa == Tmp.new(1,2)
+=end
+
+
+=begin
+class Tmp
+  def str
+    return "TmpOut"
+  end
+end
+
+#ttt = Tmp.new
+#puts ttt.str
 =end
 
 
