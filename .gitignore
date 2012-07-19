@@ -16,5 +16,6 @@ tmp
 .yardoc
 _yardoc
 doc/
+
 #dat/
 oauth.txt
