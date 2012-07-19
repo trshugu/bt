@@ -1,45 +1,62 @@
-﻿#!ruby
+#!ruby
 # -*- coding: utf-8 -*-
 =begin
 =end
 
-#同じ発言をしないようにしないといけないかもね・・・
-#あと同じ発言だった場合のエラーハンドリングとかも
-#引数を受け取るとかの処理もできないとね
+class Tmp
+  def str
+    return "TmpOut"
+  end
+end
 
-#返信する
+#ttt = Tmp.new
+#puts ttt.str
 
-#テンプレ機能
+
+
+
+
+
+
 =begin
-temp = "てあ{0}すと"
-pos = temp.index("{0}")
-if (pos != nil)
-  puts temp.gsub("{0}","AOYAMA")
+=end
+
+
+=begin
+# テンプレ機能 ワンライナー的な感じだと見にくいので分解する
+listweet = File.readlines("list1.txt")[rand(File.readlines("list1.txt").length)]
+if (listweet.index("{0}") != nil)
+  listweet = listweet.gsub("{0}",File.readlines("list2.txt")[rand(File.readlines("list2.txt").length)].chomp)
+end
+puts listweet
+
+#puts File.readlines("list1.txt")[0]
+#puts File.readlines("list1.txt").length
+=end
+
+
+=begin
+# 時間によって発言を変える
+require "./betweenhour"
+tmorningbgn = 6
+tmorningend = 9
+
+bh = BetweenHour.new()
+if bh.isBetweenHour(tmorningbgn,tmorningend,Time.now.hour) == true
+  puts "OK"
 end
 =end
 
-#時間によって発言を変える
-#→MFソースを利用する
-# 時間帯の範囲を指定し、trueなら特定の発言をする など
-
-#発言しない時間帯を作る
-#→MFソースを利用する
-# 時間帯の範囲を指定し、trueなら発言 など
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 =begin
+# 時間帯の範囲を指定し、falseならOK
+require "./betweenhour"
+tstopbgn = 23
+tstopend = 7
+
+bh = BetweenHour.new()
+if bh.isBetweenHour(tstopbgn,tstopend,Time.now.hour) == false
+  puts "OK"
+end
 =end
 
 

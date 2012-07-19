@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 =begin
 =end
-require 'test/unit'
-
-
 
 
 
@@ -12,6 +9,7 @@ require 'test/unit'
 
 =begin
 #MF試験問題テスト
+require 'test/unit'
 require './tmp'
 
 class TestBetweenHour < Test::Unit::TestCase
@@ -85,31 +83,6 @@ class TestBetweenHour < Test::Unit::TestCase
     assert_raise(ArgumentError){@bhTest.isBetweenHour(22,-1,3)}
     assert_raise(ArgumentError){@bhTest.isBetweenHour(-23,1,3)}
     assert_raise(ArgumentError){@bhTest.isBetweenHour(22,1,-128)}
-  end
-end
-=end
-
-
-
-=begin
-require 'rspec'
-require './tmp'
-
-describe Tmp, "when empty" do
-  before do
-    @empty_array = []
-  end
-
-  it "should be empty" do
-    @empty_array.should be_empty
-  end
-
-  it "should size 0" do
-    @empty_array.size.should == 0
-  end
-
-  after do
-    @empty_array = nil
   end
 end
 =end
