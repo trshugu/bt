@@ -11,7 +11,14 @@
 
 
 
+=begin
+#つかったらケス
+# 対象バイナリファイルをbinreadで読込み、pack('m')でBase64にし出力先に書き込む
+File.write("result_k84.txt", [File.binread("k89.7z")].pack('m'))
 
+# 対象ファイルを読込み、unpack('m')でバイナリにし出力先へbinwriteでバイナリで書き込む
+#File.binwrite("k89.7z", File.read("result_k84.txt").unpack('m')[0])
+=end
 
 =begin
 class Tmp
