@@ -10,6 +10,49 @@
 
 
 
+=begin
+# shiftは配列の先頭を返却し、削除する
+puts $*[0]
+puts $*.shift
+puts $*[0]
+=end
+
+
+=begin
+# コマンド名を取得
+puts $0
+
+# 引数を配列で取得
+puts $*
+puts $*[1]
+=end
+
+
+=begin
+# 出力時の変換。先に定義されていないといけない
+lis2 = "AMAYA"
+tex = "itibann#{lis2}itibandesu"
+puts tex
+=end
+
+=begin
+# %文字列配列と出力時の返還
+%w(one thow shoien).each do |arrr|
+  sttt = "asd#{arrr}gghhg"
+  puts sttt
+end
+=end
+
+=begin
+# OSコマンド
+`dir>aaa`
+=end
+
+=begin
+# 引数
+puts ARGV[0]
+=end
+
 
 =begin
 #つかったらケス
