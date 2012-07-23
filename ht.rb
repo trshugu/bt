@@ -16,6 +16,15 @@ POST /agileronin/atom/blog
 
 =end
 
+
+http://rubyforge.org/projects/hatenaapiauth/
+
+
+
+
+
+=begin
+
 require 'rubygems'
 require 'atomutil'
 
@@ -48,5 +57,6 @@ entry = Atom::Entry.new(
 )
 
 puts client.create_entry collection_uri, entry
+=end
 
 

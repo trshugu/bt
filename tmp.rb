@@ -3,11 +3,82 @@
 =begin
 =end
 
+#存在確認も必要・・・
+#＜要件＞
+#□生存チェック
+#□重複チェック
+#□フィルタリング
+#□ソート
+#□削除、追加などの編集
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=begin
+#リンクチェック移植
+require "net/http"
+require "uri"
+
+#＊同じ名前のテキストを読み込む
+file = $0.gsub("rb", "txt").split("/").pop
+
+#＊結果ファイル名
+resultfile = "result_" + file
+
+File.readlines(file).each do |line|
+  if /^http/ =~ line
+    begin
+      #URLの取得
+      response = Net::HTTP.get_response(URI.parse(line))
+      case response
+        when Net::HTTPSuccess
+          next
+        else
+          open(resultfile, "a+").write(line.chomp)
+          open(resultfile, "a+").write(" " + response.code + "\n")
+      end
+    rescue
+      open(resultfile, "a+").write(line)
+    end
+  end
+end
+=end
+
+
+=begin
+# ステータスコードのみを取得する
+require "net/http"
+response = Net::HTTP.get_response(URI.parse('http://www.yahoo.co.jp/'))
+puts response.code
+if response.code == "200"
+  puts "ok"
+else
+  puts "ng"
+end
+=end
+
+
+=begin
+#MD5変換
+require "digest/md5"
+md5 = Digest::MD5.new.update("hashhash");
+puts md5
+=end
 
 
 =begin
