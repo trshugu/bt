@@ -14,7 +14,7 @@ require "uri"
 file = $0.gsub("rb", "txt").split("/").pop
 
 #＊結果ファイル名
-resultfile = "result_" + file
+resultfile = "resultrb_" + file
 
 File.readlines(file).each do |line|
   if /^http/ =~ line
@@ -22,7 +22,7 @@ File.readlines(file).each do |line|
       #URLの取得
       response = Net::HTTP.get_response(URI.parse(line))
       case response
-        when Net::HTTPSuccess
+        when Net::HTTPSuccess, Net::HTTPRedirection
           next
         else
           open(resultfile, "a+").write(line.chomp)
