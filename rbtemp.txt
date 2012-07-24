@@ -48,12 +48,24 @@ load(file, *args)
 ObjectSpace
 initializer
 info
-
-
-
-
-
-
-
+#:nodoc:
+.is_a?(Symbol)
+defined?(ActiveRecord) and defined?(ActiveRecord::Observer)
+__send__
+File.open(path, "wb+")
+FileUtils.makedirs(File.dirname(path))
+Mime::LOOKUP[self.content_type]
+delegate :flash, :to => :request
+File.basename(path)
+%r{^(\w[\w+.-]*:|//).*}
+end.delete("\0\r\n")
+value.chomp!('"')
+match.chop
+text.scan(/\r?\n/) { @current_line += 1 }
+rescue IOError
+load
+Marshal.dump
+File.exist
+$stderr.puts
 
 
