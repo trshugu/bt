@@ -1,71 +1,73 @@
-attr
-ハッシュテーブル
-Dir
-<<
-ENV
-exit(true)
-File.expand_path('../../../actionpack/lib', __FILE__)
-$:.unshift(actionpack_path) if File.directory?(actionpack_path) && !$:.include?(actionpack_path)
-autoload
-gsub!
-module
-?
-options.assets_dir      ||= paths["public"].first
-included do
-NilClass
-Symbol
-*args
-def initialize(context, &block)
-alias :all :any
-options[:body] = block_given? ? yield : @default_render.call
-VERSION
-super
-IO
-abstract!
-observer.is_a?(String)
-return super unless respond_to?(method)
-new(method, *args).message
-protected
-assert_equal %Q{<img alt="Somelogo" src="http://images.example.com/images/somelogo.png" />}, mail.body.to_s.strip
-File.read(File.dirname(__FILE__) + "/fixtures/raw_email")
-assert_match
-wait
-silence_warnings
-ActionView::Template.register_template_handler :haml, lambda { |template| "Look its HAML!".inspect }
-test "ActionMailer should be told when Mail gets delivered" do
-format.html
-Proc.new{ Time.now.to_i.to_s }
-MyHash = Class.new(Hash)
-Hash.class_eval do
-STDOUT.flush
-klass
-classを作成
-self.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-extend
-IRB.start
-abort 'Use REE so you can profile memory and object allocation' unless GC.respond_to?(:enable_stats)
-load(file, *args)
-ObjectSpace
-initializer
-info
-#:nodoc:
-.is_a?(Symbol)
-defined?(ActiveRecord) and defined?(ActiveRecord::Observer)
-__send__
-File.open(path, "wb+")
-FileUtils.makedirs(File.dirname(path))
-Mime::LOOKUP[self.content_type]
-delegate :flash, :to => :request
-File.basename(path)
-%r{^(\w[\w+.-]*:|//).*}
-end.delete("\0\r\n")
-value.chomp!('"')
-match.chop
-text.scan(/\r?\n/) { @current_line += 1 }
-rescue IOError
-load
-Marshal.dump
-File.exist
-$stderr.puts
+＊attr
+→getterやsetterなどのクラスのメソッド
 
+・ハッシュテーブル
+・Dir
+・<<
+・ENV
+・exit(true)
+・File.expand_path('../../../actionpack/lib', __FILE__)
+・$:.unshift(actionpack_path) if File.directory?(actionpack_path) && !$:.include?(actionpack_path)
+・autoload
+・gsub!
+・module
+・?
+・options.assets_dir      ||= paths["public"].first
+・included do
+・NilClass
+・Symbol
+・*args
+・def initialize(context, &block)
+・alias :all :any
+・options[:body] = block_given? ? yield : @default_render.call
+・VERSION
+・super
+・IO
+・abstract!
+・observer.is_a?(String)
+・return super unless respond_to?(method)
+・new(method, *args).message
+・protected
+・assert_equal %Q{<img alt="Somelogo" src="http://images.example.com/images/somelogo.png" />}, mail.body.to_s.strip
+・File.read(File.dirname(__FILE__) + "/fixtures/raw_email")
+・assert_match
+・wait
+・silence_warnings
+・ActionView::Template.register_template_handler :haml, lambda { |template| "Look its HAML!".inspect }
+・test "ActionMailer should be told when Mail gets delivered" do
+・format.html
+・Proc.new{ Time.now.to_i.to_s }
+・MyHash = Class.new(Hash)
+・Hash.class_eval do
+・STDOUT.flush
+・klass
+・classを作成
+・self.class_eval <<-RUBY, __FILE__, __LINE__ + 1
+・extend
+・IRB.start
+・abort 'Use REE so you can profile memory and object allocation' unless GC.respond_to?(:enable_stats)
+・load(file, *args)
+・ObjectSpace
+・initializer
+・info
+・#:nodoc:
+・.is_a?(Symbol)
+・defined?(ActiveRecord) and defined?(ActiveRecord::Observer)
+・__send__
+・File.open(path, "wb+")
+・FileUtils.makedirs(File.dirname(path))
+・Mime::LOOKUP[self.content_type]
+・delegate :flash, :to => :request
+・File.basename(path)
+・%r{^(\w[\w+.-]*:|//).*}
+・end.delete("\0\r\n")
+・value.chomp!('"')
+・match.chop
+・text.scan(/\r?\n/) { @current_line += 1 }
+・rescue IOError
+・load
+・Marshal.dump
+・File.exist
+・$stderr.puts
+・define_method
 

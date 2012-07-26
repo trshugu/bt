@@ -3,7 +3,6 @@
 =begin
 =end
 
-puts "aaa"
 
 
 
@@ -19,6 +18,57 @@ puts "aaa"
 
 
 
+
+
+
+=begin
+#{}からdo endへ
+File.open("list1.txt") do |f| # ファイルを開いて、対応する
+                                 # Fileオブジェクトを変数fに設定
+  line = 0
+  f.each_line do                 # ファイル中の各行に対して繰り返し
+    line += 1                    # カウンタ値をインクリメント
+  end
+  puts "行数は#{line}です"
+end
+
+=end
+
+
+=begin
+#getter setter 2
+class Attttclass
+  def initialize
+    @field1 = ""
+    @field2 = ""
+    @field3 = ""
+  end
+  
+  attr_accessor :field1, :field2, :field3
+  attr_reader :field1, :field2, :field3
+  attr_writer :field1, :field2, :field3
+end
+
+o = Attttclass.new
+puts o.field1
+o.field1 = "aaa"
+puts o.field1
+
+=end
+
+=begin
+# getter setter
+def field1
+  return @field1
+end
+def field1=(new_field1)
+  @field1 = new_field1
+end
+
+puts field1
+field1 = "settin"
+puts field1
+=end
 
 
 
