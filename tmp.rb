@@ -18,6 +18,30 @@
 
 
 
+=begin
+# ダックタイピングの試し書き
+class Claa
+  def methooood
+    puts "errerere"
+  end
+end
+class Claa2
+  def methooood
+    puts "asdfasdf"
+  end
+end
+class Act
+  def exxx(a)
+    a.methooood
+  end
+end
+
+a = Act.new
+b = Claa.new
+c = Claa2.new
+a.exxx(b)
+a.exxx(c)
+=end
 
 
 
