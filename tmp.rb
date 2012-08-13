@@ -15,7 +15,22 @@
 
 
 
+=begin
+# mapとcollectは内部的には違うらしい
+(1..10).map { |x|
+  puts x
+}
 
+(1..10).collect { |x|
+  puts x
+}
+=end
+
+=begin
+# ラムダ式の試し書き
+lambdaexp = -> base{ base == "aa" }
+puts lambdaexp["bb"]
+=end
 
 
 =begin
