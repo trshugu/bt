@@ -3,7 +3,7 @@
 require 'twitter'
 
 lineArray = Array.new()
-File.readlines("oauth.txt").each do |line|
+File.readlines("maroauth.txt").each do |line|
   lineArray.push line
 end
 
