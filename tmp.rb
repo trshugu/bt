@@ -13,6 +13,36 @@
 
 
 
+=begin
+# 文字数を取得した。
+strData = 'あいうえお'
+print strData.size
+print strData.length
+
+=end
+
+
+=begin
+# プリントフォーマット
+printf "ああああ%s", "aaa"
+=end
+
+=begin
+# 配列では使えない
+a = [1,2,3]
+p a
+
+1.times {|line|
+  p line
+}
+=end
+
+
+=begin
+puts '名前を入力してください。'
+name = gets.chomp
+puts "あなたの名前は#{ name }です。"
+=end
 
 
 =begin
