@@ -13,11 +13,80 @@
 
 
 
+=begin
+# 文字数を取得した。
+strData = 'あいうえお'
+print strData.size
+print strData.length
+
+=end
 
 
+=begin
+# プリントフォーマット
+printf "ああああ%s", "aaa"
+=end
+
+=begin
+# 配列では使えない
+a = [1,2,3]
+p a
+
+1.times {|line|
+  p line
+}
+=end
 
 
+=begin
+puts '名前を入力してください。'
+name = gets.chomp
+puts "あなたの名前は#{ name }です。"
+=end
 
+
+=begin
+# mapとcollectは内部的には違うらしい
+(1..10).map { |x|
+  puts x
+}
+
+(1..10).collect { |x|
+  puts x
+}
+=end
+
+=begin
+# ラムダ式の試し書き
+lambdaexp = -> base{ base == "aa" }
+puts lambdaexp["bb"]
+=end
+
+
+=begin
+# ダックタイピングの試し書き
+class Claa
+  def methooood
+    puts "errerere"
+  end
+end
+class Claa2
+  def methooood
+    puts "asdfasdf"
+  end
+end
+class Act
+  def exxx(a)
+    a.methooood
+  end
+end
+
+a = Act.new
+b = Claa.new
+c = Claa2.new
+a.exxx(b)
+a.exxx(c)
+=end
 
 
 
