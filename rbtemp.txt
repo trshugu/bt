@@ -2,6 +2,8 @@
 →getterやsetterなどのクラスのメソッド
 
 ・ハッシュテーブル
+http://www.namaraii.com/rubytips/?%A5%CF%A5%C3%A5%B7%A5%E5
+
 ・Dir
 ・<<
 ・ENV
@@ -10,6 +12,7 @@
 ・$:.unshift(actionpack_path) if File.directory?(actionpack_path) && !$:.include?(actionpack_path)
 ・autoload
 ・gsub!
+破壊的メソッド？
 ・module
 ・?
 ・options.assets_dir      ||= paths["public"].first
