@@ -10,7 +10,84 @@
 
 
 
+=begin
+# ラッパーを使ったrack
+require 'rack/request'
+require 'rack/response'
 
+class RackApp
+  def call(env)
+    req = Rack::Request.new(env)
+
+    body = case req.request_method
+           when 'GET'
+             '<html><body><form method="POST"><input type="submit" value="loook？" /></form></body></html>'
+           when 'POST'
+             '<html><body>baboon</body></html>'
+           end
+
+    res = Rack::Response.new { |r|
+      r.status = 200
+      r['Content-Type'] = 'text/html;charset=utf-8'
+      r.write body
+    }
+    res.finish
+  end
+end
+=end
+
+
+=begin
+# ラッパーを使わないrack
+class RackApp
+  def call(env)
+    p env
+    case env['REQUEST_METHOD']
+      when 'GET'
+        [
+          200,
+          { 'Content-Type' => 'text/html' },
+          ['<html><body><form method="POST"><input type="submit" value="look?" /></form></body></html>']
+        ]
+      when 'POST'
+        [
+          200,
+          { 'Content-Type' => 'text/html' },
+          ['<html><body>何よ</body></html>']
+        ]
+      end
+  end
+end
+=end
+
+
+=begin
+# スレッドへ引数を渡す
+puts "Test start"
+puts "Create thread"
+def make(foo)
+    puts "Start thread" + foo
+    sleep 3
+    puts "End thread"
+end
+puts "Waiting for the thread to complete"
+tq = Thread.new{make("aaad")}
+tq.join
+puts "Test compleated"
+=end
+
+=begin
+# 自前ミリ秒ストップウォッチ
+starttime = Time.now
+sleep 0.1
+endtime = Time.now
+File::open("linklog.txt", "a").write((endtime - starttime).to_f.to_s + "\n")
+=end
+
+=begin
+# ログ用ファイル追記
+File::open("linklog.txt", "a").write("aaaa\n")
+=end
 
 
 =begin
