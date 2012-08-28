@@ -6,11 +6,33 @@
 
 
 
+=begin
+# スレッドへ引数を渡す
+puts "Test start"
+puts "Create thread"
+def make(foo)
+    puts "Start thread" + foo
+    sleep 3
+    puts "End thread"
+end
+puts "Waiting for the thread to complete"
+tq = Thread.new{make("aaad")}
+tq.join
+puts "Test compleated"
+=end
 
+=begin
+# 自前ミリ秒ストップウォッチ
+starttime = Time.now
+sleep 0.1
+endtime = Time.now
+File::open("linklog.txt", "a").write((endtime - starttime).to_f.to_s + "\n")
+=end
 
-
-
-
+=begin
+# ログ用ファイル追記
+File::open("linklog.txt", "a").write("aaaa\n")
+=end
 
 
 =begin
