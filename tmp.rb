@@ -10,6 +10,117 @@
 
 
 
+
+
+
+=begin
+# ブロックを引数で渡して実行可能
+def foo(cnt, &block_arg)
+  cnt.times { block_arg.call } # ブロックに収まったProcオブジェクトはcallで実行
+end
+foo(3) { print "Ruby! " } #=> Ruby! Ruby! Ruby! 
+=end
+
+
+=begin
+# アスタリスクで配列を分解
+p *ARGV
+=end
+
+
+=begin
+# 自己代入演算子
+a = "jijij"
+a ||= "aaaa"
+p a
+=end
+
+
+=begin
+p $LOAD_PATH
+#.unshift("mkdir")
+
+# ファイルからの相対パスでLOAD_PATHにパスを追加する定石コード。
+$:.unshift(File.dirname(__FILE__))
+$:.unshift(File.dirname(__FILE__) + "/lib")
+#$:は$LOAD_PATHの別名。上記のように書くことでスクリプトファイルからの
+#相対パスでLOAD_PATHに新しいパスを追加できる。
+#注意しなくてはならいのは、evalなどを使う場合で、その場合は__FILE__が
+#スクリプトファイルのパスにならないので使用できない。
+=end
+
+
+=begin
+# 相対パスを絶対パスへ
+p File.expand_path("./mkdir", "c:\\ht")
+=end
+
+
+=begin
+p nil || ""
+p nil or ""
+p nil | ""
+=end
+
+=begin
+# ディレクトリ
+p Dir::pwd
+Dir::rmdir("mkdir")
+Dir::mkdir("mkdir")
+p Dir::entries("mkdir")
+=end
+
+
+=begin
+# ハッシュを使うときはシンボルを使う
+h = {:apple=>150, :banana=>300, :lemon=>300}
+p h[:apple] #=> 150
+p h.fetch(:apple) #=> 150
+=end
+
+=begin
+# ハッシュ
+#h = {"apple"=>150, "banana"=>300, "lemon"=>300}
+#h = Hash::new
+h = {"apple"=>150}
+h.store('banana', 200)
+h['lemon'] = 300
+
+h.default = 100 # デフォルトを設定してもfetchでは例外
+
+p h.key?('apple') #=> true
+p h.has_key?('orange') #=> false
+p h.include?('lemon') #=> true
+p h.member?('avocado') #=> false
+
+
+p h['apple'] #=> 150
+p h['banana'] #=> 200
+p h['lemon'] #=> 300
+p h['papaia'] #=> nil
+
+p h.delete('banana')
+
+p h.fetch('apple') #=> 150
+p h.fetch('papaia', 500) #=> 500
+p h.fetch('papaia') { 500 } #=> 500
+#p h.fetch('papaia') #=> IndexError
+
+fruits = []
+h.each_key {|key| fruits.concat([key])}
+p fruits #=> ["apple", "banana", "lemon"]
+
+sum = 0
+h.each_value {|value| sum += value}
+p sum #=> 750
+
+h.each_pair {|key, value| puts "#{key}: \\#{value}"}
+#=> "banana: \300"
+#=> "apple: \150"
+#=> "lemon: \300"
+=end
+
+
 =begin
 # ラッパーを使ったrack
 require 'rack/request'
