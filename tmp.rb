@@ -9,8 +9,459 @@
 
 
 
+=begin
+# 式展開
+name = "東京"
+print("出身は #{name} です")
+=end
+
+=begin
+# 動的にインスタンスメソッドを定義
+class DynamicMethod
+  define_method("aaa") do
+    puts "define"
+  end
+end
+
+dm = DynamicMethod.new
+p dm.methods.select{|i| i=~/aa/} # => ["my_method_1", "my_method_2"]
+=end
+
+=begin
+# オブジェクトをダンプする
+p Marshal.dump("aaa")
+=end
+
+=begin
+# 繰り返し検索(配列)
+text = "asdfkjhd"
+p text.scan(%r{d})
+
+text.scan("k") { p text }
+# 二回発見されたら二回実行される
+# text.scan(/\r?\n/) { @current_line += 1 }
+=end
 
 
+=begin
+# 末尾の一文字を取り除く
+match = "aaa"
+p match.chop!
+p match.chop!
+p match.chop!
+=end
+
+
+=begin
+# 破壊的chomp
+p aaaa = "abcddbvadad"
+p dd = aaaa.chomp('d')
+p aaaa
+p dd
+
+p value = "abcddbvadad"
+p vv = value.chomp!('d') # 処理されなければnil
+p value 
+p vv
+=end
+
+
+=begin
+#endにdelete
+ccc = if true
+  "avaab"
+end.delete("a")
+
+p ccc
+=end
+
+=begin
+# 正規表現リテラル
+p %r{^(\w[\w+.-]*:|//).*}
+
+p %r{[d]bc}
+p "abcdbce".index(%r{[d]bc})
+=end
+
+
+=begin
+# delegete
+require 'delegate'
+foo = Object.new
+
+def foo.test
+  p 25
+end
+
+foo2 = SimpleDelegator.new(foo)
+foo2.test # => 25
+
+foo3 = foo
+foo3.test
+
+p foo.__id__
+p foo2.__id__ # 別のオブジェクト
+p foo3.__id__
+
+
+class ExtArray<DelegateClass(Array)
+  def initialize()
+    super([])
+  end
+end
+
+a = ExtArray.new
+p a.class  # => ExtArray
+
+a.push 25
+p a       # => [25]
+=end
+
+
+=begin
+require 'fileutils'
+FileUtils::makedirs("aaa")
+=end
+
+=begin
+# sendはprotectedなメソッドもprivateなメソッドも呼び出せます。
+class Cat
+  private
+  def hello(n = nil)
+    n ? Array.new(n, "meow!") : "meow!"
+  end
+end
+ 
+cat = Cat.new
+p cat.__send__(:hello, 3)
+p cat.hello # privateにするとエラー
+=end
+
+
+=begin
+# 式が定義されていなければ、偽を返します。定義されていれば式の種別 を表す文字列を返します。
+class Aaa
+  def jiji
+  end
+end
+ccc = Aaa.new
+p defined? ccc
+=end
+
+
+=begin
+# オブジェクトのidを取得
+a = "hoge"
+p ObjectSpace._id2ref(a.__id__) #=> "hoge"
+
+aa = 0
+p aa.__id__
+p 0.__id__
+
+p ObjectSpace.count_objects
+=end
+
+
+=begin
+# 全てのオブジェクトを操作するためのモジュールです。
+p ObjectSpace.class
+=end
+
+=begin
+#自分の開発しているクラスファイルの最後に記述しておくと、
+#そのクラスファイルを ruby で実行するだけで、irb が立ち上がってプログラムのテストができる。
+#irb(main):001:0> hello
+#hello, world
+require 'irb'
+def hello()
+  puts "hello, world"
+end
+#IRB.start
+
+if __FILE__ == $0
+  require 'irb'
+  IRB.start
+end
+=end
+
+
+=begin
+#クラスに所属するメソッド.オブジェクトを生成しなくても呼び出せる.
+#記法はオブジェクト名.メソッド名(例 String.dup)
+p String.methods
+=end
+
+
+=begin
+#モジュールメソッド
+#モジュールに属するメソッド.クラスオブジェクト同様オブジェクトがなくても呼び出せる.
+p GC.methods
+=end
+
+
+=begin
+# 現在行
+p __LINE__
+=end
+
+
+=begin
+# class_eval
+Fixnum.class_eval "def number ; self ;end"
+p 5.number #=> 5
+=end
+
+=begin
+# instance_eval
+class Klass
+  def initialize
+    @secret = 99
+   end
+end
+k = Klass.new
+p k.instance_eval { @secret }   #=> 99 , notice the @
+p Klass.class_eval { @secret }
+
+# シングルトンメソッドを定義するのに使うこともできます。
+p Fixnum.instance_eval "def zero; 0 ;end"
+p Fixnum.zero #=> 0
+
+# 文字列の代わりにblockを渡すことができます。
+p Fixnum.instance_eval{ def ten ;10;end }
+p Fixnum.ten #=> 10
+=end
+
+
+=begin
+# eval族
+p eval "3+4" #=> 7
+p eval "def multiply(x,y) ; x*y; end"
+p multiply(4,7) #=> 28
+
+class Demo
+  def initialize(n)
+    @secret = n
+  end
+  def getBinding
+    return binding()# a method defined in Kernel module
+  end
+end
+k1 = Demo.new(99)
+#get the value of the instance variable @secrete stored in the binding of object k1
+p eval("@secret", k1.getBinding)   #=> 99
+
+def greeting(name)
+  lambda{|greetings| greetings.collect {|g| "#{g} #{name}"} }
+end
+greeter = greeting("dude")
+p greeter #=> #<Proc>
+p greeter.call ["hi","hello","hola"] #=> ["hi dude", "hello dude", "hola dude"]
+# 出来なかった
+eval("name='khelll'",greeter) #=> "khelll"
+p greeter.call ["hi","hello","hola"] #=> ["hi khelll", "hello khelll", "hola khelll"]
+=end
+
+
+=begin
+# 配列の中に配列を入れる
+a = []; a << a
+p a
+=end
+
+
+=begin
+# class class
+MyHash = Class.new(Hash)
+p MyHash # MyHashクラス
+p MyHash.class # クラス
+p MyHash.new # MyHashの中身
+p MyHash.new.class # MyHashクラス
+
+st = Class.new(String)
+p st
+p st.class
+p st.new
+p st.new.class
+=end
+
+
+=begin
+# Procとlambdaの違い
+cc = lambda {p "tata"}
+cc.call
+cc.yield
+
+b1 = Proc.new{|a,b,c| p a,b,c}
+b1.call(2, 4)
+
+b2 = lambda{|a,b,c| p a,b,c}
+b2.call(2, 4) # エラーになる
+=end
+
+
+#=> wrong number of arguments (2 for 3) (ArgumentError)
+=begin
+# Proc.new call yield(callをProc.newせずに使える)
+aa = Proc.new{ Time.now.to_i.to_s }
+p aa.call
+p aa.yield
+
+Proc.new{p "tete"}.call
+Proc.new{p "toto"}.yield
+
+def foo
+  pr = Proc.new
+  pr.call(99)
+end
+foo {|arg| p arg }
+
+def baa
+  yield(99)
+end
+baa {|arg| p arg }
+
+def buz
+  Proc.new.call(88)
+  proc.call(99)
+  yield(77)
+end
+buz {|arg| p arg }
+=end
+
+
+=begin
+# inspectメソッドは制御文字や非アスキー文字を
+# バックスラッシュ記法に置き換えた文字列を返す
+p "Look its HAML!"
+p "Look its HAML!".inspect
+=end
+
+=begin
+# %Q ダブルクオーテーション
+# %q シングルクオーテーション
+puts %Q{<img alt='Somelogo' src="tp://images.example.com/images/somelogo.png" />}
+p %Q{<img alt='Somelogo' src="tp://images.example.com/images/somelogo.png" />}
+
+puts %q{<img alt='Somelogo' src="tp://images.example.com/images/somelogo.png" />}
+p %q{<img alt='Somelogo' src="tp://images.example.com/images/somelogo.png" />}
+
+p %Q{文字列}
+p %Q[文字列]
+p %Q(文字列)
+p %Q<文字列>
+
+p %Q|文字列|
+p %Q!文字列!
+p %Q*文字列*
+
+# 配列リテラル
+p %w{"I" 'am' opamp}
+p %W{"I" 'am' opamp}
+=end
+
+
+=begin
+# メソッド呼び出し可能かチェック
+class Cat
+  def hello
+    "meow!"
+  end
+  
+  private
+  def sleep
+    "zzz..."
+  end
+end
+cat = Cat.new
+p cat.respond_to?(:hello)
+p cat.respond_to?("sleep")
+=end
+
+=begin
+# super
+class Foo
+  def foo(arg=nil)
+    p arg
+  end
+end
+
+class Bar < Foo
+  def foo(arg=nil)
+    super(5)       # 5 を引数にして呼び出す
+    super(arg)     # 5 を引数にして呼び出す
+    super          # 6 を引数にして呼び出す super(arg) の略記法
+    arg = 1
+    super          # 1 を引数にして呼び出す super(arg) の略記法
+    super()        # 引数なしで呼び出す
+  end
+end
+Bar.new.foo
+=end
+
+=begin
+# スレッドローカルスコープ
+# スレッドで最後に終了した子プロセスのステータス
+p $?
+
+# 最近の例外に関する情報。raiseによって設定される
+p $!
+
+# バックトレースを表す配列
+p $@
+
+# カレントスレッドのセーフレベル
+p $SAFE
+=end
+
+=begin
+# 組込定数
+p TRUE
+p FALSE
+p NIL
+p STDIN
+p STDOUT
+p STDERR
+p *ENV
+p ARGF
+p ARGF.gets
+p gets
+p *$*
+p ARGF.file
+p ARGF.filename
+p ARGV
+p __FILE__
+p $0 # 実行されたファイル
+p $1 # nil
+#p __END__
+p RUBY_VERSION 
+
+# major.minor.teeny 二桁以上にならないらしい
+if RUBY_VERSION >= '1.9.9'
+  # バージョン 1.9.9 以降で有効な処理
+  puts "有効！"
+else
+  # それ以前のバージョンで有効な処理
+  puts "無効！"
+end
+p RUBY_RELEASE_DATE
+p RUBY_PLATFORM
+p RUBY_PATCHLEVEL
+=end
+
+=begin
+# 別名定義。危険らしい
+class Foo
+  class << self
+    def bar
+      return 'bar'
+    end
+    alias foo bar
+  end
+end
+
+p Foo.bar #=> 'bar'
+p Foo.foo #=> 'bar'
+=end
 
 
 =begin
@@ -38,6 +489,7 @@ p a
 
 =begin
 p $LOAD_PATH
+p $:
 #.unshift("mkdir")
 
 # ファイルからの相対パスでLOAD_PATHにパスを追加する定石コード。
