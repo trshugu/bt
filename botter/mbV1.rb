@@ -15,4 +15,6 @@ Twitter.configure do |c|
 end
 
 tweet = "test" + rand(100).to_s
-Twitter.update(tweet)
+loop do
+  Twitter.update(tweet)
+end

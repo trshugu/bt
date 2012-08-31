@@ -1,6 +1,3 @@
-#!ruby
-# -*- coding: utf-8 -*-
-
 require "net/http"
 require "uri"
 
@@ -20,11 +17,9 @@ end
 urilist = []
 File.readlines(file).each do |line|
   if /^http/ =~ line
-    urilist << line.chomp
+    urilist << line
   end
 end
-
-File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
 
 # URIチェック(スレッド化され並列処理される)
 def checkuri(uri)
@@ -33,12 +28,11 @@ def checkuri(uri)
     case response
       when Net::HTTPSuccess, Net::HTTPRedirection
         return
-        # return uri + " " + response.code.to_s + "\n"
       else
-        return uri + " " + response.code.to_s + "\n"
+        return uri.chomp + " " + response.code + "\n"
     end
-  rescue Exception => e
-    return uri + " 例外\n"
+  rescue
+    return uri
   end
 end
 
@@ -57,3 +51,4 @@ end
 
 # 計測終了
 #File::open("linklog.txt", "a").write((Time.now - starttime).to_f.to_s + "\n")
+

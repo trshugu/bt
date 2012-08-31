@@ -9,6 +9,37 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=begin
+# 大文字にする
+File.open("list_place.txt") do |line|
+  File::open("lp.txt", "a").write(line.read.upcase)
+end
+=end
+
+
 =begin
 # 式展開
 name = "東京"
