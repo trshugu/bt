@@ -17,7 +17,8 @@ commands = [
 "gem install sass-rails --no-ri --no-rdoc",
 "gem install coffee-script --no-ri --no-rdoc",
 "gem install coffee-script-source --no-ri --no-rdoc",
-"gem install coffee-rails --no-ri --no-rdoc"
+"gem install coffee-rails --no-ri --no-rdoc",
+"gem install redcar --no-ri --no-rdoc"
 ]
 
 commands.each do |command|
