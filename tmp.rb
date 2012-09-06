@@ -3,39 +3,6 @@
 =begin
 =end
 
-# linkcheckcheck
-require "net/http"
-require "uri"
-
-# 例外
-raiseurl = "http://anoie.dinoe.doijo"
-# 404
-notfoundurl = "http://www.yahoo.co.jp/naiyon.html"
-
-begin
-  response = Net::HTTP.get_response(URI.parse(raiseurl))
-  case response
-    when Net::HTTPSuccess, Net::HTTPRedirection
-      puts "true " + response.code.to_s
-    else
-      puts "else " + response.code.to_s
-  end
-rescue Exception => e
-  puts " 例外"
-end
-
-begin
-  response = Net::HTTP.get_response(URI.parse(notfoundurl))
-  case response
-    when Net::HTTPSuccess, Net::HTTPRedirection
-      puts "true " + response.code.to_s
-    else
-      puts "else " + response.code.to_s
-  end
-rescue Exception => e
-  puts " 例外"
-end
-
 
 
 

@@ -1,0 +1,34 @@
+●linkchecker on rails
+＜要件＞
+恒久的なブックマーク
+URLを登録していく。
+そのURLが死んでいるかどうか確認する。
+
+・2012/08/15 10:24 一斉にアクセスして確認するスレッドな高速化
+・存在確認も必要・・・
+・生存チェック
+・重複チェック
+・フィルタリング
+・ソート
+・削除、追加などの編集
+
+□タグ検索リンク(tag,statuscode)
+□一括削除
+□CSVimport + チェック
+□CSVexport
+
+
+table
+name
+uri
+tag
+statuscode
+
+
+sql? or xml?
+
+
+Lv.1:crud
+Lv.2:logic
+Lv.3:ajax
+
