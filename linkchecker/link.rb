@@ -5,7 +5,7 @@ require "net/http"
 require "uri"
 
 # 計測開始
-#starttime = Time.now
+starttime = Time.now
 
 # 同じ名前のテキストを読み込む
 file = $0.gsub("rb", "txt").split("/").pop
@@ -56,4 +56,4 @@ threads.each do |thread|
 end
 
 # 計測終了
-#File::open("linklog.txt", "a").write((Time.now - starttime).to_f.to_s + "\n")
+File::open("linklog.txt", "a").write((Time.now - starttime).to_f.to_s + "\n")
