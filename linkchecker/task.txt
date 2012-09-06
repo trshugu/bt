@@ -11,3 +11,24 @@ URLを登録していく。
 ・フィルタリング
 ・ソート
 ・削除、追加などの編集
+
+□タグ検索リンク(tag,statuscode)
+□一括削除
+□CSVimport + チェック
+□CSVexport
+
+
+table
+name
+uri
+tag
+statuscode
+
+
+sql? or xml?
+
+
+Lv.1:crud
+Lv.2:logic
+Lv.3:ajax
+

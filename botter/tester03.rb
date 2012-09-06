@@ -14,5 +14,7 @@ Twitter.configure do |c|
   c.oauth_token_secret = lineArray[3].chomp
 end
 
-tweet = "test" + rand(100).to_s
-Twitter.update(tweet)
+
+
+#tweet = "test" + rand(100).to_s
+#Twitter.update(tweet)

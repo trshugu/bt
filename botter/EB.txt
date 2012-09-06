@@ -5,22 +5,22 @@
 //======================================================================
 class EasyBotter
 {
-	private $_screen_name;
-	private $_consumer_key;
-	private $_consumer_secret;
-	private $_access_token;
-	private $_access_token_secret;
+    private $_screen_name;
+    private $_consumer_key;
+    private $_consumer_secret;
+    private $_access_token;
+    private $_access_token_secret;
 
-	private $_replyLoopLimit;
-	private $_footer;
-	private $_dataSeparator;
+    private $_replyLoopLimit;
+    private $_footer;
+    private $_dataSeparator;
 
-	private $_tweetData;
-	private $_replyPatternData;
+    private $_tweetData;
+    private $_replyPatternData;
 
-	private $_repliedReplies;
-	private $_logDataFile;
-	private $_latestReply;
+    private $_repliedReplies;
+    private $_logDataFile;
+    private $_latestReply;
 
     function __construct()
     {
