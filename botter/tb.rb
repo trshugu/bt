@@ -24,7 +24,7 @@ def getRandomOneline(path)
 end
 
 # 処理をランダムに切り替える
-if rand(2) == 1 
+if rand(10) == 1 
   place = getRandomOneline("list_place.txt")
   tweet = "そうだ。#{place}行こう"
 else
