@@ -5,9 +5,60 @@
 
 
 
+=begin
+# sqliteの練習
+require 'sqlite3'
+
+File.delete("data.db")
+db = SQLite3::Database.new("data.db")
+
+# テーブル作成
+sql = <<SQL
+create table 社員 (
+  名前 varchar(10),
+  年齢 integer,
+  部署 varchar(200)
+);
+SQL
+db.execute(sql)
+
+
+# レコード登録
+sql = "insert into 社員 values ('橋本', 26, '広報部')"
+db.execute(sql)
+
+
+# プレースホルダとバインド値を使用した場合
+sql = "insert into 社員 values (?, ?, ?)"
+db.execute(sql, '小泉', 35, '営業部')
+db.execute(sql, '亀井', 40, '営業部')
+
+
+# 名前付きプレースホルダも使用可能
+sql = "insert into 社員 values (:name, :age, :post)"
+db.execute(sql, :name => '小泉nam', :age => 35, :post => '営業部')
+db.execute(sql, :name => '亀井nam', :age => 40, :post => '営業部')
+
+
+# レコード取得
+db.execute('select * from 社員') do |row|
+  #rowは結果の配列
+  puts row.join("\t")
+end
 
 
 
+# レコード更新
+#小泉の部署を広報部に更新する
+db.execute("update 社員 set 部署='広報部' where 名前='小泉'")
+
+
+# レコード削除
+# 亀井を削除
+db.execute("delete from 社員 where 名前='亀井'")
+
+db.close
+=end
 
 
 =begin
