@@ -1,0 +1,41 @@
+<h1>Listing bookmarks</h1>
+<p id="notice"><%= notice %></p>
+<%= form_for :index, :url=>{:action=>'checklink'} do |fo| %>
+    <%= fo.submit 'checklink' %>
+  </div>
+<% end %>
+
+
+<%= render 'form' %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Uri</th>
+    <th>Tag</th>
+    <th>Status</th>
+    <th>Httpcode</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bookmarks.each do |bookmark| %>
+  <tr id="list" class="<%= bookmark.httpcode %>">
+    <td><%= bookmark.title %></td>
+    <td><%= link_to bookmark.uri, bookmark.uri %></td>
+    <td><%= bookmark.tag %></td>
+    <td><%= bookmark.status %></td>
+    <td><%= bookmark.httpcode %></td>
+    <td><%= link_to 'Show', bookmark %></td>
+    <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
+    <td><%= link_to 'Tide', tide_bookmark_path(bookmark) %></td>
+    <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bookmark', new_bookmark_path %>

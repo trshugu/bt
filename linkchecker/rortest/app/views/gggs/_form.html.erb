@@ -1,0 +1,21 @@
+<%= form_for(@ggg) do |f| %>
+  <% if @ggg.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ggg.errors.count, "error") %> prohibited this ggg from being saved:</h2>
+
+      <ul>
+      <% @ggg.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nana %><br />
+    <%= f.text_field :nana %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

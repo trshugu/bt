@@ -1,0 +1,23 @@
+<h1>Listing eees</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @eees.each do |eee| %>
+  <tr>
+    <td><%= eee.name %></td>
+    <td><%= link_to 'Show', eee %></td>
+    <td><%= link_to 'Edit', edit_eee_path(eee) %></td>
+    <td><%= link_to 'Destroy', eee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Eee', new_eee_path %>
