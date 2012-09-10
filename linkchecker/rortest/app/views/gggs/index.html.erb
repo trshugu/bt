@@ -1,0 +1,23 @@
+<h1>Listing gggs</h1>
+
+<table>
+  <tr>
+    <th>Nana</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gggs.each do |ggg| %>
+  <tr>
+    <td><%= ggg.nana %></td>
+    <td><%= link_to 'Show', ggg %></td>
+    <td><%= link_to 'Edit', edit_ggg_path(ggg) %></td>
+    <td><%= link_to 'Destroy', ggg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ggg', new_ggg_path %>
