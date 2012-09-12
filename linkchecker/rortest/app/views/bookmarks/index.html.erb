@@ -10,6 +10,7 @@
 
 <table>
   <tr>
+    <th></th>
     <th>Title</th>
     <th>Uri</th>
     <th>Tag</th>
@@ -23,6 +24,9 @@
 
 <% @bookmarks.each do |bookmark| %>
   <tr id="list" class="<%= bookmark.httpcode %>">
+    <td>
+      <%= check_box(bookmark, 'checkbokus') %>
+    </td>
     <td><%= bookmark.title %></td>
     <td><%= link_to bookmark.uri, bookmark.uri %></td>
     <td><%= bookmark.tag %></td>

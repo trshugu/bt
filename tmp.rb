@@ -4,6 +4,12 @@
 =end
 
 
+# 末尾の一文字を取り除く
+match = "aaa"
+p match.chop!
+p match.chop!
+p match.chop!
+
 
 =begin
 # sqliteの練習
