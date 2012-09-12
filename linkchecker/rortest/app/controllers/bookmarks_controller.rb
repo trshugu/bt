@@ -48,6 +48,11 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = Bookmark.new(params[:bookmark])
 
+    require './app/helpers/checklinkmodule2ar'
+    linkchecker = Checklink.new
+    @bookmark.httpcode = linkchecker.checkuri(@bookmark.uri)
+    @bookmark.save
+
     respond_to do |format|
       if @bookmark.save
         #format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
