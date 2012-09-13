@@ -1,12 +1,12 @@
 <h1>Listing bookmarks</h1>
 <p id="notice"><%= notice %></p>
-<%= form_for :index, :url=>{:action=>'checklink'} do |fo| %>
-    <%= fo.submit 'checklink' %>
   </div>
-<% end %>
 
 
 <%= render 'form' %>
+
+<%= form_for :index, :url=>{:action=>'checklink'} do |fo| %>
+    <%= fo.submit 'checklink' %>
 
 <table>
   <tr>
@@ -25,7 +25,7 @@
 <% @bookmarks.each do |bookmark| %>
   <tr id="list" class="<%= bookmark.httpcode %>">
     <td>
-      <%= check_box(bookmark, 'checkbokus') %>
+      <%= check_box(bookmark.id, "dc") %>
     </td>
     <td><%= bookmark.title %></td>
     <td><%= link_to bookmark.uri, bookmark.uri %></td>
@@ -39,6 +39,7 @@
   </tr>
 <% end %>
 </table>
+<% end %>
 
 <br />
 

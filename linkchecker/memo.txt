@@ -44,3 +44,16 @@ end
 <% form_for :bookmark, @bookmark, :url => { :action => "create" } do |f| %>
 <% form_for(@bookmark) do |f| %>
 
+
+パラメータを受け取るためにはRack式にやらないとダメだった。
+
+GETの場合
+@env['rack.request.query_string']
+Rack::Utils.parse_query(@env['rack.request.query_string'])
+
+POSTの場合
+@env['rack.request.form_vars']
+Rack::Utils.parse_query(@env['rack.request.form_vars'])
+
+
+

@@ -98,14 +98,22 @@ class BookmarksController < ApplicationController
   def checklink
     @bookmarks = Bookmark.all
     
+    #env["rack.request.form_vars"]
+    poster = Rack::Utils.parse_query(env['rack.request.form_vars'])
+    
     require './app/helpers/checklinkmodule2ar'
     linkchecker = Checklink.new
+    checkboxcount = 0
     @bookmarks.each do |bookmark|
-      bookmark.httpcode = linkchecker.checkuri(bookmark.uri)
+      #checkboxcount = bookmark
+      
+      checkboxcount = bookmark
+      #bookmark.httpcode = linkchecker.checkuri(bookmark.uri)
       bookmark.save
     end
     
-    redirect_to bookmarks_path, notice: @bookmarks.size
+    
+    redirect_to bookmarks_path, notice: poster
 #    respond_to do |format|
 #      if @bookmark.save
 #        #format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
