@@ -3,7 +3,14 @@
 =begin
 =end
 
+require 'test/unit'
+require './tmp'
 
+class TestBetweenHour < Test::Unit::TestCase
+  def testGetargs
+    assert_not_nil(@bhTest.isBetweenHour(1,1,1))
+  end
+end
 
 
 

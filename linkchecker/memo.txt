@@ -56,4 +56,11 @@ POSTの場合
 Rack::Utils.parse_query(@env['rack.request.form_vars'])
 
 
+◆テスト
+get :edit, :id => 1
+post :update, :id => 1, :customer => {:name => 'tom'}
+
+セッションについては、@request.session に直接指定します。
+@request.session["key"] = "value"
+
 

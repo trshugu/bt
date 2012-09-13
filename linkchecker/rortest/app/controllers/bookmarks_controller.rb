@@ -98,22 +98,17 @@ class BookmarksController < ApplicationController
   def checklink
     @bookmarks = Bookmark.all
     
-    #env["rack.request.form_vars"]
-    poster = Rack::Utils.parse_query(env['rack.request.form_vars'])
-    
     require './app/helpers/checklinkmodule2ar'
     linkchecker = Checklink.new
-    checkboxcount = 0
+    countcheckbox = 0
+
     @bookmarks.each do |bookmark|
-      #checkboxcount = bookmark
-      
-      checkboxcount = bookmark
+      countcheckbox += 1
       #bookmark.httpcode = linkchecker.checkuri(bookmark.uri)
       bookmark.save
     end
     
-    
-    redirect_to bookmarks_path, notice: poster
+    redirect_to bookmarks_path, notice: countcheckbox
 #    respond_to do |format|
 #      if @bookmark.save
 #        #format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
@@ -124,5 +119,18 @@ class BookmarksController < ApplicationController
 #        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
 #      end
 #    end
+  end
+  
+  def deleterecord
+    @bookmarks = Bookmark.all
+    poster = Rack::Utils.parse_query(env['rack.request.form_vars'])
+    
+    @bookmarks.each do |bookmark|
+      if (poster[bookmark.id.inspect + "[delete]"].index("1") != nil)
+        bookmark.destroy
+      end
+    end
+    
+    redirect_to bookmarks_path, notice: poster
   end
 end

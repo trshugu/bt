@@ -9,6 +9,7 @@ Rortest::Application.routes.draw do
 
   get 'bookmarks/:id/tide' => 'bookmarks#tide', as: 'tide_bookmark'
   post 'bookmarks/checklink' => 'bookmarks#checklink', as: 'cl_bookmark'
+  post 'bookmarks/deleterecord' => 'bookmarks#deleterecord', as: 'dl_bookmark'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

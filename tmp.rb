@@ -4,11 +4,53 @@
 =end
 
 
-# 末尾の一文字を取り除く
-match = "aaa"
-p match.chop!
-p match.chop!
-p match.chop!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=begin
+# pではinspectが呼ばれる
+class Test
+   def initialize
+     @a = Array.new
+     @b = Array.new
+   end
+   
+   def to_s
+     "call to_s"
+   end
+   
+   def inspect
+     "call inspect"
+   end 
+end
+
+# 「if __FILE__ == $0」現在実行中のスクリプトが、
+# ファイル名と同じものの場合、この条件は真になる
+# requireなどで使う場合には条件が偽となり表示処理はおこなわれず、
+# このスクリプト単体で実行する場合にだけ、
+# 表示処理を実行させることができるようになる。
+if __FILE__ == $0
+   test = Test.new
+   p test
+   print test
+   puts test
+end
+=end
 
 
 =begin
