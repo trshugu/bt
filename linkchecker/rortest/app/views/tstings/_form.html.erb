@@ -1,0 +1,29 @@
+<%= form_for(@tsting) do |f| %>
+  <% if @tsting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tsting.errors.count, "error") %> prohibited this tsting from being saved:</h2>
+
+      <ul>
+      <% @tsting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :aaa %><br />
+    <%= f.text_field :aaa %>
+  </div>
+  <div class="field">
+    <%= f.label :bbb %><br />
+    <%= f.text_field :bbb %>
+  </div>
+  <div class="field">
+    <%= f.label :ccc %><br />
+    <%= f.text_field :ccc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

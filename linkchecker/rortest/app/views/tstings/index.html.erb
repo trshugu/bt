@@ -1,0 +1,27 @@
+<h1>Listing tstings</h1>
+
+<table>
+  <tr>
+    <th>Aaa</th>
+    <th>Bbb</th>
+    <th>Ccc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tstings.each do |tsting| %>
+  <tr>
+    <td><%= tsting.aaa %></td>
+    <td><%= tsting.bbb %></td>
+    <td><%= tsting.ccc %></td>
+    <td><%= link_to 'Show', tsting %></td>
+    <td><%= link_to 'Edit', edit_tsting_path(tsting) %></td>
+    <td><%= link_to 'Destroy', tsting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tsting', new_tsting_path %>

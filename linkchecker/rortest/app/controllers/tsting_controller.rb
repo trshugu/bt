@@ -1,0 +1,2 @@
+class TstingController < ApplicationController
+end

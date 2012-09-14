@@ -25,7 +25,7 @@ filter:
     <% @bookmarks.each do |bookmark| %>
       <tr id="list" class="<%= bookmark.httpcode %>">
         <td><%= check_box(bookmark.id, "delete") %></td>
-        <td><%= bookmark.title %></td>
+        <td><%= bookmark.name %></td>
         <td><%= link_to bookmark.uri, bookmark.uri %></td>
         <td><%= bookmark.httpcode %></td>
         <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>

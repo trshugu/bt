@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  uri: MyString
+  tag: MyString
+  status: MyString
+  httpcode: MyString
+
+two:
+  name: MyString
+  uri: MyString
+  tag: MyString
+  status: MyString
+  httpcode: MyString

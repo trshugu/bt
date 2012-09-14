@@ -1,7 +1,6 @@
 (id,title,url,tag,status,httpcode) values(1,たいとる,http～,音楽,action,200)
 
-タイトルではなくて名前(name)の方がいいかも・・・
-rails g scaffold bookmarks title:string uri:string tag:string status:string httpcode:string
+rails g scaffold bookmarks name:string uri:string tag:string status:string httpcode:string
 rake db:migrate
 
 insert into bookmarks (title,uri,created_at,updated_at) values ('yahoo','http://yahoo.co.jp',0,0);
@@ -63,4 +62,16 @@ post :update, :id => 1, :customer => {:name => 'tom'}
 セッションについては、@request.session に直接指定します。
 @request.session["key"] = "value"
 
+rake test
+rake test:units
+rake test:functionals
+rake test:integration
 
+$rake -T test:
+
+rake test:recent 10分以内に変更されたモデルとコントローラを探し関連したテストを実行
+rake test:single
+rake test:uncommitted 最後のコミットに関連したモデルとコントローラを探し関連したテストを実行
+
+
+rails3では"link_to_remote" がなくなり "link_to" , "button_to" などに ":remote => true" オプションで実装する

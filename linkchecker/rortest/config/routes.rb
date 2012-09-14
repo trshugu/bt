@@ -1,5 +1,6 @@
 Rortest::Application.routes.draw do
-  resources :bookmarks
+  resources :tstings
+
 
   resources :gggs
 
@@ -7,9 +8,16 @@ Rortest::Application.routes.draw do
 
   resources :eees
 
-  get 'bookmarks/:id/tide' => 'bookmarks#tide', as: 'tide_bookmark'
+  get 'bookmarks' => 'bookmarks#index', as: 'bookmarks'
+  get 'bookmarks/:id' => 'bookmarks#index', as: 'bookmark'
+  get 'bookmarks/:id/edit' => 'bookmarks#edit', as: 'edit_bookmark'
+  get 'bookmarks/:id' => 'bookmarks#index'
+  get 'bookmarks/search/:httpcode' => 'bookmarks#index'
+  post 'bookmarks' => 'bookmarks#create'
   post 'bookmarks/checklink' => 'bookmarks#checklink', as: 'cl_bookmark'
   post 'bookmarks/deleterecord' => 'bookmarks#deleterecord', as: 'dl_bookmark'
+  put 'bookmarks/:id' => 'bookmarks#update'
+  delete 'bookmarks/:id' => 'bookmarks#destroy'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
