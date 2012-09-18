@@ -1,0 +1,41 @@
+<h1>Listing tmps</h1>
+<script type="text/javascript">
+$.each([1,2,3], function() {
+  document.write(this + 1);
+});
+
+</script>
+
+
+<div class="container">
+  <div class="row">
+    <div class="span4">
+      Span4の中身
+    </div>
+    <div class="span8">
+      Span8の中身
+    </div>
+  </div>
+</div>
+
+<table>
+  <tr>
+    <th>Test</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+16:04 2012/09/18
+<% @tmps.each do |tmp| %>
+  <tr>
+    <td><%= tmp.test %></td>
+    <td><%= link_to 'Show', tmp %></td>
+    <td><%= link_to 'Edit', edit_tmp_path(tmp) %></td>
+    <td><%= link_to 'Destroy', tmp, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tmp', new_tmp_path %>

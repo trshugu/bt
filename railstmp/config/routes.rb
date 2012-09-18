@@ -1,17 +1,5 @@
-Arlinkchecker::Application.routes.draw do
-  #resources :bookmarks
-
-  get '' => 'bookmarks#index'
-  get 'bookmarks' => 'bookmarks#index', as: 'bookmarks'
-  get 'bookmarks/:id' => 'bookmarks#index', as: 'bookmark'
-  get 'bookmarks/:id/edit' => 'bookmarks#edit', as: 'edit_bookmark'
-  get 'bookmarks/:id' => 'bookmarks#index'
-  get 'bookmarks/search/:httpcode' => 'bookmarks#index'
-  post 'bookmarks' => 'bookmarks#create'
-  post 'bookmarks/checklink' => 'bookmarks#checklink', as: 'cl_bookmark'
-  post 'bookmarks/deleterecord' => 'bookmarks#deleterecord', as: 'dl_bookmark'
-  put 'bookmarks/:id' => 'bookmarks#update'
-  delete 'bookmarks/:id' => 'bookmarks#destroy'
+Railstmp::Application.routes.draw do
+  resources :tmps
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

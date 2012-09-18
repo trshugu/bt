@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ruby on Rails: Welcome aboard</title>
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/pret.css" rel="stylesheet">
+<script type="text/javascript" src="jquery-1.8.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/prettify.js"></script>
+
+<script type="text/javascript">
+$.each([1,2,3], function() {
+  document.write(this + 1);
+});
+
+
+
+/*
+$(document).ready(function(){
+  $(".ueue").css("color","#f00");
+});
+
+$(document).ready(function(){
+  $(".ueue").click(function(event){
+    event.preventDefault();
+    $(this).hide("slow");
+  });
+});
+
+$(document).ready(function(){
+  $("div").append(":");
+});
+*/
+
+
+/*
+$(document).ready(function(){
+  $("div").click(function () {
+    var color = $(this).css("background-color");
+    $("#result").html("That div is <span style='color:" + color + ";'>" + color + "</span>.");
+  });
+});
+*/
+
+/* tmpsにパラメータ test=John をつけて要求し、その要求が正常に完了したとき、レスポンスを表示する。
+$.ajax({
+  type: "POST",
+  url: "tmps",
+  data: {test: "John"},
+  success: function(msg){
+    alert( "Data Saved: " + msg );
+  }
+});
+*/
+
+</script>
+  </head>
+  <body>
+<!--
+<div style="background-color:blue;">aaa</div>
+<div style="background-color:rgb(15,99,30);">bbb</div>
+<div style="background-color:#123456;">nnn</div>
+<div style="background-color:#f11;">ggg</div>
+<br>
+<span id="result"></span>
+<br>
+-->
+<i class="icon-pencil"></i>
+<div class="container">
+  <div class="row">
+    <div class="span4">
+      Span4の中身
+    </div>
+    <div class="span8">
+      Span8の中身
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span4">
+      Span4の中身
+    </div>
+    <div class="span8">
+      Span8の中身
+    </div>
+  </div>
+</div>
+
+
+<pre>
+roit
+rtiourt
+
+</pre>
+
+
+<pre class="prettyprint linenums">
+roit
+rtiourt
+
+</pre>
+
+  <div class="ueue">aaaa</div>
+    <div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <h3>Browse the documentation</h3>
+            <ul class="links">
+              <li class="nuu"><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
+              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
+              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
+              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <div id="header">
+          <h1>あああ</h1>
+          <h2>You&rsquo;re riding Ruby on Rails!</h2>
+        </div>
+
+        <div id="about">
+          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
+          <div id="about-content" style="display: none"></div>
+        </div>
+
+        <div id="getting-started">
+          <h1>Getting started</h1>
+          <h2>Here&rsquo;s how to get rolling:</h2>
+
+          <ol>
+            <li>
+              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
+              <p>To see all available options, run it without parameters.</p>
+            </li>
+
+            <li>
+              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
+              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
+            </li>
+
+            <li>
+              <h2>Create your database</h2>
+              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>
