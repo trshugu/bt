@@ -10,13 +10,23 @@
 <script src="js/prettify.js"></script>
 
 <script type="text/javascript">
+
+/*
+
+function aaa(){
+  document.write(window.innerWidth + "<br>");
+}
+
+window.onresize=function(){ aaa();  }
+
+aaa();
+
+
 $.each([1,2,3], function() {
   document.write(this + 1);
 });
 
 
-
-/*
 $(document).ready(function(){
   $(".ueue").css("color","#f00");
 });
@@ -57,6 +67,43 @@ $.ajax({
 </script>
   </head>
   <body>
+<p>画面サイズ：<span id="ScrSize"></span></p>
+<p>ウィンドウサイズ：<span id="WinSize"></span></p>
+
+<script tyle="text/javascript">
+//画面サイズの取得
+getScreenSize();
+
+//ウィンドウサイズの取得
+getWindowSize();
+//window.onresize=function(){ getWindowSize(); }
+window.onresize=getWindowSize;
+
+//画面サイズを取得する
+function getScreenSize() {
+	var s = "横幅 = " + window.parent.screen.width + " / 高さ = " + window.parent.screen.height;
+	document.getElementById("ScrSize").innerHTML = s;
+}
+
+//ウィンドウサイズを取得する
+function getWindowSize() {
+	var sW,sH,s;
+	if (document.all) {
+		//Internet Explorer
+		sW = document.body.clientWidth;
+		sH = document.body.clientHeight;
+	} else {
+		//Firefox等
+		sW = window.innerWidth;
+		sH = window.innerHeight;
+	}
+	s = "横幅 = " + sW + " / 高さ = " + sH;
+ 
+	document.getElementById("WinSize").innerHTML = s;
+}
+</script>  
+  
+  
 <!--
 <div style="background-color:blue;">aaa</div>
 <div style="background-color:rgb(15,99,30);">bbb</div>
