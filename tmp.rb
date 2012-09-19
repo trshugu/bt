@@ -10,16 +10,234 @@
 
 
 
+=begin
+# 排他的論理和 ^^はない
+if (true ^ false)
+  p "tt"
+else
+  p "fal"
+end
+=end
+
+
+=begin
+# Mime::Type.lookup('text/plain')は、Mime::TEXTと省略して書くこともできます。
+require 'action_dispatch/http/mime_type'
+p Mime::TEXT
+p Mime::HTML
+=end
+
+=begin
+# binding 組み込み関数。実行すると、このメソッドを呼んだスコープの変数と
+# 値の一覧を収めたオブジェクト(=bindingと呼ばれるもの）が返ってくる。
+
+class Demo
+  def initialize(n)
+    @secret = n
+  end
+  def get_binding
+    return binding()
+  end
+end
+
+k1 = Demo.new(99)
+b1 = k1.get_binding
+k2 = Demo.new(-3)
+b2 = k2.get_binding
+
+p eval("@secret", b1)   #=> 99
+p eval("@secret", b2)   #=> -3
+p eval("@secret")       #=> nil
+=end
+
+
+=begin
+# class#allocateはnewメソッドと異なりinisializeメソッドが呼ばれない
+#aaa = Class.new do
+class Hoge
+  def initialize  
+    puts 'initialize!!!'  
+  end  
+
+  def hoge
+    p "hogehoge"
+  end
+end
+aaa = Hoge.allocate
+aaa.hoge
+
+bbb = Hoge.new
+bbb.hoge
+=end
+
+
+=begin
+p c = Class.allocate
+p d = Class.allocate
+p c.send :initialize, d
+p d.send :initialize, c
+
+p c.class.allocate
+p d.class.allocate
+=end
+
+=begin
+=end
+
+=begin
+# class#allocate 自身のインスタンスを生成して返します
+class Hoge
+  def hoge
+    p "hogehoge"
+  end
+end
+
+aaa = Hoge.allocate
+p aaa.class
+aaa.hoge
+
+bbb = Hoge.new
+p bbb.class
+bbb.hoge
+=end
 
 
 
+=begin
+# privateだとオブジェクトの外からでも呼べない
+class HogeSuper
+  protected
+  def protected_method
+    puts "protected"
+  end
+  
+  private
+  def private_method
+    puts "private"
+  end
+end
+
+class Hoge < HogeSuper
+  def hoge
+    protected_method # OK
+    private_method # OK
+    a = Hoge.new
+    a.protected_method # OK
+    #a.private_method # Error
+  end
+end
+Hoge.new.hoge
+=end
+
+
+=begin
+# protected を使うと、サブクラスのインスタンスが「オブジェクトの外から」
+# メソッドを呼べるようになります。
+class Protest
+  def toprotect
+    puts "OK"
+  end
+  protected :toprotect
+
+  def call_m(a)
+    a.toprotect
+  end
+end
+
+mm = Protest.new
+mm.call_m(Protest.new)
+mm.toprotect
+
+#Protest.new.call_m(Protest.new)   # これは大丈夫
+#Protest.new.toprotect               # これはダメ
+=end
+
+
+=begin
+# Kernel#binding を使用すれば現在のスコープを(Binding)オブジェクトの形で取得することが出来る
+class C
+  def m
+    @x = 20
+    y = 30
+    binding
+  end
+end
+
+b = C.new.m
+p b.class
+p eval "@x", b
+p eval "y", b
+
+# トップレベルのスコープを取得したい場合は Ruby の組込み定数 TOPLEVEL_BINDING を使用する。
+class C2
+  def get_self
+    eval "self", TOPLEVEL_BINDING
+  end
+
+  def get_b
+    eval "b", TOPLEVEL_BINDING
+  end
+end
+
+obj = C2.new
+p obj.get_self
+p obj.get_b
+=end
 
 
 
+=begin
+# eachはスコープを生成するので、
+# code=$1はeachブロック内のローカル変数と見なされます。
+#DATA.each do |line|
+while line = DATA.gets
+  if /code,(.+)/=~line
+    code=$1
+  elsif /name,(.+)/=~line
+    puts "code= #{code}"
+    puts "name= #{$1}"
+  end
+end
 
 
+__END__
+code,001
+name,ipp
+code,002
+name,opp
+=end
 
 
+=begin
+# __END__ 以降のデータをDATA定数でアクセスできる。
+DATA.each{|line|
+  one = line.chomp.split(/ /)
+  puts "#{one[0]} is #{one[1]} years old"
+}
+p DATA.gets
+
+__END__
+toshi 32
+youko 26
+mamoru 12
+kako 8
+hisanori 5
+
+=end
+
+=begin
+# エイリアス
+$aaa = "asdfj" 
+p $aaa
+# グローバル変数でないとうまくいかなかった。
+alias $bbb $aaa
+$aaa = "ikkaime"
+p $aaa
+p $bbb
+$bbb = "nnikkaime"
+p $aaa
+p $bbb
+=end
 
 
 =begin
@@ -1535,5 +1753,4 @@ while i < 3
     sleep 1
 end
 =end 
-
 

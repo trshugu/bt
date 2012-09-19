@@ -1,0 +1,31 @@
+◆inbox
+
+◆action
+
+◆done
+＊exit(true)  終了ステータスを指定する。0(正常終了)
+＊&block ブロック渡し
+＊alias
+＊DATA
+＊TOPLEVEL_BINDIN
+＊IO
+＊protected
+＊IO#wait 読みとり可能になるまで待つメソッド
+＊silence_warnings activesupport/core_ext/kernel/reporting.rbで定義されている。
+＊class.allocate
+＊class.inherited 新しいクラスの親クラスに対して呼び出されるメソッドです。引数childには親クラスを継承した新しいサブクラスが入ります。
+＊class_eval
+＊binding()
+＊Mime::LOOKUP[self.content_type]
+＊Ruby/Tk
+＊^^ 排他的論理和 二連続はなかった
+＊rails
+＞＊http://itpro.nikkeibp.co.jp/article/COLUMN/20060920/248542/?k2
+＞＊migration http://d.hatena.ne.jp/elm200/20070909/1187829050
+＞＊tobysoft http://tobysoft.net/wiki/index.php?Ruby%2FRuby%20on%20Rails
+＞＊DBスキーマ http://webos-goodies.jp/archives/50727147.html
+＞＊ヘルパー http://doruby.kbmj.com/mimi_on_rails/20080213/1/
+＞＊scaffold http://d.hatena.ne.jp/kasei_san/20120820/p4
+＊10分で作る
+＞＊http://masuidrive.jp/rails/
+＞＊http://www.rubylife.jp/rails/
