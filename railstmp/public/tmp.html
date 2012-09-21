@@ -9,15 +9,120 @@
 
 
 
+
+/*
+// 右開きの設定
+#flipbook {
+	direction:rtl;
+}
+*/
+
+
+/*
+// autoCenter用アニメーション設定
+#flipbook{
+	-webkit-transition:margin-left 0.2s ease-in-out;
+	-moz-transition:margin-left 0.2s ease-in-out;
+	-o-transition:margin-left 0.2s ease-in-out;
+	-ms-transition:margin-left 0.2s ease-in-out;
+	transition:margin-left 0.2s ease-in-out;
+}
+
+*/
+
+
 </style>
 
 <script type="text/javascript">
 /*
 */
 
+$(document).ready(function(){
+	$("#flipbook").turn({
+		width: 400,
+		height: 300,
+		autoCenter: true
+	});
+});
+
+$(window).bind('keydown', function(e){
+	if (e.keyCode==37)
+		
+	else if (e.keyCode==39)
+		$('#flipbook').turn('next');
+});
 
 
 
+/*
+$(document).ready(function(){
+	$("#flipbook").turn({
+		width: 400,
+		height: 300,
+		autoCenter: true
+	});
+});
+
+// Propertiesのチェック
+$(window).bind('keydown', function(e){
+	if (e.keyCode==37)
+		// $('#flipbook').turn('previous');
+		// alert($('#flipbook').turn('direction'));
+		// alert($('#flipbook').turn('animating'));
+		// alert($('#flipbook').turn('size').width);
+		// alert($('#flipbook').turn('size').height);
+		// alert($('#flipbook').turn('options'));
+		// alert($('#flipbook').turn('view').join(" and "));
+		// alert($('#flipbook').turn('zoom'));
+	else if (e.keyCode==39)
+		$('#flipbook').turn('next');
+});
+*/
+
+
+/*
+// 現在動作中かを判定する
+function isAnimating() {
+	if ($("#flipbook").turn("animating"))
+		alert('Animating a page!');
+}
+*/
+
+
+/*
+// 矢印キーで改ページ
+$(window).bind('keydown', function(e){
+	if (e.keyCode==37)
+		$('#flipbook').turn('previous');
+	else if (e.keyCode==39)
+		$('#flipbook').turn('next');
+});
+*/
+
+
+/*
+// optionsのチェック
+$(document).ready(function(){
+	$("#flipbook").turn({
+		width: 400,
+		height: 300,
+		// direction: "rtl",
+		// duration: 600,
+		// gradients: !$.isTouch,
+		// elevation: 50,
+		// page: 5,
+		// when: {
+		// 	turning: function(event, page, pageobj) {
+		// 		alert(event);
+		// 		alert(page); // 動作したページ
+		// 		alert(pageobj); // 次のセットなど
+		// 	}
+		// },
+		autoCenter: true
+	});
+	//alert($("#flipbook").children().length)
+});
+*/
 
 
 /*
@@ -113,6 +218,18 @@ $.each([1,2,3], function() {
 </head><body>
 <!--
 -->
+
+
+<div id="flipbook">
+	<div style="background-color:#eee" class="hard"> Turn.js </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
+</div>
 
 
 
