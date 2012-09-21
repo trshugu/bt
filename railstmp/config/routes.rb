@@ -1,6 +1,9 @@
 Railstmp::Application.routes.draw do
   resources :tmps
 
+  root :to => 'tmps#index'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

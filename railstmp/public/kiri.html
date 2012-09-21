@@ -3,6 +3,7 @@
 <head>
 <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="js/turn.min.js"></script>
+<script type="text/javascript" src="js/zoom.min.js"></script>
 
 <style type="text/css">
 body{
@@ -10,7 +11,7 @@ body{
 }
 
 #magazine .turn-page{
-	background-color:#ccc;
+	background-color:#fff;
 	background-size:100% 100%;
 }
 
@@ -27,15 +28,13 @@ body{
 <body>
 
 <div id="magazine">
-	<div class="hard" style="background-image:url(pages/01.jpg);"></div>
+	<div style="background:#fff">tit</div>
 	<div style="background-image:url(pages/02.jpg);"></div>
-	<div style="background:#ccc;font-size:9px;margin:10px;">
-<span style="width:10px;float:left">
+	<div class="ueue" style="background:#ccc;font-size:9px;">
 um'aiderv<br>
 <br>
 •½‹C‚ÈU‚è‚ğ‚µ‚ÄÎ‚Á‚ÄŒë–‚‰»‚µ‚½‚Á‚Ä<br>
 ‚¢‚Â‚©ŒÀŠE‚ª—ˆ‚é<br>
-</span>
 <br>
 ’m‚ç‚È‚¢ŠÔ‚É‰R‚Ì©•ª‚É“h‚è’×‚³‚ê<br>
 –{“–‚Ì©•ª‚ª‹‚È‚¢<br>
@@ -97,11 +96,15 @@ body{
 	$(window).ready(function() {
 		$('#magazine')
 		.turn({
-			width: 576,
-			height: 376,
+			width: 840,
+			height: 520,
 			autoCenter: true,
-			inclination: 50
-		});
+			elevation: 50,
+			zoom: 1.5
+		})
+		.bind("zooming", function(event,  newZoomValue, currentZoomValue) {
+			$('.ueue').css("font-size","150%")
+		})
 	});
 	
 	
@@ -111,8 +114,14 @@ body{
 			$('#magazine').turn('previous');
 		else if (e.keyCode==39)
 			$('#magazine').turn('next');
-			
+		else if (e.keyCode==38)
+			$("#magazine").turn('zoom', 1);
+		else if (e.keyCode==40)
+			$("#magazine").turn('zoom', 1.5);
 	});
+
+
+
 
 </script>
 

@@ -1,91 +1,38 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>tmp</title>
+<!DOCTYPE html><html><head><title>tmp</title>
 <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="js/turn.min.js"></script>
-
-<script type="text/javascript">
-    $(window).ready(function() {
-        $('#magazine').turn();
-    });
-</script>
+<script type="text/javascript" src="js/zoom.min.js"></script>
 
 <style type="text/css">
-#magazine{
-    width:300px;
-    height:200px;
-}
+/*
+*/
 
-#magazine .turn-page{
-    background-color:#ccc;
-    background-size:100% 100%;
-}
 
-#flipbook .page-wrapper{
-   -webkit-perspective:2000px;
-   -moz-perspective: 2000px;
-   -ms-perspective: 2000px;
-   perspective: 2000px;
-}
+
 </style>
 
-
-
-
-
-
-<!--
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/pret.css" rel="stylesheet">
-<script src="js/bootstrap.js"></script>
-<script src="js/prettify.js"></script>
--->
 <script type="text/javascript">
-
 /*
-
-function aaa(){
-  document.write(window.innerWidth + "<br>");
-}
-
-window.onresize=function(){ aaa();  }
-
-aaa();
-
-
-$.each([1,2,3], function() {
-  document.write(this + 1);
-});
-
-
-$(document).ready(function(){
-  $(".ueue").css("color","#f00");
-});
-
-$(document).ready(function(){
-  $(".ueue").click(function(event){
-    event.preventDefault();
-    $(this).hide("slow");
-  });
-});
-
-$(document).ready(function(){
-  $("div").append(":");
-});
 */
 
 
+
+
+
+
 /*
+// turn.js サイズを指定しないと自動調整される。
 $(document).ready(function(){
-  $("div").click(function () {
-    var color = $(this).css("background-color");
-    $("#result").html("That div is <span style='color:" + color + ";'>" + color + "</span>.");
-  });
+	$("#flipbook").turn({
+		width: 400,
+		height: 300,
+		autoCenter: true
+	});
 });
 */
 
-/* tmpsにパラメータ test=John をつけて要求し、その要求が正常に完了したとき、レスポンスを表示する。
+/*
+// tmpsにパラメータ test=John をつけて要求し、その要求が正常に完了したとき、レスポンスを表示する。
 $.ajax({
   type: "POST",
   url: "tmps",
@@ -96,55 +43,47 @@ $.ajax({
 });
 */
 
-</script>
+/*
+// クリックしたdivの色を取得しresultに渡す
+$(document).ready(function(){
+  $("div").click(function () {
+    var color = $(this).css("background-color");
+    $("#result").html("That div is <span style='color:" + color + ";'>" + color + "</span>.");
+  });
+});
+*/
 
 
-  </head>
-<body>
+/*
+// divに:を追加したり.klassの色を変えたりクリックして隠したり。
+$(document).ready(function(){
+  $("div").append(":");
+  $(".klass").css("color","#f00");
+  $(".klass").click(function(event){
+    event.preventDefault();
+    $(this).hide("slow");
+  });
+});
+*/
 
 
-<div id="flipbook">
-	<div class="hard"> Turn.js </div> 
-	<div class="hard"></div>
-	<div> Page 1 </div>
-	<div> Page 2 </div>
-	<div> Page 3 </div>
-	<div> Page 4 </div>
-	<div class="hard"></div>
-	<div class="hard"></div>
-</div>
-<script type="text/javascript">
-	$("#flipbook").turn({
-		width: 400,
-		height: 300,
-		autoCenter: true
-	});
-</script>
+/*
+// ウィンドウサイズのリアルタイムな取得
+$(document).ready(function(){
+	getScreenSize(); // 画面サイズの取得
+	getWindowSize(); // ウィンドウサイズの取得
+});
 
-<br>
-<br>
-<br>
-<br>
-
-<p>画面サイズ：<span id="ScrSize"></span></p>
-<p>ウィンドウサイズ：<span id="WinSize"></span></p>
-
-<script tyle="text/javascript">
-//画面サイズの取得
-getScreenSize();
-
-//ウィンドウサイズの取得
-getWindowSize();
 //window.onresize=function(){ getWindowSize(); }
 window.onresize=getWindowSize;
 
-//画面サイズを取得する
+// 画面サイズを取得する
 function getScreenSize() {
 	var s = "横幅 = " + window.parent.screen.width + " / 高さ = " + window.parent.screen.height;
 	document.getElementById("ScrSize").innerHTML = s;
 }
 
-//ウィンドウサイズを取得する
+// ウィンドウサイズを取得する
 function getWindowSize() {
 	var sW,sH,s;
 	if (document.all) {
@@ -160,106 +99,56 @@ function getWindowSize() {
  
 	document.getElementById("WinSize").innerHTML = s;
 }
-</script>  
-  
-  
+*/
+
+
+/* 
+// each文
+$.each([1,2,3], function() {
+  document.write(this + 1);
+});
+*/
+
+</script>
+</head><body>
 <!--
-<div style="background-color:blue;">aaa</div>
-<div style="background-color:rgb(15,99,30);">bbb</div>
-<div style="background-color:#123456;">nnn</div>
-<div style="background-color:#f11;">ggg</div>
-<br>
-<span id="result"></span>
-<br>
 -->
-<i class="icon-pencil"></i>
-<div class="container">
-  <div class="row">
-    <div class="span4">
-      Span4の中身
-    </div>
-    <div class="span8">
-      Span8の中身
-    </div>
-  </div>
+
+
+
+
+<!--
+// turn.js サイズを指定しないと自動調整される。
+<div id="flipbook">
+	<div style="background-color:#eee" class="hard"> Turn.js </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
 </div>
-
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span4">
-      Span4の中身
-    </div>
-    <div class="span8">
-      Span8の中身
-    </div>
-  </div>
-</div>
+-->
 
 
-<pre>
-roit
-rtiourt
+<!--
+// クリックしたdivの色を取得しresultに渡す
+<div style="background-color:#0f0">aaaa</div>
+<span id="result"></span>
+-->
 
-</pre>
+
+<!--
+// divに:を追加したり.klassの色を変えたりクリックして隠したり。
+<div class="klass">aaaa</div>
+-->
 
 
-<pre class="prettyprint linenums">
-roit
-rtiourt
+<!--
+// ウィンドウサイズのリアルタイムな取得
+<p>画面サイズ：<span id="ScrSize"></span></p>
+<p>ウィンドウサイズ：<span id="WinSize"></span></p>
+-->
 
-</pre>
-
-  <div class="ueue">aaaa</div>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li class="nuu"><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
-              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div id="content">
-        <div id="header">
-          <h1>あああ</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
-
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-
-          <ol>
-            <li>
-              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-
-            <li>
-              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
-              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div id="footer">&nbsp;</div>
-    </div>
-  </body>
-</html>
+</body></html>
