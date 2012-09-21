@@ -1,3 +1,12 @@
+https://twitter.com/statuses/update.xml
+http://twitter.com/statuses/friends_timeline.xml
+http://twitter.com/statuses/replies.xml
+http://twitter.com/statuses/friends.xml
+http://twitter.com/statuses/followers.xml
+http://twitter.com/friendships/create/agileronin.xml
+
+
+
 同一連続投稿制限解除時間測定ボット まろいち
 連続投稿用乱数発生ボット まろに
 最大文字数絶叫ボット まろさん

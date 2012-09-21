@@ -1,50 +1,19 @@
-□起動開始/起動終了
-□リプライ
-□TL
-□発言リストの分割読込
+◆action
+・起動開始/起動終了
+・リプライ
+＞・大元リストとパターンマッチングをする別ファイル/リプライループリミット
+＞・@の受け取り時間
+＞・リプライ一覧から自分が既に返事したものを除く
+・TL取得 タイムラインに反応する(getFriendsTimeline)
+・自動フォロー返し
+＞・getFollowers
 
-    //順番にポスト
-$lastPhraseがきたら終了する
+◆someday
 
-    //リプライする
-    function reply($cron = 2, $replyFile = "data.txt", $replyPatternFile = "reply_pattern.php")
-パターンマッチングをする別ファイル
-リプライループリミット
-getReplies()
-@の受け取り
-@の受け取り時間
-    //リプライ一覧から自分が既に返事したものを除く
+◆NotToDo
+・発言リストの分割読込->$lastPhraseがきたら終了する
 
-
-//タイムラインに反応する
-getFriendsTimeline
+◆Done
 
 
-取得
-パターンマッチング
-リミット確認
-
-
-    //自動フォロー返し
-getFollowers
-followUser($screen_name)
-
-        //ランダムな一人のfollowingデータを取る
-            $response = $this->getFriends();
-
-        //ランダムな一人のfollowerデータを取る
-            $response = $this->getFollowers();
-
-        //タイムラインからランダムに最近発言した人のデータを取る
-            $randomTweet = $this->getRandomTweet();
-
-https://twitter.com/statuses/update.xml
-http://twitter.com/statuses/friends_timeline.xml
-http://twitter.com/statuses/replies.xml
-http://twitter.com/statuses/friends.xml
-http://twitter.com/statuses/followers.xml
-http://twitter.com/friendships/create/agileronin.xml
-
-        $response = $this->consumer->sendRequest($url,array(),"GET");
-        $response = simplexml_load_string($response->getBody());
 

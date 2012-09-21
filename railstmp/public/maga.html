@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/turn.min.js"></script>
+
+<style type="text/css">
+body{
+	background:#ccc;
+}
+
+#magazine .turn-page{
+	background-color:#ccc;
+	background-size:100% 100%;
+}
+
+#magazine{
+	-webkit-transition:margin-left 0.2s ease-in-out;
+	-moz-transition:margin-left 0.2s ease-in-out;
+	-o-transition:margin-left 0.2s ease-in-out;
+	-ms-transition:margin-left 0.2s ease-in-out;
+	transition:margin-left 0.2s ease-in-out;
+}
+
+</style>
+</head>
+<body>
+
+<div id="magazine">
+	<div class="hard" style="background-image:url(pages/01.jpg);"></div>
+	<div style="background-image:url(pages/02.jpg);"></div>
+	<div style="background-image:url(pages/03.jpg);"></div>
+	<div style="background-image:url(pages/04.jpg);"></div>
+	<div style="background-image:url(pages/05.jpg);"></div>
+	<div style="background-image:url(pages/06.jpg);"></div>
+</div>
+
+
+<script type="text/javascript">
+	$(window).ready(function() {
+		$('#magazine')
+		.turn({
+			width: 576,
+			height: 376,
+			autoCenter: true,
+			inclination: 50
+		});
+	});
+	
+	
+	$(window).bind('keydown', function(e){
+		
+		if (e.keyCode==37)
+			$('#magazine').turn('previous');
+		else if (e.keyCode==39)
+			$('#magazine').turn('next');
+			
+	});
+
+</script>
+
+</body>
+</html>

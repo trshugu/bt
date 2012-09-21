@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ruby on Rails: Welcome aboard</title>
+    <title>tmp</title>
+<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/turn.min.js"></script>
 
+<script type="text/javascript">
+    $(window).ready(function() {
+        $('#magazine').turn();
+    });
+</script>
+
+<style type="text/css">
+#magazine{
+    width:300px;
+    height:200px;
+}
+
+#magazine .turn-page{
+    background-color:#ccc;
+    background-size:100% 100%;
+}
+
+#flipbook .page-wrapper{
+   -webkit-perspective:2000px;
+   -moz-perspective: 2000px;
+   -ms-perspective: 2000px;
+   perspective: 2000px;
+}
+</style>
+
+
+
+
+
+
+<!--
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/pret.css" rel="stylesheet">
-<script type="text/javascript" src="jquery-1.8.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/prettify.js"></script>
-
+-->
 <script type="text/javascript">
 
 /*
@@ -65,8 +97,35 @@ $.ajax({
 */
 
 </script>
+
+
   </head>
-  <body>
+<body>
+
+
+<div id="flipbook">
+	<div class="hard"> Turn.js </div> 
+	<div class="hard"></div>
+	<div> Page 1 </div>
+	<div> Page 2 </div>
+	<div> Page 3 </div>
+	<div> Page 4 </div>
+	<div class="hard"></div>
+	<div class="hard"></div>
+</div>
+<script type="text/javascript">
+	$("#flipbook").turn({
+		width: 400,
+		height: 300,
+		autoCenter: true
+	});
+</script>
+
+<br>
+<br>
+<br>
+<br>
+
 <p>画面サイズ：<span id="ScrSize"></span></p>
 <p>ウィンドウサイズ：<span id="WinSize"></span></p>
 
