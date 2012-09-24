@@ -54,6 +54,13 @@
 /*
 */
 
+
+
+
+
+
+
+/*
 $(document).ready(function(){
 	$("#flipbook").turn({
 		width: 400,
@@ -65,15 +72,24 @@ $(document).ready(function(){
 $(window).bind('keydown', function(e){
 	if (e.keyCode==38){
 		$('#zoom-viewport').zoom('zoomIn');
-$("#flipbook").turn();
 	}
 	else if (e.keyCode==40){
 		$('#zoom-viewport').zoom('zoomOut');
 	}
 });
 
+$(window).bind('keydown', function(e){
+	if (e.keyCode==37)
+		$('#flipbook').turn('previous');
+	else if (e.keyCode==39)
+		$('#flipbook').turn('next');
+});
+*/
+
+
 /*
 // Zoom のチェック
+$(document).ready(function(){
 	$('#zoom-viewport').zoom({
 		flipbook: $("#flipbook"),
 		duration: 600,
@@ -83,6 +99,7 @@ $("#flipbook").turn();
 		//	Tap: function(e){alert(e);}
 		//}
 	});
+});
 	
 	// $('#zoom-viewport').bind("zoom.doubleTap", function(e){ alert("dd"); })
 	//  $('#zoom-viewport').bind("zoom.tap", function(e){ alert("tt"); })
@@ -195,6 +212,7 @@ $(document).ready(function(){
 	$("#flipbook").turn({
 		width: 400,
 		height: 300,
+		// acceleration: false,
 		// direction: "rtl",
 		// duration: 600,
 		// gradients: !$.isTouch,
@@ -308,6 +326,13 @@ $.each([1,2,3], function() {
 <!--
 -->
 
+
+
+
+
+
+<!--
+// ズーム用
 <div id="zoom-viewport">
 	<div id="flipbook">
 		<div style="background-color:#eee" class="hard"> Turn.js </div> 
@@ -320,6 +345,7 @@ $.each([1,2,3], function() {
 		<div style="background-color:#eee" class="hard"></div>
 	</div>
 </div>
+
 
 
 <!--
