@@ -3,5 +3,7 @@ heroku keys:add
 heroku auth:login
 ‚È‚ñ‚¾‚©‚ñ‚¾‚Ågit bash‚Å‚È‚¢‚Æƒ_ƒ‚¾‚Á‚½B
 
+lokka
+fulcrum
 
-
+gem install debugger
