@@ -1,21 +1,11 @@
-<!doctype html>
-<html>
-<head>
+<!doctype html><html><head>
 <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="js/turn.min.js"></script>
 <script type="text/javascript" src="js/zoom.min.js"></script>
 
 <style type="text/css">
-body{
-	background:#ccc;
-}
-
-#magazine .turn-page{
-	background-color:#fff;
-	background-size:100% 100%;
-}
-
-#magazine{
+/* autoCenter用アニメーション設定 */
+#fb1, #fb2{
 	-webkit-transition:margin-left 0.2s ease-in-out;
 	-moz-transition:margin-left 0.2s ease-in-out;
 	-o-transition:margin-left 0.2s ease-in-out;
@@ -24,106 +14,92 @@ body{
 }
 
 </style>
-</head>
-<body>
-
-<div id="magazine">
-	<div style="background:#fff">tit</div>
-	<div style="background-image:url(pages/02.jpg);"></div>
-	<div class="ueue" style="background:#ccc;font-size:9px;">
-「m'aider」<br>
-<br>
-平気な振りをして笑って誤魔化したって<br>
-いつか限界が来る<br>
-<br>
-知らない間に嘘の自分に塗り潰され<br>
-本当の自分が居ない<br>
-<br>
-今でも言えない何かを抱いて隠したまま<br>
-見えない孤独を抱いて<br>
-<br>
-心の鍵を外す誰かを待ち続ける<br>
-孤独な観察者<br>
-<br>
-いつだってそうやって泣きそうに笑った強がって<br>
-淋しくて哀しくて今にでも狂いそうだった<br>
-だけど悲鳴の上げ方も知らないまま生きてきたから<br>
-泣き方を知らないんだね<br>
-<br>
-怖いなら叫んで　その悲鳴を<br>
-辿って貴方の元へゆくから<br>
-貴方が生きて　傍に居るなら<br>
-もう、それだけで良い<br>
- <br>
-私は貴方が必要だと目を見て言える<br>
-でも貴方にはどうだい？<br>
- <br>
-虚ろな眼をして貴方の光を待ち続ける<br>
-孤独な地下室で<br>
- <br>
-消したくて消せなくて今でも此の声は震えている<br>
-笑えるほど怖くって今にでも泣きだしそうだ<br>
-一人でも平気じゃなきゃ赦さーれなかったから<br>
-その温もりが怖い
-貴方に届け　この悲鳴よ<br>
-その声でこの名前を呼んで欲しい<br>
-貴方と生きて　抱き締め合える<br>
-こんな幸せは無いよ<br>
- <br>
-怖いなら叫んで　其の悲鳴を<br>
-辿って貴方の元へゆくから<br>
-貴方と生きて　交わす口付け<br>
-こんな幸せはないよ　ねぇそうでしょう<br>
-暗い地下室で　貴方が照らした<br>
-本当の私を見付けてくれたんだ<br>
-貴方と出逢って　一緒に生きている<br>
-こんな幸せはないよ<br>
- <br>
-こんな幸せに出逢えたよ<br>
-<br>
-暗闇に響く　ノックの音　開かれるドア<br>
-その眼に映ったのは<br>
-出逢った命　鼓動が二つ　溢れる涙<br>
-この暗い地下室で<br>
-</div>
-	<div style="background-image:url(pages/04.jpg);"></div>
-	<div style="background-image:url(pages/05.jpg);"></div>
-	<div style="background-image:url(pages/06.jpg);"></div>
-</div>
-
 
 <script type="text/javascript">
-	$(window).ready(function() {
-		$('#magazine')
-		.turn({
-			width: 840,
-			height: 520,
-			autoCenter: true,
-			elevation: 50,
-			zoom: 1.5
-		})
-		.bind("zooming", function(event,  newZoomValue, currentZoomValue) {
-			$('.ueue').css("font-size","150%")
-		})
-	});
-	
-	
-	$(window).bind('keydown', function(e){
-		
-		if (e.keyCode==37)
-			$('#magazine').turn('previous');
-		else if (e.keyCode==39)
-			$('#magazine').turn('next');
-		else if (e.keyCode==38)
-			$("#magazine").turn('zoom', 1);
-		else if (e.keyCode==40)
-			$("#magazine").turn('zoom', 1.5);
-	});
 
+$(document).ready(function(){
+	hideall();
+});
+
+function hideall(){
+	$("#fb1").hide();
+	$("#fb2").hide();
+	$("#fb3").hide();
+}
+
+function keybind(fbid){
+	$(window).bind('keydown', function(e){
+		if (e.keyCode==37)
+			$(fbid).turn('previous');
+		else if (e.keyCode==39)
+			$(fbid).turn('next');
+	});
+}
+
+
+var fbnow;
+function fb(fb){
+	if (fbnow && fbnow != fb){
+		$(fbnow).hide();
+	}
+	
+	$(fb).show();
+	
+	if (!$(fb).turn("is")){
+		$(fb).turn({
+			width: 400,
+			height: 300,
+			autoCenter: true
+		});
+	}
+	
+	keybind(fb);
+	fbnow = fb;
+}
 
 
 
 </script>
 
-</body>
-</html>
+</head><body>
+
+<a href="#" onClick="fb('#fb1')">fb1</a>
+<a href="#" onClick="fb('#fb2')">fb2</a>
+
+<div class="flipbook">
+
+<div id="fb1">
+	<div style="background-color:#eee" class="hard"> fb1 </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
+</div>
+
+<div id="fb2">
+	<div style="background-color:#eee" class="hard"> fb2 </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
+</div>
+
+<div id="fb3">
+	<div style="background-color:#eee" class="hard"> fb3 </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
+</div>
+
+</div>
+</body></html>
