@@ -1,4 +1,5 @@
 ◆action
+・otherなボットアカウント作成(2つくらい)
 ・フォローする=>Favorite,retweet,Follower
 ・反応する。
 
