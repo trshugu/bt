@@ -2,6 +2,7 @@
 <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="js/turn.min.js"></script>
 <script type="text/javascript" src="js/zoom.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 
 <style type="text/css">
 /*
@@ -11,11 +12,11 @@
 /*
 // CSS classes のチェック
 .shadow{
-	-webkit-box-shadow: 0 4px 10px #666;
-	-moz-box-shadow: 0 4px 10px #666;
-	-ms-box-shadow: 0 4px 10px #666;
-	-o-box-shadow: 0 4px 10px #666;
-	box-shadow: 0 4px 10px #666;
+    -webkit-box-shadow: 0 4px 10px #666;
+    -moz-box-shadow: 0 4px 10px #666;
+    -ms-box-shadow: 0 4px 10px #666;
+    -o-box-shadow: 0 4px 10px #666;
+    box-shadow: 0 4px 10px #666;
 }
 .sheet{background-color:#acd}
 .page{background-color:#367}
@@ -30,7 +31,7 @@
 /*
 // 右開きの設定
 #flipbook {
-	direction:rtl;
+    direction:rtl;
 }
 */
 
@@ -38,11 +39,11 @@
 /*
 // autoCenter用アニメーション設定
 #flipbook{
-	-webkit-transition:margin-left 0.2s ease-in-out;
-	-moz-transition:margin-left 0.2s ease-in-out;
-	-o-transition:margin-left 0.2s ease-in-out;
-	-ms-transition:margin-left 0.2s ease-in-out;
-	transition:margin-left 0.2s ease-in-out;
+    -webkit-transition:margin-left 0.2s ease-in-out;
+    -moz-transition:margin-left 0.2s ease-in-out;
+    -o-transition:margin-left 0.2s ease-in-out;
+    -ms-transition:margin-left 0.2s ease-in-out;
+    transition:margin-left 0.2s ease-in-out;
 }
 
 */
@@ -62,27 +63,27 @@
 
 /*
 $(document).ready(function(){
-	$("#flipbook").turn({
-		width: 400,
-		height: 300,
-		autoCenter: true
-	});
+    $("#flipbook").turn({
+        width: 400,
+        height: 300,
+        autoCenter: true
+    });
 });
 
 $(window).bind('keydown', function(e){
-	if (e.keyCode==38){
-		$('#zoom-viewport').zoom('zoomIn');
-	}
-	else if (e.keyCode==40){
-		$('#zoom-viewport').zoom('zoomOut');
-	}
+    if (e.keyCode==38){
+        $('#zoom-viewport').zoom('zoomIn');
+    }
+    else if (e.keyCode==40){
+        $('#zoom-viewport').zoom('zoomOut');
+    }
 });
 
 $(window).bind('keydown', function(e){
-	if (e.keyCode==37)
-		$('#flipbook').turn('previous');
-	else if (e.keyCode==39)
-		$('#flipbook').turn('next');
+    if (e.keyCode==37)
+        $('#flipbook').turn('previous');
+    else if (e.keyCode==39)
+        $('#flipbook').turn('next');
 });
 */
 
@@ -90,27 +91,27 @@ $(window).bind('keydown', function(e){
 /*
 // Zoom のチェック
 $(document).ready(function(){
-	$('#zoom-viewport').zoom({
-		flipbook: $("#flipbook"),
-		duration: 600,
-		max: 2
-		//when: {
-		//	doubleTap: function(e){alert(e);},
-		//	Tap: function(e){alert(e);}
-		//}
-	});
+    $('#zoom-viewport').zoom({
+        flipbook: $("#flipbook"),
+        duration: 600,
+        max: 2
+        //when: {
+        //  doubleTap: function(e){alert(e);},
+        //  Tap: function(e){alert(e);}
+        //}
+    });
 });
-	
-	// $('#zoom-viewport').bind("zoom.doubleTap", function(e){ alert("dd"); })
-	//  $('#zoom-viewport').bind("zoom.tap", function(e){ alert("tt"); })
-	// $('#zoom-viewport').bind("zoom.change", function(e, change){ alert(change); })
-	// $('#zoom-viewport').bind("zoom.resize", function(e){ alert("tt"); })
+    
+    // $('#zoom-viewport').bind("zoom.doubleTap", function(e){ alert("dd"); })
+    //  $('#zoom-viewport').bind("zoom.tap", function(e){ alert("tt"); })
+    // $('#zoom-viewport').bind("zoom.change", function(e, change){ alert(change); })
+    // $('#zoom-viewport').bind("zoom.resize", function(e){ alert("tt"); })
 
 $(window).bind('keydown', function(e){
-	if (e.keyCode==37)
-		$('#flipbook').turn('previous');
-	else if (e.keyCode==39)
-		$('#flipbook').turn('next');
+    if (e.keyCode==37)
+        $('#flipbook').turn('previous');
+    else if (e.keyCode==39)
+        $('#flipbook').turn('next');
 });
 */
 
@@ -118,14 +119,14 @@ $(window).bind('keydown', function(e){
 /*
 // Eventsのチェック
 $(document).ready(function(){
-	// $("#flipbook").bind("first", function(event){alert("first!!")});
-	// $("#flipbook").bind("last", function(event){alert("last!!")});
-	// $("#flipbook").bind("start", function(event, pageObj, corner){alert(pageObj.page)});
-	// $("#flipbook").bind("end", function(event, pageObj, turned){alert(pageObj.page)});
-	// $("#flipbook").bind("missing", function(event, pages){alert("missing!!")});
-	// $("#flipbook").bind("turning", function(event, page, view){alert(page)});
-	// $("#flipbook").bind("turned", function(event, page, view){alert(page)});
-	// $("#flipbook").bind("zooming", function(event, new, current){alert(new)});
+    // $("#flipbook").bind("first", function(event){alert("first!!")});
+    // $("#flipbook").bind("last", function(event){alert("last!!")});
+    // $("#flipbook").bind("start", function(event, pageObj, corner){alert(pageObj.page)});
+    // $("#flipbook").bind("end", function(event, pageObj, turned){alert(pageObj.page)});
+    // $("#flipbook").bind("missing", function(event, pages){alert("missing!!")});
+    // $("#flipbook").bind("turning", function(event, page, view){alert(page)});
+    // $("#flipbook").bind("turned", function(event, page, view){alert(page)});
+    // $("#flipbook").bind("zooming", function(event, new, current){alert(new)});
 });
 */
 
@@ -133,28 +134,28 @@ $(document).ready(function(){
 /*
 // Methodsのチェック
 $(window).bind('keydown', function(e){
-	if (e.keyCode==37)
-		// $('#flipbook').turn('previous');
-		// $('#flipbook').turn('addPage', $("<div />").html("Loading..."), $("#flipbook").turn("pages")+1);
-		// $('#flipbook').turn('center');
-		// $('#flipbook').turn('destroy').remove();
-		// $('#flipbook').turn('direction', 'rtl');
-		// $('#flipbook').turn('display', 'single');
-		// $('#flipbook').turn('disable', true);
-		// alert($('#flipbook').turn('hasPage', 10));
-		// alert($('#flipbook').turn('is'));
-		// $('#flipbook').turn('page', 4);// numへ飛ぶ
-		// $('#flipbook').turn('pages', 4); // numにする
-		// $('#flipbook').turn('peel', 'br');
-		// alert($('#flipbook').turn('range'));
-		// $('#flipbook').turn('removePage', 2);
-		// $('#flipbook').turn('resize');//?
-		// $('#flipbook').turn('size', 100, 100);
-		// $('#flipbook').turn('next').turn('stop');
-		// alert($('#flipbook').turn('version'));
-		$('#flipbook').turn('zoom', 0.5);
-	else if (e.keyCode==39)
-		$('#flipbook').turn('next');
+    if (e.keyCode==37)
+        // $('#flipbook').turn('previous');
+        // $('#flipbook').turn('addPage', $("<div />").html("Loading..."), $("#flipbook").turn("pages")+1);
+        // $('#flipbook').turn('center');
+        // $('#flipbook').turn('destroy').remove();
+        // $('#flipbook').turn('direction', 'rtl');
+        // $('#flipbook').turn('display', 'single');
+        // $('#flipbook').turn('disable', true);
+        // alert($('#flipbook').turn('hasPage', 10));
+        // alert($('#flipbook').turn('is'));
+        // $('#flipbook').turn('page', 4);// numへ飛ぶ
+        // $('#flipbook').turn('pages', 4); // numにする
+        // $('#flipbook').turn('peel', 'br');
+        // alert($('#flipbook').turn('range'));
+        // $('#flipbook').turn('removePage', 2);
+        // $('#flipbook').turn('resize');//?
+        // $('#flipbook').turn('size', 100, 100);
+        // $('#flipbook').turn('next').turn('stop');
+        // alert($('#flipbook').turn('version'));
+        $('#flipbook').turn('zoom', 0.5);
+    else if (e.keyCode==39)
+        $('#flipbook').turn('next');
 });
 
 */
@@ -162,26 +163,26 @@ $(window).bind('keydown', function(e){
 
 /*
 $(document).ready(function(){
-	$("#flipbook").turn({
-		width: 400,
-		height: 300,
-		autoCenter: true
-	});
+    $("#flipbook").turn({
+        width: 400,
+        height: 300,
+        autoCenter: true
+    });
 });
 
 // Propertiesのチェック
 $(window).bind('keydown', function(e){
-	if (e.keyCode==37)
-		// $('#flipbook').turn('previous');
-		// alert($('#flipbook').turn('direction'));
-		// alert($('#flipbook').turn('animating'));
-		// alert($('#flipbook').turn('size').width);
-		// alert($('#flipbook').turn('size').height);
-		// alert($('#flipbook').turn('options'));
-		// alert($('#flipbook').turn('view').join(" and "));
-		// alert($('#flipbook').turn('zoom'));
-	else if (e.keyCode==39)
-		$('#flipbook').turn('next');
+    if (e.keyCode==37)
+        // $('#flipbook').turn('previous');
+        // alert($('#flipbook').turn('direction'));
+        // alert($('#flipbook').turn('animating'));
+        // alert($('#flipbook').turn('size').width);
+        // alert($('#flipbook').turn('size').height);
+        // alert($('#flipbook').turn('options'));
+        // alert($('#flipbook').turn('view').join(" and "));
+        // alert($('#flipbook').turn('zoom'));
+    else if (e.keyCode==39)
+        $('#flipbook').turn('next');
 });
 */
 
@@ -189,8 +190,8 @@ $(window).bind('keydown', function(e){
 /*
 // 現在動作中かを判定する
 function isAnimating() {
-	if ($("#flipbook").turn("animating"))
-		alert('Animating a page!');
+    if ($("#flipbook").turn("animating"))
+        alert('Animating a page!');
 }
 */
 
@@ -198,10 +199,10 @@ function isAnimating() {
 /*
 // 矢印キーで改ページ
 $(window).bind('keydown', function(e){
-	if (e.keyCode==37)
-		$('#flipbook').turn('previous');
-	else if (e.keyCode==39)
-		$('#flipbook').turn('next');
+    if (e.keyCode==37)
+        $('#flipbook').turn('previous');
+    else if (e.keyCode==39)
+        $('#flipbook').turn('next');
 });
 */
 
@@ -209,25 +210,25 @@ $(window).bind('keydown', function(e){
 /*
 // optionsのチェック
 $(document).ready(function(){
-	$("#flipbook").turn({
-		width: 400,
-		height: 300,
-		// acceleration: false,
-		// direction: "rtl",
-		// duration: 600,
-		// gradients: !$.isTouch,
-		// elevation: 50,
-		// page: 5,
-		// when: {
-		// 	turning: function(event, page, pageobj) {
-		// 		alert(event);
-		// 		alert(page); // 動作したページ
-		// 		alert(pageobj); // 次のセットなど
-		// 	}
-		// },
-		autoCenter: true
-	});
-	//alert($("#flipbook").children().length)
+    $("#flipbook").turn({
+        width: 400,
+        height: 300,
+        // acceleration: false,
+        // direction: "rtl",
+        // duration: 600,
+        // gradients: !$.isTouch,
+        // elevation: 50,
+        // page: 5,
+        // when: {
+        //  turning: function(event, page, pageobj) {
+        //      alert(event);
+        //      alert(page); // 動作したページ
+        //      alert(pageobj); // 次のセットなど
+        //  }
+        // },
+        autoCenter: true
+    });
+    //alert($("#flipbook").children().length)
 });
 */
 
@@ -235,11 +236,11 @@ $(document).ready(function(){
 /*
 // turn.js サイズを指定しないと自動調整される。
 $(document).ready(function(){
-	$("#flipbook").turn({
-		width: 400,
-		height: 300,
-		autoCenter: true
-	});
+    $("#flipbook").turn({
+        width: 400,
+        height: 300,
+        autoCenter: true
+    });
 });
 */
 
@@ -282,8 +283,8 @@ $(document).ready(function(){
 /*
 // ウィンドウサイズのリアルタイムな取得
 $(document).ready(function(){
-	getScreenSize(); // 画面サイズの取得
-	getWindowSize(); // ウィンドウサイズの取得
+    getScreenSize(); // 画面サイズの取得
+    getWindowSize(); // ウィンドウサイズの取得
 });
 
 //window.onresize=function(){ getWindowSize(); }
@@ -291,25 +292,25 @@ window.onresize=getWindowSize;
 
 // 画面サイズを取得する
 function getScreenSize() {
-	var s = "横幅 = " + window.parent.screen.width + " / 高さ = " + window.parent.screen.height;
-	document.getElementById("ScrSize").innerHTML = s;
+    var s = "横幅 = " + window.parent.screen.width + " / 高さ = " + window.parent.screen.height;
+    document.getElementById("ScrSize").innerHTML = s;
 }
 
 // ウィンドウサイズを取得する
 function getWindowSize() {
-	var sW,sH,s;
-	if (document.all) {
-		//Internet Explorer
-		sW = document.body.clientWidth;
-		sH = document.body.clientHeight;
-	} else {
-		//Firefox等
-		sW = window.innerWidth;
-		sH = window.innerHeight;
-	}
-	s = "横幅 = " + sW + " / 高さ = " + sH;
+    var sW,sH,s;
+    if (document.all) {
+        //Internet Explorer
+        sW = document.body.clientWidth;
+        sH = document.body.clientHeight;
+    } else {
+        //Firefox等
+        sW = window.innerWidth;
+        sH = window.innerHeight;
+    }
+    s = "横幅 = " + sW + " / 高さ = " + sH;
  
-	document.getElementById("WinSize").innerHTML = s;
+    document.getElementById("WinSize").innerHTML = s;
 }
 */
 
@@ -334,16 +335,16 @@ $.each([1,2,3], function() {
 <!--
 // ズーム用
 <div id="zoom-viewport">
-	<div id="flipbook">
-		<div style="background-color:#eee" class="hard"> Turn.js </div> 
-		<div style="background-color:#eee" class="hard"></div>
-		<div style="background-color:#eee"> Page 1 </div>
-		<div style="background-color:#eee"> Page 2 </div>
-		<div style="background-color:#eee"> Page 3 </div>
-		<div style="background-color:#eee"> Page 4 </div>
-		<div style="background-color:#eee" class="hard"></div>
-		<div style="background-color:#eee" class="hard"></div>
-	</div>
+    <div id="flipbook">
+        <div style="background-color:#eee" class="hard"> Turn.js </div> 
+        <div style="background-color:#eee" class="hard"></div>
+        <div style="background-color:#eee"> Page 1 </div>
+        <div style="background-color:#eee"> Page 2 </div>
+        <div style="background-color:#eee"> Page 3 </div>
+        <div style="background-color:#eee"> Page 4 </div>
+        <div style="background-color:#eee" class="hard"></div>
+        <div style="background-color:#eee" class="hard"></div>
+    </div>
 </div>
 
 
@@ -351,14 +352,14 @@ $.each([1,2,3], function() {
 <!--
 // CSS classes のチェック
 <div id="flipbook">
-	<div class="hard"> Turn.js </div> 
-	<div class="hard"></div>
-	<div> Page 1 </div>
-	<div> Page 2 </div>
-	<div> Page 3 </div>
-	<div> Page 4 </div>
-	<div class="hard"></div>
-	<div class="hard"></div>
+    <div class="hard"> Turn.js </div> 
+    <div class="hard"></div>
+    <div> Page 1 </div>
+    <div> Page 2 </div>
+    <div> Page 3 </div>
+    <div> Page 4 </div>
+    <div class="hard"></div>
+    <div class="hard"></div>
 </div>
 -->
 
@@ -366,14 +367,14 @@ $.each([1,2,3], function() {
 <!--
 // turn.js サイズを指定しないと自動調整される。
 <div id="flipbook">
-	<div style="background-color:#eee" class="hard"> Turn.js </div> 
-	<div style="background-color:#eee" class="hard"></div>
-	<div style="background-color:#eee"> Page 1 </div>
-	<div style="background-color:#eee"> Page 2 </div>
-	<div style="background-color:#eee"> Page 3 </div>
-	<div style="background-color:#eee"> Page 4 </div>
-	<div style="background-color:#eee" class="hard"></div>
-	<div style="background-color:#eee" class="hard"></div>
+    <div style="background-color:#eee" class="hard"> Turn.js </div> 
+    <div style="background-color:#eee" class="hard"></div>
+    <div style="background-color:#eee"> Page 1 </div>
+    <div style="background-color:#eee"> Page 2 </div>
+    <div style="background-color:#eee"> Page 3 </div>
+    <div style="background-color:#eee"> Page 4 </div>
+    <div style="background-color:#eee" class="hard"></div>
+    <div style="background-color:#eee" class="hard"></div>
 </div>
 -->
 

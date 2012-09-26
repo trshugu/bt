@@ -1,0 +1,76 @@
+$("#test_table").dataTable();
+
+// ソートをオフ
+$("#test_table").dataTable({
+  "bSort": false
+});
+
+// 表示件数設定オフ
+$("#test_table").dataTable({
+  "bLengthChange": false
+});
+
+// 表示件数の選択肢を増やしたい場合は
+// jquery.dataTables.jsの1330行目付近の
+// this.aLengthMenu = [ 10, 25, 50, 100];
+// 全件を表示したかったら -1
+
+// cookieを使ったソート順や表示件数の設定を保存
+$("#test_table").dataTable({
+  "bStateSave": true
+});
+
+// Initialisation code
+$(document).ready(function() {
+	$('#example').dataTable( {
+		"bPaginate": false,
+		"bLengthChange": false,
+		"bFilter": true,
+		"bSort": false,
+		"bInfo": false,
+		"bAutoWidth": false } );
+} );
+
+// 一行選択
+// http://datatables.net/examples/api/select_single_row.html
+
+// パラメータ
+// http://baalzephon.dyndns.org/tech/index.php?JavaScript%2FjQuery%2FDataTables
+
+
+<style type="text/css" title="currentStyle">
+@import "media/css/demos.css";
+</style>
+<script type="text/javascript" language="javascript" src="http://アップロード先/media/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="http://アップロード先/media/js/jquery.dataTables.js"></script>
+// テーブルを作る
+// http://ascii.jp/elem/000/000/409/409633/index-2.html
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  $('#表のID').dataTable();
+});
+</script>
+
+Read more: http://ascii.jp/elem/000/000/409/409633/index-2.html#ixzz27Yz4Rq2h
+
+//http://railscasts.com/episodes/340-datatables?language=ja&view=asciicast
+//ソースコードをダウンロードしてRailsアプリケーションで使用することもできますが、画像ファイルへの相対パスによる参照がコードに含まれていて、asset pipelineに追加するためにはそれを修正する必要があり、これは少し難しい作業になります。幸いにもjquery-datatables-railsというgemがあり、これを利用することでその作業をずっと簡単なものにしてくれます。gemfileでこれをassetsグループに追加します。このgemはかなり頻繁に更新されていて、なるべく最新版を使用したいので、githubオプションを使用してプロジェクトのパスを渡します。
+
+// csvのDLとか・・・
+//http://miekun3333.blog.fc2.com/blog-entry-29.html
+
+// 行選択と値の取得
+//http://miekun3333.blog.fc2.com/blog-entry-31.html
+
+// 日本語化
+//http://ameblo.jp/it-books/entry-11299436811.html
+// 日本語化って？
+//http://www.keibunsya.co.jp/modules/features/index.php?content_id=113
+
+// datatablesえでぃたぶる
+//http://code.google.com/p/jquery-datatables-editable/
+
+// UI
+//http://alphasis.info/jquery-ui/
+
