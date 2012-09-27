@@ -2,6 +2,7 @@
 ・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
 ・radrailsでデバッグ
 
+
 ◆action
 
 ◆done
