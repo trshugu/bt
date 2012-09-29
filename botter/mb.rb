@@ -1,7 +1,10 @@
 #!ruby
 # -*- coding: utf-8 -*-
 require 'twitter'
+require './betweenhour.rb'
 
+
+# 認証設定
 lineArray = Array.new()
 File.readlines("oauth.txt").each do |line|
   lineArray.push line
@@ -15,11 +18,27 @@ Twitter.configure do |c|
 end
 
 =begin
-tweet = "test" + rand(100).to_s
-loop do
-  Twitter.update(tweet)
+# ランダムに一行取得
+def getRandomOneline(path)
+  filelinecount = File.open(path).read.count("\n") + 1
+  oneline = File.open(path).readlines[rand(filelinecount)].chomp
+
+  return oneline
+end
+
+# 特定の時間帯は発言しない
+VerifySleeping = BetweenHour.new
+if (!VerifySleeping.isBetweenHour(0, 23, Time.now.hour))
+  # 処理をランダムに切り替える
+  if rand(10) == 1 
+    place = getRandomOneline("list_place.txt")
+    tweet = "そうだ。#{place}行こう"
+  else
+    tweet = getRandomOneline("list.txt")
+  end
 end
 =end
 
 tweet = "test"
-Twitter.update(tweet)
+puts tweet
+#Twitter.update(tweet)

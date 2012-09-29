@@ -1,4 +1,7 @@
 ◆inbox
+・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
+・radrailsでデバッグ
+
 
 ◆action
 
