@@ -1,3 +1,9 @@
+eclipse‚Åegit‚Ìssh‚ª’Ê‚ç‚È‚¢Œ
+openssl rsa -in agile_rsa -out agile-eclipse -des3
+‚İ‚½‚¢‚ÈŠ´‚¶‚Å‚¤‚Ü‚­‚¢‚Á‚½B
+http://d.hatena.ne.jp/ang65/20120223/1329970301
+
+
 heroku create herokutest
 heroku keys:add
 heroku auth:login
