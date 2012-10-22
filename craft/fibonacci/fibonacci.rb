@@ -1,24 +1,28 @@
+ # n番目のフィボナッチ数を返却する
 class Fibonacci
-  # n番目のフィボナッチ数を返却する
+  # 初期値は0と1
+  def initialize
+    @beforeTwo = 0
+    @beforeOne = 1
+  end
+
   def returnFibonacciNumber(numberInt)
     # 受け取った値が数値か確認
-    if (numberInt.class != Fixnum)
-      raise
+    raise if numberInt.class != Fixnum
+    
+    # 0の場合は0、1の場合は1を返却
+    return 0 if numberInt == 0
+    return 1 if numberInt == 1
+
+    if (numberInt > 2)
+      sumNum = @beforeOne + @beforeTwo
+      @beforeTwo = @beforeOne
+      @beforeOne = sumNum
+      return returnFibonacciNumber(numberInt-1)
+    else
+      return @beforeOne + @beforeTwo
     end
-    
-    beforeOne = 0
-    beforeTwo = 0
-    resultFibonacciNumber = 1
-    
-    numberInt.times do
-      beforeTwo = beforeOne
-      beforeOne = resultFibonacciNumber
-      resultFibonacciNumber = beforeOne + beforeTwo
-    end
-    
-    return resultFibonacciNumber
   end
+
 end
 
-# 1番目は0で2番目は1なので微妙に違う。
-# あと再帰関数でやるべき
