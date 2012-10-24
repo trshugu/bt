@@ -21,7 +21,7 @@ class TestFibonacci < Test::Unit::TestCase
   end
 
   def testStress
-    100.times do |count|
+    7500.times do |count|
       Fibonacci.new.returnFibonacciNumber(count)
     end
   end
