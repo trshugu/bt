@@ -1,7 +1,7 @@
 ◆inbox
 ・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
 ・radrailsでデバッグできるようにする
-
+ruby ログ出力
 
 ◆action
 
