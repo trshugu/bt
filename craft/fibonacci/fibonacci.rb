@@ -1,4 +1,4 @@
- # n番目のフィボナッチ数を返却する
+# n番目のフィボナッチ数を返却する
 class Fibonacci
   # 初期値は0と1
   def initialize
@@ -26,3 +26,4 @@ class Fibonacci
 
 end
 
+puts Fibonacci.new().returnFibonacciNumber(ARGV[0].to_i)

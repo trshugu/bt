@@ -5,7 +5,6 @@
 
 
 
-
 =begin
 # 排他的論理和 ^^はない
 if (true ^ false)
