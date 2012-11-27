@@ -6,6 +6,7 @@ class TestFibonacci < Test::Unit::TestCase
     @fbTest = Fibonacci.new
   end
   
+  # 10番目までテスト
   def testIntin
     assert_equal(0,Fibonacci.new.returnFibonacciNumber(0))
     assert_equal(1,Fibonacci.new.returnFibonacciNumber(1))
@@ -19,13 +20,15 @@ class TestFibonacci < Test::Unit::TestCase
     assert_equal(34,Fibonacci.new.returnFibonacciNumber(9))
     assert_equal(55,Fibonacci.new.returnFibonacciNumber(10))
   end
-
+  
+  # ストレステスト
   def testStress
-    7500.times do |count|
+    8100.times do |count|
       Fibonacci.new.returnFibonacciNumber(count)
     end
   end
-
+  
+  # 文字列が入った場合はエラー
   def testException
     assert_raise(RuntimeError){Fibonacci.new.returnFibonacciNumber("0")}
     assert_raise(RuntimeError){Fibonacci.new.returnFibonacciNumber("b")}
