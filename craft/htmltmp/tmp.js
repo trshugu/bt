@@ -1,12 +1,107 @@
 /*
 */
+$(document).ready(function() {
+	$("#tmp");
+});
 
 
+
+
+
+
+
+
+
+
+
+/*
+// draggable
+$(document).ready(function() {
+	$("#tmp").draggable({ distance: 20 });
+});
+*/
+
+/*
+// prev + next
+$(document).ready(function() {
+	$(".prev + .next").css("border", "3px solid red");
+});
+*/
+
+/*
+// 名前をセレクタで
+$(document).ready(function() {
+	$("input[name=ttb]").css("border", "3px solid red");
+});
+*/
+
+/*
+// classを追加する運用だといいという
+$(document).ready(function() {
+	$(".tmp:odd").css({color: "#f00"}).addClass("odd-view");
+});
+*/
+
+
+/*
+// css
+$(document).ready(function() {
+	$("#tmp").css({color: "#f00"});
+});
+
+*/
+
+
+/*
+// tmpを使用する運用に
+$(document).ready(function() {
+	$("#tmp").click( function(){$(this).slideToggle("slow");} );
+});
+
+*/
+
+
+/*
+// h4 の次の要素をトグル
+$(document).ready(function() {
+  $('#navi > h4').click(function(){
+    // 引数には開閉する速度を指定します
+    $(this).next().slideToggle('slow');
+  });
+});
+*/
+
+
+
+/*
+// ワンライナーでの記述が可能
+javascript:$('.semooh a').hover(function(){ $(this).text('ヌ？'); },function(){ $(this).text('ヌー'); }); 
+*/
+
+
+/*
+// jsでBSD/オールマンのテスト
+// javascriptでは行が正しく終っていないと判断した場合、暗黙的に;が挿入される
+// http://qiita.com/items/9c349ee212caee635997
+function allman()
+{
+var a = 1
+return (a == 1)
+? "if"
+: "else";
+
+}
+
+alert(allman());
+*/
+
+
+/*
 // datatable
 $(document).ready( function() {
 	$("#example").dataTable();
 } );
-
+*/
 
 
 /*
