@@ -1,3 +1,7 @@
+railstmpは破壊用
+rortestはテストでいろいろやる用
+でもDBがなくてエラーに・・・
+もうちょっと手順をまとめる
 
 
 eclipseでegitのsshが通らない件
