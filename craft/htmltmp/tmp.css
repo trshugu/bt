@@ -1,0 +1,44 @@
+/*
+*/
+
+
+/*
+// CSS classes のチェック
+.shadow{
+    -webkit-box-shadow: 0 4px 10px #666;
+    -moz-box-shadow: 0 4px 10px #666;
+    -ms-box-shadow: 0 4px 10px #666;
+    -o-box-shadow: 0 4px 10px #666;
+    box-shadow: 0 4px 10px #666;
+}
+.sheet{background-color:#acd}
+.page{background-color:#367}
+.even{background-color:#f00}
+.odd{background-color:#0f0}
+.fixed{background-color:#00f}
+.hard{background-color:#00f}
+.p3{background-color:#367}
+*/
+
+
+/*
+// 右開きの設定
+#flipbook {
+    direction:rtl;
+}
+*/
+
+
+/*
+// autoCenter用アニメーション設定
+#flipbook{
+    -webkit-transition:margin-left 0.2s ease-in-out;
+    -moz-transition:margin-left 0.2s ease-in-out;
+    -o-transition:margin-left 0.2s ease-in-out;
+    -ms-transition:margin-left 0.2s ease-in-out;
+    transition:margin-left 0.2s ease-in-out;
+}
+
+*/
+
+

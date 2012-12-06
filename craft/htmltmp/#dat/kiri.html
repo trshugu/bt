@@ -1,0 +1,105 @@
+<!doctype html><html><head>
+<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/turn.min.js"></script>
+<script type="text/javascript" src="js/zoom.min.js"></script>
+
+<style type="text/css">
+/* autoCenter用アニメーション設定 */
+#fb1, #fb2{
+	-webkit-transition:margin-left 0.2s ease-in-out;
+	-moz-transition:margin-left 0.2s ease-in-out;
+	-o-transition:margin-left 0.2s ease-in-out;
+	-ms-transition:margin-left 0.2s ease-in-out;
+	transition:margin-left 0.2s ease-in-out;
+}
+
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	hideall();
+});
+
+function hideall(){
+	$("#fb1").hide();
+	$("#fb2").hide();
+	$("#fb3").hide();
+}
+
+function keybind(fbid){
+	$(window).bind('keydown', function(e){
+		if (e.keyCode==37)
+			$(fbid).turn('previous');
+		else if (e.keyCode==39)
+			$(fbid).turn('next');
+	});
+}
+
+
+var fbnow;
+function fb(fb){
+	if (fbnow && fbnow != fb){
+		$(fbnow).hide();
+	}
+	
+	$(fb).show();
+	
+	if (!$(fb).turn("is")){
+		$(fb).turn({
+			width: 400,
+			height: 300,
+			autoCenter: true
+		});
+	}
+	
+	keybind(fb);
+	fbnow = fb;
+}
+
+
+
+</script>
+
+</head><body>
+
+<a href="#" onClick="fb('#fb1')">fb1</a>
+<a href="#" onClick="fb('#fb2')">fb2</a>
+
+<div class="flipbook">
+
+<div id="fb1">
+	<div style="background-color:#eee" class="hard"> fb1 </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
+</div>
+
+<div id="fb2">
+	<div style="background-color:#eee" class="hard"> fb2 </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
+</div>
+
+<div id="fb3">
+	<div style="background-color:#eee" class="hard"> fb3 </div> 
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee"> Page 1 </div>
+	<div style="background-color:#eee"> Page 2 </div>
+	<div style="background-color:#eee"> Page 3 </div>
+	<div style="background-color:#eee"> Page 4 </div>
+	<div style="background-color:#eee" class="hard"></div>
+	<div style="background-color:#eee" class="hard"></div>
+</div>
+
+</div>
+</body></html>
