@@ -76,3 +76,7 @@ rake test:uncommitted 最後のコミットに関連したモデルとコントローラを探し関連した
 
 rails3では"link_to_remote" がなくなり "link_to" , "button_to" などに ":remote => true" オプションで実装する
 
+railsをproductionモードで実行する
+$ rake environment RAILS_ENV=production migrate 
+
+rails s -e production でOK

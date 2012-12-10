@@ -1,4 +1,5 @@
 ◆inbox
+・railsのlocaleを調査
 ・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
 ・radrailsでデバッグできるようにする
 ・RSS管理する系を考察(d群、w群、m群)

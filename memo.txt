@@ -1,3 +1,5 @@
+
+
 railstmpは破壊用
 rortestはテストでいろいろやる用
 でもDBがなくてエラーに・・・
@@ -19,3 +21,4 @@ lokka
 fulcrum
 
 gem install debugger
+
