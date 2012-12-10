@@ -5,6 +5,31 @@
 
 
 
+
+
+
+
+
+
+=begin
+# 論理演算子とビット演算子の確認
+def returnTrueAndPutsTest
+  puts "test"
+  return true
+end
+
+# 論理演算子 orのとき後者を評価しない
+if returnTrueAndPutsTest() || returnTrueAndPutsTest() 
+  puts "logical operators"
+end
+
+# ビット演算子
+if returnTrueAndPutsTest() | returnTrueAndPutsTest()
+  puts "Bitwise operators"
+end
+
+=end
+
 =begin
 # 排他的論理和 ^^はない
 if (true ^ false)
