@@ -9,8 +9,6 @@
 
 
 
-
-
 =begin
 # 論理演算子とビット演算子の確認
 def returnTrueAndPutsTest
