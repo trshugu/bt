@@ -2,6 +2,7 @@
 ・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
 ・radrailsでデバッグできるようにする
 ruby ログ出力
+・RSS管理する系を考察(d群、w群、m群)
 
 ◆action
 
