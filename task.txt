@@ -6,7 +6,43 @@
 
 ◆action
 
-◆done
+◆someday
+
+◆NotToDo
+
+◆document
+=================================================
+
+
+
+
+
+
+2012/12/18 10:00
+railstmpは破壊用
+rortestはテストでいろいろやる用
+でもDBがなくてエラーに・・・
+もうちょっと手順をまとめる
+
+
+eclipseでegitのsshが通らない件
+openssl rsa -in agile_rsa -out agile-eclipse -des3
+みたいな感じでうまくいった。
+http://d.hatena.ne.jp/ang65/20120223/1329970301
+
+
+heroku create herokutest
+heroku keys:add
+heroku auth:login
+なんだかんだでgit bashでないとダメだった。
+
+lokka
+fulcrum
+
+gem install debugger
+
+=================================================
+◆Done
 ＊exit(true)  終了ステータスを指定する。0(正常終了)
 ＊&block ブロック渡し
 ＊alias
