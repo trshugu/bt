@@ -1,5 +1,4 @@
 ◆inbox
-・railsのlocaleを調査
 ・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
 ・radrailsでデバッグできるようにする
 ・RSS管理する系を考察(d群、w群、m群)
@@ -71,3 +70,7 @@ gem install debugger
 ＊10分で作る
 ＞＊http://masuidrive.jp/rails/
 ＞＊http://www.rubylife.jp/rails/
+
+2012/12/18 15:51
+＊railsのlocaleを調査
+→localeモジュールによって国際化対応ができるとのこと

@@ -22,8 +22,7 @@
   get "tmps/:id" => "tmps#show", :as => "tmp"
   put "tmps/:id" => "tmps#update"
   delete "tmps/:id" => "tmps#destroy"
-  
-  root :to => 'tmps#index'
+  root :to => "tmps#index"
 end
 
 =begin
