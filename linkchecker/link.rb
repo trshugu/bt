@@ -1,8 +1,9 @@
 #!ruby
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 require "net/http"
 require "uri"
+require "./checklinkmodule.rb"
 
 # 計測開始
 starttime = Time.now
@@ -24,29 +25,15 @@ File.readlines(file).each do |line|
   end
 end
 
+# 総件数
 File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
 
-# URIチェック(スレッド化され並列処理される)
-def checkuri(uri)
-  begin
-    response = Net::HTTP.get_response(URI.parse(uri))
-    case response
-      when Net::HTTPSuccess, Net::HTTPRedirection
-        return
-        # return uri + " " + response.code.to_s + "\n"
-      else
-        return uri + " " + response.code.to_s + "\n"
-    end
-  rescue Exception => e
-    return uri + " 例外\n"
-  end
-end
-
 # 一行読んでスレッドへ渡す
+checklink = Checklink.new()
 threads = []
 urilist.each do |uri|
   threads << Thread.new do
-    File::open(resultfile, "a").write(checkuri(uri))
+    File::open(resultfile, "a").write(checklink.checkuri(uri))
   end
 end
 

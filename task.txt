@@ -2,11 +2,50 @@
 ・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
 ・radrailsでデバッグできるようにする
 ruby ログ出力
+>>>>>>> origin/master
 ・RSS管理する系を考察(d群、w群、m群)
+・キャッシュの練習する
+http://redmine.gendosu.jp/projects/1/wiki/Rails%E3%81%AE%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5
 
 ◆action
 
-◆done
+◆someday
+
+◆NotToDo
+
+◆document
+=================================================
+
+
+
+
+
+
+2012/12/18 10:00
+railstmpは破壊用
+rortestはテストでいろいろやる用
+でもDBがなくてエラーに・・・
+もうちょっと手順をまとめる
+
+
+eclipseでegitのsshが通らない件
+openssl rsa -in agile_rsa -out agile-eclipse -des3
+みたいな感じでうまくいった。
+http://d.hatena.ne.jp/ang65/20120223/1329970301
+
+
+heroku create herokutest
+heroku keys:add
+heroku auth:login
+なんだかんだでgit bashでないとダメだった。
+
+lokka
+fulcrum
+
+gem install debugger
+
+=================================================
+◆Done
 ＊exit(true)  終了ステータスを指定する。0(正常終了)
 ＊&block ブロック渡し
 ＊alias
@@ -33,3 +72,13 @@ ruby ログ出力
 ＊10分で作る
 ＞＊http://masuidrive.jp/rails/
 ＞＊http://www.rubylife.jp/rails/
+
+2012/12/18 15:51
+＊railsのlocaleを調査
+→localeモジュールによって国際化対応ができるとのこと
+
+2012/12/18 18:43
+＊radrailsでrubyデバッグできるようにする
+→やはりIDEが使えないと理解も遅いので
+
+
