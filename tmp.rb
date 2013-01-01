@@ -4,10 +4,24 @@
 =end
 
 
+=begin
+# オーバーライドかとおもったら違ったひっかけ問題。
+class Test
+  def test
+    p 'aaa'
+  end
+end
 
+obj =  Test.new
 
+class Test
+  def test
+    p 'noanoanoa'
+  end
+end
 
-
+obj.test
+=end
 
 =begin
 # 論理演算子とビット演算子の確認
