@@ -18,6 +18,12 @@ http://redmine.gendosu.jp/projects/1/wiki/Rails%E3%81%AE%E3%83%9A%E3%83%BC%E3%82
 
 
 
+アセットへのリンク
+<%= stylesheet_link_tag "application" %>
+<%= javascript_include_tag "application" %>
+<%= image_tag "rails.png" %>
+http://it.sifr.me/ruby-on-rails-asset-pipeline/
+
 
 
 2012/12/18 10:00
