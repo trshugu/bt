@@ -1,3 +1,30 @@
+#ボット要件
+http://twitter.com/friendships/create
+。replyの方法
+・RSSの内容を引用する
+・台風名を取得する
+・返信する
+・ 自分宛の発言があるか調べる あったら即座に回答
+・ 前回の発言からn時間経っているかどうか
+
+・朝フラグ()
+・夜フラグ()
+（それぞれがモバファク日付boolモジュールを使う）
+
+・string 発言モジュール()→朝フラグはこの中
+
+・bot
+＞・用意した文章をランダムな順番で投稿する
+＞・用意した文章を決まった順番で投稿する
+＞・誰かに@を貰うと用意した文章をランダムに返す
+＞・置換するパターン http://pha22.net/twitterbot/1.4/adv_id.php
+＞・特定の単語 http://pha22.net/twitterbot/1.4/adv_pattern.php
+＞・RT http://pha22.net/twitterbot/1.4/adv_other.php
+＞・@つき http://bot.ni-moe.com/Entry/4/
+＞・replyLoopLimit
+＞・リプライ
+＞・TLリプライ
+
 ◆action
 ・otherなボットアカウント作成(2つくらい)
 ・フォローする=>Favorite,retweet,Follower
