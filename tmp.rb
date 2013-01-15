@@ -4,6 +4,23 @@
 =end
 
 
+
+
+
+
+
+
+=begin
+# ディレクトリ内のクラスを呼ぶとパスが呼び出しもとを基準にされる。
+# なのでFile.expand_pathを使って自分自身を起点に呼び出させる。
+#require File.expand_path('../retstr.rb', __FILE__)
+#puts File.expand_path('nanigasi.rb', "../ddd")
+
+require './factory/bo.rb'
+aaa = Bo.new
+aaa.getter
+=end
+
 =begin
 # オーバーライドかとおもったら違ったひっかけ問題。
 class Test
