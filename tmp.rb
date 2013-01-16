@@ -4,9 +4,35 @@
 =end
 
 
+=begin
+# strategyパターンの考察
+class AbsNanigasi
+  def say
+    raise "this is abstract"
+  end
 
+  def bay
+    puts "nothing"
+  end
+end
 
+class Iti < AbsNanigasi
+  def say
+    puts "ichi"
+  end
+end
 
+class Ni < AbsNanigasi
+  def say
+    puts "nii"
+  end
+end
+
+Iti.new.say
+Ni.new.say
+Ni.new.bay
+# ダックタイピングによって旨味がないかも。
+=end
 
 
 =begin
