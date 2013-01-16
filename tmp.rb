@@ -9,6 +9,28 @@
 
 
 
+=begin
+# ダックタイピングの試し書きその弐
+def duckt(nanigasi)
+  nanigasi.duck
+end
+
+class Nanika
+  def duck
+    puts "asdfasdf"
+  end
+end
+
+class Nanikanoni
+  def duck
+    puts "nininini"
+  end
+end
+
+duckt(Nanika.new)
+duckt(Nanikanoni.new)
+=end
+
 
 =begin
 # ディレクトリ内のクラスを呼ぶとパスが呼び出しもとを基準にされる。
