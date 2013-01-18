@@ -2,7 +2,11 @@
 # coding: utf-8
 =begin
 =end
+def aaa
+  puts "kick id"
+end
 
+# ああああ
 
 =begin
 # strategyパターンの考察

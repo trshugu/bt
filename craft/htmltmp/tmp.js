@@ -14,6 +14,60 @@ $(document).ready(function() {
 
 
 
+
+
+
+/*
+// BSD/オールマンでクロージャを使ったときの挙動
+function newCounter() {
+	var i = 0;
+	return function() { // 無名関数
+		i = i + 1;
+		return i;
+	}
+}
+ 
+c1 = newCounter();
+document.write(c1() + "<br>")
+document.write(c1() + "<br>")
+document.write(c1() + "<br>")
+
+function newCounterAllman()
+{
+	var i = 0;
+	return function() // 無名関数
+	{
+		i = i + 1;
+		return i;
+	}
+}
+ 
+d1 = newCounterAllman();
+document.write(d1() + "<br>")
+document.write(d1() + "<br>")
+document.write(d1() + "<br>")
+*/
+
+
+/*
+// 配列でfor-inを使うと、prototypeを変更したとき挙動がおかしくなることがある
+Object.prototype.hoge = function() {};
+
+var assoc = {
+	foo: 1,
+	bar: 2,
+	baz: 3
+};
+
+for ( var i in assoc ) {
+	// よってhasOwnProperty()で自分自身のメンバ変数かを確認する
+	if ( assoc.hasOwnProperty(i) === true ) {
+		document.write(i + assoc[i] + "<br>");
+	}
+}
+*/
+
+
 /*
 // draggable
 $(document).ready(function() {
