@@ -1,41 +1,34 @@
 class BetweenHour
-  # ã‚ã‚‹æ™‚åˆ»(0æ™‚ï½23æ™‚)ãŒã€æŒ‡å®šã—ãŸæ™‚é–“ã®ç¯„å›²å†…ã«å«ã¾ã‚Œã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
   def isBetweenHour(beginHour, endHour, checkHour)
-    # å—ã‘å–ã£ãŸå€¤ãŒæ•°å€¤ã‹ç¢ºèª
+    # ó‚¯æ‚Á‚½’l‚ª”’l‚©Šm”F
     if (beginHour.class != Fixnum || endHour.class != Fixnum || checkHour.class != Fixnum)
       raise
     end
     
-    # 24ä»¥ä¸Šã®å€¤ã‚’æŒ‡å®šã—ãŸå ´åˆã‚¨ãƒ©ãƒ¼
-    if (beginHour >= 24 || endHour >= 24 || checkHour >= 24)
+    # ”ÍˆÍŠO‚Ì’l‚ğw’è‚µ‚½ê‡ƒGƒ‰[
+    if (beginHour >= 24 || endHour >= 24 || checkHour >= 24 || beginHour < 0 || endHour < 0 || checkHour < 0)
       raise
     end
     
-    # æ—¥ä»˜å‹ã¸å¤‰æ›
-    beginHour = Time.gm(0,1,1,beginHour)
-    endHour = Time.gm(0,1,1,endHour)
-    checkHour = Time.gm(0,1,1,checkHour)
-    
-    # é–‹å§‹æ™‚åˆ»ã¨çµ‚äº†æ™‚åˆ»ãŒåŒã˜å ´åˆã¯å«ã¾ã‚Œã‚‹
+    # ŠJn‚ÆI—¹‚ª“¯‚¶ê‡‚ÍŠÜ‚Ü‚ê‚é
     if (beginHour == checkHour && checkHour == endHour)
       return true
     end
     
-    # é–‹å§‹æ™‚åˆ»ãŒçµ‚äº†æ™‚åˆ»ã‚ˆã‚Šå¤§ãã„å ´åˆæ—¥è·¨ãåˆ¤å®š
-    if (beginHour > endHour)
-      endHour = Time.gm(0,1,endHour.day + 1, endHour.hour)
-      
-      # é–‹å§‹æ™‚åˆ»ãŒåˆ¤å®šæ™‚åˆ»ã‚ˆã‚Šå¤§ãã„å ´åˆæ—¥è·¨ãåˆ¤å®š
-      if (beginHour > checkHour)
-        checkHour = Time.gm(0,1,checkHour.day + 1, checkHour.hour)
+    # ŠÔ‚ğƒ‹[ƒv‚³‚¹A‚»‚Ì’†‚ÉcheckHour‚ª‚ ‚é‚©‚Ç‚¤‚©‚ğŠm”F‚·‚éˆ—‚É‚µ‚½
+    until beginHour == endHour
+      if (checkHour == beginHour)
+        return true
       end
-    end
-
-    # ç¯„å›²æŒ‡å®šã¯é–‹å§‹æ™‚åˆ»ã‚’å«ã¿çµ‚äº†æ™‚åˆ»ã¯å«ã¾ãªã„
-    if (beginHour <= checkHour && checkHour < endHour)
-      return true
+      
+      if beginHour >= 23
+        beginHour = 23 - beginHour
+      else
+        beginHour = beginHour + 1
+      end
     end
     
     return false
   end
 end
+
