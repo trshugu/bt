@@ -2,11 +2,48 @@
 # coding: utf-8
 =begin
 =end
-def aaa
-  puts "kick id"
+
+
+
+
+
+
+=begin
+# Rubyのクラスメソッドは同じクラスのprotectedメソッドや
+# privateメソッドにアクセスできない
+class Hoge
+ def self.class_method
+   hoge = Hoge.new
+   puts_safe {hoge.public_method}
+   puts_safe {hoge.protected_method}
+   puts_safe {hoge.private_method}
+ end
+
+ def public_method
+   "public"
+ end
+
+ protected
+ def protected_method
+   "protected"
+ end
+
+ private
+ def private_method
+   "private"
+ end
 end
 
-# ああああ
+def puts_safe
+ puts yield
+rescue => e
+ puts "ERROR!! - #{e}"
+end
+puts Hoge.new.public_method
+puts Hoge.new.protected_method
+puts Hoge.new.private_method
+=end
+
 
 =begin
 # strategyパターンの考察
