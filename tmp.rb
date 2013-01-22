@@ -8,6 +8,116 @@
 
 
 
+
+
+
+=begin
+# privateメソッドはサブクラスからも呼べる
+# 親クラス
+class Hoge
+  def pro
+    a_protected_method
+  end
+  def pri
+    a_private_method
+  end
+  
+  protected
+  def a_protected_method
+    "PROTECTED! - #{do_not_override_me}"
+  end
+ 
+  private
+  def a_private_method
+    "PRIVATE! - #{do_not_override_me}"
+  end
+ 
+  #May be overridden by sub class
+  def do_not_override_me
+    "I am Hoge."
+  end
+end
+
+# 子クラス
+class Piyo < Hoge
+  def call_a_protected_method
+    a_protected_method
+  end
+ 
+  def call_a_private_method
+    a_private_method #OK!!
+  end
+ 
+  def call_a_protected_method_via(hoge_or_piyo)
+    hoge_or_piyo.a_protected_method
+  end
+ 
+  def call_a_private_method_via(hoge_or_piyo)
+    hoge_or_piyo.a_private_method #NG!!
+  end
+  
+  private
+  # Override a private method in super class and called from super class
+  def do_not_override_me
+    "I am Piyo."
+  end
+end
+
+hoge = Hoge.new
+piyo = Piyo.new
+
+# 子クラスのprivateメソッドでオーバーライドされてる
+puts piyo.call_a_protected_method
+puts piyo.call_a_private_method
+
+# 親クラスのメソッドを呼べる
+puts piyo.call_a_protected_method_via(hoge)
+
+# 親クラスのメソッドを呼べないのでエラー
+#puts piyo.call_a_private_method_via(hoge)#ERROR!!
+
+# 別クラスでも同じ
+piyo2 = Piyo.new
+puts piyo.call_a_protected_method_via piyo2
+#puts piyo.call_a_private_method_via piyo2 #ERROR!!
+
+# 自分を入れても同じ
+puts piyo.call_a_protected_method_via piyo
+#puts piyo.call_a_private_method_via piyo
+
+# どちらもprivateで呼べない
+#puts hoge.do_not_override_me
+#puts piyo.do_not_override_me
+
+# どっちも外からなので呼べない
+#puts hoge.a_protected_method
+#puts hoge.a_private_method
+
+# 内側からのアクセス
+puts hoge.pro
+puts hoge.pri
+=end
+
+
+=begin
+# カッコ不要
+def testVar str, sss
+  puts str + sss
+end
+
+testVar "aaaa", "bbb"
+=end
+
+
+=begin
+# 単純なものはreturnを指定しなくてもOKぽ
+def stringonly
+  "why!"
+end
+
+puts stringonly
+=end
+
 =begin
 # Rubyのクラスメソッドは同じクラスのprotectedメソッドや
 # privateメソッドにアクセスできない
