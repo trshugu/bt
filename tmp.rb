@@ -7,9 +7,20 @@
 
 
 
+=begin
+# map関数(collectの別名)
+a = [10, 20, 30, 40, 50]
+p a.collect {|x| x*10} #=> [100, 200, 300, 400, 500]
+p a #=> [10, 20, 30, 40, 50]
+=end
 
 
-
+=begin
+# reduce関数(injectの別名)
+# 1個目、2個目と渡され、前回の戻り値、3個目と渡される
+number = [4,2,1,4] # 11
+puts number.reduce {|memo,item| memo + item}
+=end
 
 =begin
 # privateメソッドはサブクラスからも呼べる
