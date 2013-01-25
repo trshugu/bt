@@ -6,6 +6,46 @@
 
 
 
+=begin
+# クロージャの確認
+def closure
+  x = 0
+  puts x
+  #return lambda {|n| x = x + n }
+  return -> n{ x = x + n }
+end
+
+func = closure
+x = -100
+p func.call 1
+p func.call 1
+p func.call 1
+
+p x
+=end
+
+
+
+=begin
+# lambdaの練習
+lam = lambda {|x| x * x }
+puts lam.call 3
+
+lam2 = -> x{ x * x }
+puts lam2[3]
+
+# Procはクラス(引数を指定しないとnilが入る)
+pro = Proc.new do |x|
+  x * x
+end
+puts pro.call 3
+
+p lam.lambda?
+p lam2.lambda?
+p pro.lambda?
+=end
+
+
 
 =begin
 # map関数(collectの別名)
@@ -143,6 +183,7 @@ class Hoge
  def public_method
    "public"
  end
+
 
  protected
  def protected_method
