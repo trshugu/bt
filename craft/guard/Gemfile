@@ -1,0 +1,4 @@
+gem 'guard-rspec'
+gem 'guard-shell'
+gem 'pry'
+gem 'wdm'
