@@ -6,6 +6,41 @@
 
 
 
+
+
+
+
+
+
+=begin
+# mapの確認
+[[1,"a"],[2,"b"],[3,"c"]].map do |e|
+  p e.first
+end
+=end
+
+=begin
+# 時刻 フォーマット YYYYmmddHHMMSS
+p Time.new.strftime("%Y%m%d%H%M%S")
+=end
+
+=begin
+# CSVライブラリ
+require "csv"
+p [1,2,3].class
+p [1,2,3].first
+p CSV.class
+=end
+
+=begin
+# 行と列の入れかえ
+p [["aa",2],["bb",4],["cc",6]]
+p [["aa",2],["bb",4],["cc",6]].transpose
+# [["aa", "bb", "cc"], [2, 4, 6]]になる
+# 要素数が一致しない場合はIndexErrorが返る
+=end
+
+
 =begin
 # クロージャの確認
 def closure
