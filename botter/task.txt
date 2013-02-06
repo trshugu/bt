@@ -11,6 +11,7 @@
 ・自動フォロー返し
 ＞・getFollowers
 ・TL取得 タイムラインに反応する(getFriendsTimeline)
+・大分です！
 
 ◆someday
 ・フォロワー数チャッチョ
