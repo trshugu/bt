@@ -10,7 +10,54 @@
 
 
 
+=begin
+# ラムダ式を渡す形式
+def testfunc( data, callback )
+  callback.call( data )
+end
 
+data = { "a"=>1, "b"=> 2 }
+lam = -> hash{ p hash }
+testfunc( data, lam )
+=end
+
+
+=begin
+# yieldでもできる
+def testfunc( data )
+    yield( data )
+end
+
+# Procを渡さないでblockを渡す的な
+data = { "a"=>1, "b"=> 2 }
+testfunc( data ){|hash|  p hash }
+=end
+
+=begin
+# コールバックする関数($blockを追加)
+def testfunc( data, &callback )
+    callback.call( data )
+end
+
+# Procを渡さないでblockを渡す的な
+data = { "a"=>1, "b"=> 2 }
+testfunc( data ){|hash|  p hash }
+=end
+
+
+=begin
+# コールバックする関数
+def testfunc( data, callback )
+  callback.call( data )
+end
+
+# コールバック用にProcを渡す
+data = { "a"=>1, "b"=> 2 }
+testfunc( data, Proc.new{|hash| p hash } )
+testfunc( data, -> hash{ p hash } )
+testfunc( data, proc {|hash| p hash } )
+
+=end
 
 
 =begin
