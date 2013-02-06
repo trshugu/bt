@@ -11,6 +11,257 @@
 
 
 
+=begin
+# eval はObjectクラスのインスタンスメソッド
+eval "puts self"
+self.instance_eval "puts self"
+=end
+
+=begin
+# procいろいろその弐
+def myproc
+  proc.call
+  Proc.new.call
+  lambda.call # warning
+end
+
+myproc do
+  puts "pro"
+end
+=end
+
+
+=begin
+# procいろいろ
+proc do
+  puts 'proce'
+end.call
+
+lambda do
+  puts 'lam'
+end.call
+
+-> {
+  puts 'yajirusi'
+}.call
+
+-> x {
+  puts x
+}.call "yajirusi"
+=end
+
+
+=begin
+def kurikaesi
+    yield "asdf"
+    yield "fefdf"
+end
+
+kurikaesi do |aaa|
+  puts aaa
+end
+=end
+
+
+=begin
+# yieldを使ったフィボナッチ
+def fib(n)
+  i1,i2 = 0,1
+  n.times do
+    yield i1
+    i1, i2 = i2, i1+i2
+  end
+end
+fib(10){|n|puts n}
+=end
+
+=begin
+def foo(val)
+  yield val
+end
+foo(3) {|x| p  2 + x }
+=end
+
+
+=begin
+def foo
+  yield
+end
+foo { p  2 }
+=end
+
+=begin
+# yieldは渡されたブロックと同じ働きをするメソッドのようなもの
+def hogehoge( x )
+  yield
+  return x + 2
+end
+p hogehoge( 5 ){ p "foo" } # このブロックはyieldで実行される
+=end
+
+=begin
+# ブロックを渡したとき
+def hogehoge( x, &proc )    # &proc
+  proc.call if block_given? # proc.call
+  return x + 2
+end
+
+p hogehoge( 3 )
+p hogehoge( 5 ){ p "foo" }
+
+# yieldを使ったとき
+def hogehoge2( x )      # &proc はない！
+  yield if block_given? # proc.call が yield に！
+  return x + 2
+end
+
+p hogehoge2( 3 )
+p hogehoge2( 5 ){ p "foo" }
+=end
+
+=begin
+proc2 = Proc.new{|a, b| ( a + b ) }
+proc3 = Proc.new{|a, b| ( a + b ); ( a - b ) }
+
+def proc2( a, b )
+  return ( a + b )
+end
+
+# 手続き型オブジェクトを実行したときの値 ( メソッドで言うと戻り値 ) は、
+# ブロック内で最後に評価された値になる。
+p proc2.call( 3, 5 ) # 8
+p proc3.call( 3, 5 ) # -2 (+はもどってこない)
+p proc2( 4, 9 ) # 13
+=end
+
+
+=begin
+# procとメソッドの違い
+procedure = Proc.new{ p "hoge" }
+
+p procedure.class
+procedure.call
+
+def definition
+  p "moga"
+end
+
+# 実行される
+p definition.class # 戻り値を返す(String)
+definition
+=end
+
+
+=begin
+# ブロックが与えられたときにcall
+def hogehoge( x, &proc )
+  proc.call if block_given?
+  return x + 2
+end
+
+p hogehoge( 3 )
+p hogehoge( 5 ) { p "foo" }
+=end
+
+
+=begin
+# block_given?でブロックが存在するか確認できる
+def hogehoge( x )
+  p block_given?
+  return x + 2
+end
+
+p hogehoge( 3 )
+p hogehoge( 5 ){ p "foo" }
+=end
+
+=begin
+# 全てのメソッドはブロックを引数にすることができる
+def hogehoge( x )
+  return x + 2
+end
+p hogehoge( 3 )
+p hogehoge( 5 ){ p "foo" } # このブロックは無視される
+=end
+
+=begin
+# yieldの確認その壱
+def func
+  yield("aaa")
+end
+
+func {| data |
+  p data
+}
+=end
+
+
+=begin
+# コールバックの確認その参
+puts "testes1"
+def testfunc( data, callback )
+  puts "testes4"
+  callback.call( data )
+  puts "testes7"
+end
+puts "testes2"
+
+func1 = -> hash {
+  puts "testes5"
+  p hash
+  puts "testes6"
+}
+
+puts "testes3"
+data = { "a"=>1, "b"=> 2 }
+testfunc( data, func1 )
+puts "testes8"
+=end
+
+
+=begin
+# コールバックの確認その弐
+puts "testes1"
+def testfunc( data, &callback )
+  puts "testes4"
+  callback.call( data )
+  puts "testes7"
+end
+puts "testes2"
+
+data = { "a"=>1, "b"=> 2 }
+puts "testes3"
+testfunc( data ){|hash|
+  puts "testes5"
+  p hash
+  puts "testes6"
+}
+puts "testes8"
+=end
+
+
+=begin
+# コールバックの確認その壱
+puts "testes1"
+def testfunc( data, callback )
+  puts "testes5"
+  sleep 2
+  callback.call( data )
+  puts "testes8"
+end
+puts "testes2"
+
+puts "testes3"
+data = { "a"=>1, "b"=> 2 }
+puts "testes4"
+testfunc( data, Proc.new { |hash|
+  puts "testes6"
+  p hash
+  puts "testes7"
+} )
+puts "testes9"
+=end
+
 
 =begin
 # mapの確認
