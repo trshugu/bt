@@ -11,6 +11,27 @@
 
 
 
+
+
+=begin
+# Couchbase接続サンプル確認
+require 'rubygems'
+require 'couchbase'
+
+#client = Couchbase.connect(:bucket => "beer-sample", :host => "localhost")
+client = Couchbase.connect("http://192.168.64.128:8091", :bucket => "beer-sample", :username => 'suzuki', :password => 'suzuki')
+
+beer = client.get("aass_brewery-juleol")
+puts "#{beer['name']}, ABV: #{beer['abv']}"
+
+beer['comment'] = "Random beer from Norway"
+client.replace("aass_brewery-juleol", beer)
+
+client.disconnect
+
+=end
+
+
 =begin
 # eval はObjectクラスのインスタンスメソッド
 eval "puts self"
