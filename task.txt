@@ -19,6 +19,21 @@ http://redmine.gendosu.jp/projects/1/wiki/Rails%E3%81%AE%E3%83%9A%E3%83%BC%E3%82
 
 
 
+2013/02/07 12:34
+vagrantメモ
+vagrant box add precise32 http://files.vagrantup.com/precise32.box
+curl -O http://packages.couchbase.com/releases/2.0.0/couchbase-server-community_x86_2.0.0.deb
+
+vagrant gem install sahara
+vagrant sandbox on
+
+# sandbox モード on に入った時点まで巻き戻す!
+% vagrant sandbox rollback
+
+# 変更を確定
+% vagrant sandbox commit
+
+2013/02/07 12:34
 こんなかきかたをしていた
   resources :mangas
   root :to => "mangas#index"
