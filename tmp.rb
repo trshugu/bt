@@ -6,9 +6,11 @@
 
 
 
-
-
-
+=begin
+# gem install git
+require "git"
+Git.open(".").pull()
+=end
 
 =begin
 # gem install grit
