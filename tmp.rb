@@ -11,6 +11,13 @@
 
 
 =begin
+# gem install grit
+Grit::Repo.new(".").commits[0].message
+# pullはできないっぽい
+=end
+
+
+=begin
 # ラムダ式を渡す形式
 def testfunc( data, callback )
   callback.call( data )
