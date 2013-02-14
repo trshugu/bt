@@ -13,7 +13,25 @@ $(document).ready(function() {
 
 
 
+/*
+// クロージャオンクリックのテスト
+window.onload = function()
+{
+	document.getElementById('btn').onclick = setButtonState();
 
+	function setButtonState()
+	{
+		var flag = false;
+		var btn = document.getElementById('btn');
+
+		return function()
+		{
+			flag = !flag;
+			this.value = flag ? "有効" : "無効";
+		};
+	}
+}
+*/
 
 
 
