@@ -6,6 +6,45 @@
 
 
 
+
+
+
+
+=begin
+# getter setterの確認
+class Attrclass
+  def initialize
+    @accessor = ""
+    @reader = "readonly"
+    @writer = ""
+  end
+  
+  attr_accessor :accessor
+  attr_reader :reader
+  attr_writer :writer
+  
+  def reading
+    @writer
+  end
+end
+
+att = Attrclass.new
+
+# 読み書きできる
+att.accessor = "aaa"
+puts att.accessor
+
+# 書けない
+#att.reader = "bbb"
+puts att.reader
+
+# 読めない
+att.writer = "ccc"
+#puts att.writer
+puts att.reading # 読むメソッド
+=end
+
+
 =begin
 # gem install git
 require "git"
