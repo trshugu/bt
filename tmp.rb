@@ -11,6 +11,50 @@
 
 
 =begin
+# グローバル変数は$(ドル記号)で始める
+$glo = "global!"
+puts $glo
+class Gtest
+  puts $glo
+  $glo = "change!"
+  puts $glo
+end
+Gtest
+
+# インスタンス変数は@(アットマーク)で始める
+@ins = "instance!"
+puts @ins
+class Itest
+  puts @ins # ない
+  @ins = "change!"
+  puts @ins
+end
+Itest
+
+# クラス変数は@@(二重アットマーク)ではじめる
+# @@cla = "class!" # warningでる
+# puts @@cla
+class Ctest
+  def initialize
+    @@cla = "change!"
+    puts @@cla
+  end
+  
+  #puts @@cla # 初期化してないのでエラーに
+  @@cla = "class!"
+  puts @@cla
+end
+Ctest.new
+=end
+
+
+=begin
+# Range
+p (1..3).to_a # x以下
+p (1...3).to_a # x未満
+=end
+
+=begin
 # getter setterの確認
 class Attrclass
   def initialize

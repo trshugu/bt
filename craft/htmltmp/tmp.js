@@ -11,6 +11,16 @@ $(document).ready(function() {
 
 
 
+/*
+// jqueryでjsonからオブジェクトへ変換テスト
+var str = '{"ary":[0,1,2],"obj":{"a":0,"b":1,"c":2}}';
+var obj = $.parseJSON(str);
+
+// テスト出力
+document.write(obj.ary + "<br>");
+// ブラウザでは配列がobject
+document.write(obj.obj + "<br>");
+*/
 
 
 /*
