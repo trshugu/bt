@@ -23,6 +23,7 @@
 
 ◆document
 =================================================
+https://twitter.com/users/show/trshububot.json
 #ボット要件
 http://twitter.com/friendships/create
 。replyの方法

@@ -9,6 +9,43 @@ $(document).ready(function() {
 
 
 
+/*
+// 配列をインクリメントすると参照型がわかる
+var b = { key: 1 };
+function inc_b(data) {
+  data["key"]++;
+  return data;
+}
+console.log(b); // { key: 1 }
+console.log(inc_b(b)); // { key: 2 }
+console.log(b); // { key: 2 }
+
+var c = { key: 1 };
+function inc_c(data) {
+  data = { key: 5 }
+  return data;
+}
+console.log(inc_c(c)); // 5
+console.log(c); // { key: 1 }
+*/
+
+/*
+// 全体的にプリミティブ型なのかも
+var p = "abc";
+var r = new String("def");
+
+var pc = p;
+var rc = r;
+
+pc = "ghi";
+rc = "jkl";
+
+document.write(p + "<br>");
+document.write(r + "<br>");
+document.write(pc + "<br>");
+document.write(rc + "<br>");
+
+*/
 
 
 /*
