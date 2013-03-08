@@ -11,6 +11,79 @@
 
 
 =begin
+# ハッシュを作成する際に引数を渡すとデフォルト値
+hash2 = Hash.new("dos")
+=end
+
+=begin
+def dicegame(grid, count)
+  #
+  i = 0.0
+  count.times {
+    d = rand(6)+1
+    i = i + d
+  }
+  
+  if (grid <= i)
+    $clear = $clear + 1
+  else
+  end
+end
+
+$clear = 0.0
+10000.times {
+  dicegame(*ARGV[0].to_i, *ARGV[1].to_i)
+}
+puts $clear / 10000
+=end
+
+
+=begin
+# サイコロの平均値
+def sai(count)
+  i = 0.0
+  count.times {
+    i = i + rand(6)+1
+  }
+  puts i / count
+end
+
+sai *ARGV[0].to_i
+=end
+
+=begin
+# Redisテスト
+require "redis"
+redis = Redis.new(:host => "192.168.64.133")
+
+puts redis.set "tmpkey","tmpvalue"
+puts redis.get "tmpkey"
+puts redis.set "tmpkeysec","tmpvalueni"
+puts redis.get "tmpkeysec"
+
+# 複数キー指定
+puts redis.mget "tmpkey","tmpkeysec"
+
+# リスト操作
+#puts redis.rpush "あああ", "this is my first tweet."
+#puts redis.lrange "あああ", 0, 100
+#10.times {|i| redis.rpush("tw", "times")}
+#redis.lrange "あああ", 0, 20
+
+# 計測しつつ1000回繰り返す
+st =  Time.now
+1000.times {|i| redis.rpush("ttt", "million#{i}")}
+et = Time.now
+puts et - st
+
+# 構造化データ
+require "json"
+tmpjson = {:id => 1, :user => "shin", :time => Time.now, :body => "hello redis!"}
+puts redis.set "tj", tmpjson.to_json
+puts JSON.parse(redis.get("tj"))
+=end
+
+=begin
 # seleniumテスト
 require "selenium-webdriver"
 
