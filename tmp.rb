@@ -8,7 +8,26 @@
 
 
 
+=begin
+# Why do we convert the list of symbols to strings and then compare
+# against the string value rather than against symbols?
 
+# もともとのやつ
+def test_method_names_become_symbols
+  symbols_as_strings = Symbol.all_symbols.map { |x| x.to_s }
+  puts symbols_as_strings.include?("test_method_names_become_symbols")
+  puts symbols_as_strings.include?("test_method_names_become_symbols_other")
+end
+test_method_names_become_symbols
+
+# 比較した瞬間に存在することになってしまう
+def test_method_names_become_symbols_not
+  symbols_as_strings = Symbol.all_symbols.map { |x| x }
+  puts symbols_as_strings.include?(:test_method_names_become_symbols_not)
+  puts symbols_as_strings.include?(:test_method_names_become_symbols_not_other)
+end
+test_method_names_become_symbols_not
+=end
 
 
 =begin
