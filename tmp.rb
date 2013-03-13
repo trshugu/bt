@@ -10,6 +10,31 @@
 
 
 
+
+=begin
+# 複数行テキストの一行目と以降を分ける
+linestext = "いちぎょうめ\nそれいこう\naaa\niii"
+#puts linestext
+
+
+# 一行ずつ処理する
+title = ""
+content = ""
+firstflg = true
+linestext.each_line {|l|
+  if firstflg
+    title =  l
+    firstflg = false
+  else
+    content << l
+  end
+}
+
+puts title
+puts content
+=end
+
+
 =begin
 # ハッシュを作成する際に引数を渡すとデフォルト値
 hash2 = Hash.new("dos")
