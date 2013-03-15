@@ -8,6 +8,35 @@
 
 
 
+
+
+
+=begin
+x = 12345
+res = 0
+# 自分で書いたやりかた
+x.to_s.split("").each{|i|
+  res = res + i.to_i
+}
+puts res
+
+# injectを使ったやりかた
+p(x.to_s.scan(/./).inject(0){|i, v| i + v.to_i })
+=end
+
+
+=begin
+# couchDB接続テスト
+require "couchdb"
+server = CouchDB::Server.new("localhost","5984")
+database = CouchDB::Database.new server, "mokkai"
+design = CouchDB::Design.new database, "design_1"
+view = CouchDB::Design::View.new design, "view_1", "function(document) { emit([ document['category'], document['_id'] ]); }"
+#design.save
+# かなり複雑・・・・
+puts view.collection.size
+=end
+
 =begin
 # Why do we convert the list of symbols to strings and then compare
 # against the string value rather than against symbols?
