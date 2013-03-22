@@ -10,6 +10,23 @@
 
 
 
+=begin
+# 複数のURLから20件のフィードを取得し全件の中からランダムで返却する
+require 'open-uri'
+require 'rss'
+
+rsslists = []
+
+#rss = open("http://files.value-press.com/rss/index.rdf"){ |file| RSS::Parser.parse(file.read) }
+rss = open("http://releasepress.jp/feed"){ |file| RSS::Parser.parse(file.read) }
+rss.items.each_with_index{|item,i| 
+  break if i >= 20
+  # タイトルを1行にする
+  rsslists.push(item.title.gsub(/(\r\n|\r|\n)/, "") + "\n" + item.link + "\n" + ">>\n" + item.description[0,300] + "\n<<")
+}
+puts rsslists.size
+puts rsslists[rand(rsslists.size)]
+=end
 
 =begin
 x = 12345
