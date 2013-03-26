@@ -1,9 +1,17 @@
 #!ruby
 # coding: utf-8
+=begin
+=end
 
 
 
 
+
+
+
+
+
+=begin
 # EventMachineテスト
 require "eventmachine"
 
@@ -34,6 +42,7 @@ EM.run {
   puts "EM end"
 }
 puts "Test compleated"
+=end
 
 
 =begin
