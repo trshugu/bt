@@ -1,13 +1,111 @@
 #!ruby
 # coding: utf-8
+
+
+
+
 =begin
+# EventMachineテスト
+require "eventmachine"
+
+def randomsleep(ind)
+  rand_int = rand 8
+  sleep rand_int
+  p ind, rand_int
+  puts "sonotasonota"
+end
+
+puts "Test start"
+EM.run {
+  puts "EM start"
+  
+  EM.defer {
+    puts "defer in"
+    randomsleep 0
+    puts "defer out"
+  }
+  
+  EM.defer {
+    puts "defer in2"
+    randomsleep 1
+    puts "defer out2"
+  }
+  
+  EM.add_timer(8) { 
+    puts "EM.stop now"
+    EM.stop
+    puts "EM stoped"
+  }
+  
+  puts "EM end"
+}
+puts "Test compleated"
 =end
 
 
+=begin
+# celluloid テスト
+# さっぱり・・・
+require 'celluloid'
+
+class Counter
+  include Celluloid
+  attr_reader :count
+  
+  def initialize
+    @count = 0
+  end
+  
+  def increment(n = 1)
+    sleep n
+    @count += n
+  end
+end
+
+actor = Counter.new
+p actor.count 
+p actor.increment 
+p actor.async.increment(41) 
+p actor.count
+=end
 
 
+=begin
+# ファイバーテスト
+fiber = Fiber.new {
+  n = 0
+  loop {
+    # yieldの引数が親への戻り値
+    Fiber.yield(n)
+    n += 1
+  }
+}
+
+5.times {
+puts fiber.resume
+}
+=end
 
 
+=begin
+# EventMachineでReactorパターン
+require "eventmachine"
+hosts = ["http://yahoo.com/"]
+hosts_size = hosts.size
+
+EM.run {
+  hosts.each {|h|
+    puts h
+    #http = EM::Protocols::HttpClient.request(:host=>h, :port=>80, :request=>"/")
+    #http = EM::HttpRequest.new(h).get
+    # ダメだった
+    http.callback {|data|
+      puts data.response
+      EM.stop_event_loop if (hosts_size -= 1) <= 0
+    }
+  }
+}
+=end
 
 
 =begin
