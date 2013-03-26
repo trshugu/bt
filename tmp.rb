@@ -4,31 +4,25 @@
 
 
 
-=begin
 # EventMachineテスト
 require "eventmachine"
 
 def randomsleep(ind)
   rand_int = rand 8
   sleep rand_int
-  p ind, rand_int
-  puts "sonotasonota"
+  return ind, rand_int
 end
 
 puts "Test start"
 EM.run {
   puts "EM start"
   
-  EM.defer {
-    puts "defer in"
-    randomsleep 0
-    puts "defer out"
-  }
-  
-  EM.defer {
-    puts "defer in2"
-    randomsleep 1
-    puts "defer out2"
+  5.times.each{|i|
+    EM.defer {
+      puts "defer in" + i.to_s
+      p randomsleep i
+      puts "defer out" + i.to_s
+    }
   }
   
   EM.add_timer(8) { 
@@ -40,7 +34,6 @@ EM.run {
   puts "EM end"
 }
 puts "Test compleated"
-=end
 
 
 =begin
