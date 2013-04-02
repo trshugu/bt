@@ -8,6 +8,8 @@
 
 
 
+
+=begin
 # 正規表現で目的の文字列の存在確認
 regex = "く  た    び れ"
 if regex[/く\s+た\s+び\s+れ/]
@@ -15,6 +17,8 @@ if regex[/く\s+た\s+び\s+れ/]
 else
   puts "not"
 end
+=end
+
 =begin
 # EventMachineテスト
 require "eventmachine"
