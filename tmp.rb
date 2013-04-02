@@ -8,9 +8,13 @@
 
 
 
-
-
-
+# 正規表現で目的の文字列の存在確認
+regex = "く  た    び れ"
+if regex[/く\s+た\s+び\s+れ/]
+  puts "find"
+else
+  puts "not"
+end
 =begin
 # EventMachineテスト
 require "eventmachine"
