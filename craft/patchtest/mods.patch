@@ -1,0 +1,16 @@
+--- test_1.txt	Thu Apr  4 16:38:24 2013
++++ test_2_nothing.txt	Thu Apr  4 16:05:47 2013
+@@ -1,6 +1,7 @@
+-123456789
+-abcdefg
+-
+-aiueo
+-kakikukeko
+-
++123456789
++abcdefgtuika
++tuika
++aiueo
++
++kakikukesita
++
