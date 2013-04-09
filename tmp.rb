@@ -8,6 +8,57 @@
 
 
 
+=begin
+#Compositeパターンの確認
+# Component(部品) 
+class Entry
+  def get_name
+  end
+  def ls_entry(prefix)
+  end
+end
+
+# Leaf(葉) 
+class FileEntry < Entry
+  def initialize(name)
+    @name = name
+  end
+  def get_name
+    @name
+  end
+  def ls_entry(prefix)
+    puts(prefix + "/" + get_name)
+  end
+end
+
+# Composite(合成物) 
+class DirEntry < Entry
+  def initialize(name)
+    @name = name
+    @directory = Array.new
+  end
+  def get_name
+    @name
+  end
+  def add(entry)
+    @directory.push(entry)
+  end
+  def ls_entry(prefix)
+    puts(prefix + "/" + get_name)
+    @directory.each {|e|
+      e.ls_entry(prefix + "/" + @name)
+    }
+  end
+end
+
+root = DirEntry.new("root")
+tmp  = DirEntry.new("tmp")
+tmp.add(FileEntry.new("passwd"))
+tmp.add(FileEntry.new("plist"))
+root.add(tmp)
+root.ls_entry("")
+=end
+
 
 =begin
 # 正規表現で目的の文字列の存在確認
