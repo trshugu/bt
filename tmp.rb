@@ -4,6 +4,11 @@
 =end
 
 
+
+
+
+
+=begin
 # Couchbase Viewサンプル確認
 require 'couchbase'
 client = Couchbase.connect(:bucket => "testbucket", :username => 'suzuki', :password => 'suzuki')
@@ -13,6 +18,7 @@ puts ddoc
 puts ddoc.views
 puts ddoc.class
 client.disconnect
+=end
 
 =begin
 # Couchbase接続サンプル確認
@@ -28,6 +34,7 @@ client.replace("testid", getid)
 getid = client.get("testid")
 puts getid
 puts getid["_id"]
+getid.each{|a|p a}
 client.disconnect
 =end
 
