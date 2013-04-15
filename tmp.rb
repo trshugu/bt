@@ -4,8 +4,32 @@
 =end
 
 
+# Couchbase Viewサンプル確認
+require 'couchbase'
+client = Couchbase.connect(:bucket => "testbucket", :username => 'suzuki', :password => 'suzuki')
+puts client
+ddoc = client.design_docs["ddn"]
+puts ddoc
+puts ddoc.views
+puts ddoc.class
+client.disconnect
 
-
+=begin
+# Couchbase接続サンプル確認
+require 'couchbase'
+client = Couchbase.connect(:bucket => "testbucket", :username => 'suzuki', :password => 'suzuki')
+puts client
+getid = client.get("testid")
+puts getid
+puts getid["_id"]
+puts getid["_id"] = "nise"
+puts getid
+client.replace("testid", getid)
+getid = client.get("testid")
+puts getid
+puts getid["_id"]
+client.disconnect
+=end
 
 
 =begin
