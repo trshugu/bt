@@ -6,6 +6,17 @@
 
 
 
+# CouchbaseのAPIあれこれ
+require "json"
+require "net/http"
+
+#uri = "http://localhost:8092/"
+uri = "http://localhost:8092/beer-sample/_design/beer/_view/brewery_beers/"
+res = Net::HTTP.get_response(URI.parse(uri))
+starttime = Time.now
+puts JSON.parse(res.body)["rows"][0]["key"][0]
+endtime = Time.now
+puts endtime - starttime
 
 
 =begin
