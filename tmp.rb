@@ -6,6 +6,12 @@
 
 
 
+
+
+
+
+
+=begin
 # CouchbaseのAPIあれこれ
 require "json"
 require "net/http"
@@ -17,7 +23,7 @@ starttime = Time.now
 puts JSON.parse(res.body)["rows"][0]["key"][0]
 endtime = Time.now
 puts endtime - starttime
-
+=end
 
 =begin
 # Couchbase Viewサンプル確認
