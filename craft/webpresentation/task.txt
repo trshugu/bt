@@ -1,0 +1,26 @@
+3D‚ÈƒvƒŒƒ[ƒ“
+http://dontkry.com/jmpress.js/
+
+3D‚ÈƒvƒŒƒ[ƒ“
+https://github.com/shama/jmpress.js
+
+slippy
+http://seld.be/notes/introducing-slippy-html-presentations
+
+deck.js
+http://coliss.com/articles/build-websites/operation/javascript/jquery-plugin-deckjs-for-presentations.html
+
+jQueryPP
+http://viget.com/inspire/jquery-presentation-plugin
+
+Ascensor.js
+http://kirkas.ch/ascensor/
+
+Fathom.js
+http://markdalgleish.com/projects/fathom/?utm_source=javascriptweekly&utm_medium=email
+
+Awkward Showcase
+http://showcase.awkwardgroup.com/
+
+Presenteer.js
+http://willemmulder.github.com/Presenteer.js/
