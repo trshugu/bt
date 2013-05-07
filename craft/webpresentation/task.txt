@@ -1,14 +1,17 @@
 3Dなプレゼン
 http://dontkry.com/jmpress.js/
-
 3Dなプレゼン
 https://github.com/shama/jmpress.js
+→too hard
 
 slippy
 http://seld.be/notes/introducing-slippy-html-presentations
+→簡単そうだけどうまくいかなかった
 
 deck.js
 http://coliss.com/articles/build-websites/operation/javascript/jquery-plugin-deckjs-for-presentations.html
+→エクステンションをいくつか選択しないといけない
+→→これに決定
 
 jQueryPP
 http://viget.com/inspire/jquery-presentation-plugin
