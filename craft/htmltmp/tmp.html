@@ -20,7 +20,20 @@
 
 
 
+<!--
+// BDSオールマンではダメなケース
+function test(){
+  window.alert(ret());
+}
 
+function ret(){
+  return
+  {
+    ok: false
+  };
+}
+
+-->
 
 <!--
 // クロージャオンクリックのテスト
