@@ -17,7 +17,8 @@ end
 =begin
 =end
 
-tweet = "test" + rand(100).to_s
+tweet = "test" + rand(1000).to_s
+#puts tweet
 #Twitter.update(tweet)
 
 #・フォローを取得する
@@ -31,15 +32,32 @@ tweet = "test" + rand(100).to_s
 
 
 
+# TLfirst取得
+first_time_line = Twitter.home_timeline[0]
+# 自分でない
+if (first_time_line.user.name != "trstester")
+  # 正規表現で目的の文字列の存在確認
+  regex = first_time_line.text
+  #if regex[/く\s+た\s+び\s+れ/]
+  if regex[/test/]
+    puts "find"
+    # @name取得
+    puts "@" + first_time_line.user.name + " 某"
+    Twitter.update("@" + first_time_line.user.name + " 某")
+  else
+    puts "not"
+  end
+end
 
-
+#puts Twitter.home_timeline[0]
+#puts Twitter.home_timeline[0].name
 
 
 
 =begin
 # 応用：フォロワー数 フォロー数
-puts Twitter.follower_ids("agileronin").ids.size
-puts Twitter.friend_ids("agileronin").ids.size
+puts Twitter.follower_ids("trstester").ids.size
+puts Twitter.friend_ids("trstester").ids.size
 =end
 
 =begin
@@ -59,7 +77,9 @@ p Twitter.user("trstester")
 =begin
 #自分宛てのReplyの取得
 p Twitter.mentions
+p Twitter.mentions[0].text
 =end
+
 
 =begin
 #自分のタイムラインの取得

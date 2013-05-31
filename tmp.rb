@@ -8,8 +8,16 @@
 
 
 
+
+
 =begin
+# MD5の計算
+require 'digest/md5'
+puts Digest::MD5.hexdigest("test")
 =end
+
+
+=begin
 # Couchbase SDKの速度試験
 require 'couchbase'
 starttime = Time.now
@@ -19,6 +27,7 @@ client.design_docs["beer"].brewery_beers.count
 client.disconnect
 endtime = Time.now
 puts endtime - starttime
+=end
 
 =begin
 # CouchbaseのAPIあれこれ
