@@ -10,6 +10,58 @@
 
 
 
+
+=begin
+# jsonをxmlにする
+require "nokogiri"
+require "json"
+
+hash = JSON.parse("{\"asdf\":\"cccd\",\"aaa\":\"bbb\"}")
+xmlObj = Nokogiri::XML::Builder.new { |xml|
+  xml.root {
+    hash.each{ |k, v|
+      eval("xml.#{k} { xml.text v }")
+    }
+  }
+}
+
+puts xmlObj.to_xml
+=end
+
+=begin
+# csvとjson
+require "json"
+require "csv"
+
+# csvをjsonにする
+p CSV.parse("aaa,bbb,ccc").flatten.to_json
+
+# jsonをcsvにする
+JSON.parse("{\"asdf\":\"cccd\",\"aaa\":\"bbb\"}").each do |arr|
+  p arr.to_csv
+end
+=end
+
+=begin
+# 文字化けしたapplication.propertiesを読めるようにする
+File.readlines("application.properties_org").each do |line|
+  #puts line
+  #p line.scan(/(\\u[\w\d]{4})/i)
+  
+  utfs = line.scan(/(\\u[\w\d]{4})/)
+  utfs.each{|utf|
+    #p (utf[0][2,4]).to_i(16).chr("UTF-8")
+    #open("res.txt", "a+").write((utf[0][2,4]).to_i(16).chr("UTF-8"))
+    line.sub!(utf[0],(utf[0][2,4]).to_i(16).chr("UTF-8"))
+  }
+  
+  open("application.properties", "a+").write(line)
+  #open("res.txt", "a+").write(aa.ord.chr("UTF-8"))
+  #open("res.txt", "a+").write("\u30a3")
+  #open("res.txt", "a+").write(12354.chr("UTF-8"))
+end
+=end
+
 =begin
 # MD5の計算
 require 'digest/md5'
@@ -21,11 +73,17 @@ puts Digest::MD5.hexdigest("test")
 # Couchbase SDKの速度試験
 require 'couchbase'
 starttime = Time.now
-client = Couchbase.connect(:bucket => "beer-sample", :hostname => "localhost", :username => 'suzuki', :password => 'suzuki')
-#client = Couchbase.connect(:bucket => "beer-sample", :hostname => "192.168.80.64", :username => 'suzuki', :password => 'suzuki')
+#client = Couchbase.connect(:bucket => "beer-sample", :hostname => "localhost", :username => 'suzuki', :password => 'suzuki')
+client = Couchbase.connect(:bucket => "beer-sample", :hostname => "192.168.80.64", :username => 'suzuki', :password => 'suzuki')
 client.design_docs["beer"].brewery_beers.count
-client.disconnect
+#client.disconnect
 endtime = Time.now
+puts endtime - starttime
+
+starttime = Time.now
+client.design_docs["beer"].brewery_beers.count
+endtime = Time.now
+client.disconnect
 puts endtime - starttime
 =end
 
