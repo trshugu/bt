@@ -10,6 +10,15 @@
 
 
 
+=begin
+# 再度正規表現
+text="く  　た　 　 び　 れ"
+
+# パターンを網羅できていなかった・・・
+if text[/く[\s　]*た[\s　]*び[\s　]*れ/]
+  puts true
+end
+=end
 
 =begin
 # jsonをxmlにする

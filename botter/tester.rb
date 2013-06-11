@@ -19,7 +19,7 @@ end
 
 tweet = "test" + rand(1000).to_s
 #puts tweet
-#Twitter.update(tweet)
+Twitter.update(tweet)
 
 #・フォローを取得する
 #・リプライを取得する
@@ -28,6 +28,17 @@ tweet = "test" + rand(1000).to_s
 
 
 =begin
+# TLfirst取得
+first_time_line = Twitter.home_timeline[0]
+
+# 自分でない
+if (first_time_line.user.name != "trstester")
+  # 正規表現で目的の文字列の存在確認
+  regex = first_time_line.text
+  if regextext[/(([\s　]*˘⊖˘[\s　]*))/]
+    Twitter.favorite(Twitter.home_timeline[0].id)
+  end
+end
 =end
 
 
