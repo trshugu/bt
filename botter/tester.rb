@@ -32,6 +32,7 @@ tweet = "test" + rand(1000).to_s
 
 
 
+=begin
 # TLfirst取得
 first_time_line = Twitter.home_timeline[0]
 # 自分でない
@@ -51,6 +52,7 @@ end
 
 #puts Twitter.home_timeline[0]
 #puts Twitter.home_timeline[0].name
+=end
 
 
 
