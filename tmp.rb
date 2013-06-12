@@ -10,6 +10,138 @@
 
 
 
+
+=begin
+# couchbase APIの速度試験
+require "json"
+require "net/http"
+
+def api(u)
+  st = Time.now
+  res = Net::HTTP.get_response(URI.parse(u))
+  JSON.parse(res.body)["rows"][0]["value"]
+  et = Time.now
+  puts et - st
+end
+
+uri = "http://192.168.80.64:8092/njstest/_design/test/_view/heavytest/"
+threadtest = nil
+starttime = Time.now
+100.times{
+  begin
+    threadtest = Thread.new{api(uri)}
+  end
+}
+threadtest.join
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+
+=begin
+# Couchbase 複数スレッドの速度試験
+require 'couchbase'
+
+# スレッドへ引数を渡す
+def find(client)
+  st = Time.now
+  client.design_docs["test"].heavytestr.each{|v|v}
+  #if (client.design_docs["test"].find.count != 1)
+  #  puts "nothing!"
+  #end
+  et = Time.now
+  puts et - st
+end
+
+starttime = Time.now
+cli = Couchbase.connect(:bucket => "njstest", :hostname => "192.168.80.64", :username => 'suzuki', :password => 'suzuki')
+threadtest = nil
+100.times{
+  begin
+    threadtest = Thread.new{find(cli)}
+  end
+}
+threadtest.join
+cli.disconnect
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+
+=begin
+# Couchbase 重いViewの速度試験
+require 'couchbase'
+starttime = Time.now
+client = Couchbase.connect(:bucket => "njstest", :hostname => "192.168.80.64", :username => 'suzuki', :password => 'suzuki')
+
+100.times{
+  #client.set("stressTest" + rand(1000000000).to_s,{"arthistid"=>rand(1000000000).to_s})
+  #client.get("stressTest" + rand(1000000000).to_s)
+  client.design_docs["test"].heavytest.each{}
+}
+client.disconnect
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+=begin
+# Couchbase Get Setの速度試験
+require 'couchbase'
+starttime = Time.now
+#client = Couchbase.connect(:bucket => "beer-sample", :hostname => "localhost", :username => 'suzuki', :password => 'suzuki')
+client = Couchbase.connect(:bucket => "njstest", :hostname => "192.168.80.64", :username => 'suzuki', :password => 'suzuki')
+10000.times{
+  #client.set("stressTest" + rand(1000000000).to_s,{"arthistid"=>rand(1000000000).to_s})
+  begin
+    client.get("stressTest" + rand(1000000000).to_s)
+  rescue => ex
+    #p ex
+  end
+}
+client.disconnect
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+=begin
+# try catch
+begin
+  # 実行する処理
+  1 + "aaa"
+rescue SyntaxError => ex
+  # 例外が発生したときの処理
+  puts "rescue!error"
+  p ex
+rescue => ee
+  # 例外が発生したときの処理
+  puts "rescue!"
+  p ee
+else
+  # 例外が発生しなかったときに実行される処理
+  puts "harmony"
+ensure
+  # 例外の発生有無に関わらず最後に必ず実行する処理
+  puts "must"
+end
+=end
+
+
+=begin
+starttime = Time.now
+10000.times{
+  client.set("stressTest",{"arthistid"=>"1234567890"})
+}
+client.disconnect
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+
 =begin
 # 再度正規表現
 text="く  　た　 　 び　 れ"
