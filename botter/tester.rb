@@ -35,7 +35,7 @@ first_time_line = Twitter.home_timeline[0]
 if (first_time_line.user.name != "trstester")
   # 正規表現で目的の文字列の存在確認
   regex = first_time_line.text
-  if regextext[/(([\s　]*˘⊖˘[\s　]*))/]
+  if regex[/(([\s　]*˘⊖˘[\s　]*))/]
     Twitter.favorite(Twitter.home_timeline[0].id)
   end
 end

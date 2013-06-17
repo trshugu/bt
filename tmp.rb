@@ -11,6 +11,101 @@
 
 
 
+
+
+
+
+
+
+
+=begin
+# ラムダ式と並列処理練習
+tl = []
+lam = -> i {
+  begin
+    threadtest = Thread.new &-> {
+      puts "start"
+      sleep 3
+    }
+    tl.push(threadtest)
+  rescue => ex
+    p ex
+  end
+}
+
+starttime = Time.now
+
+threadtest = nil
+2.times &lam
+tl.each &-> th { th.join }
+
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+
+
+=begin
+# 1ノード16G限界試験 (75,000,000レコード)=15Gの想定
+require 'couchbase'
+starttime = Time.now
+client = Couchbase.connect(:bucket => "bigbucket", :hostname => "localhost", :username => 'suzuki', :password => 'suzuki')
+75000000.times{
+  begin
+    json = {"bigdatatest" + rand(10000000000).to_s => {"artistid"=>rand(10000000000).to_s, "musicid"=>rand(10000000000).to_s, "affiliateid"=>rand(10000000000).to_s, "other"=>rand(10000000000).to_s}}
+    client.set(json)
+    #client.get("stressTest" + rand(1000000000).to_s)
+  rescue => ex
+    p ex
+  end
+}
+client.disconnect
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+=begin
+def insert(client)
+  starttime = Time.now
+  puts "start" + client.hostname
+  100.times{
+    begin
+      json = {"bigdatatest" + rand(10000000000).to_s => {"artistid"=>rand(10000000000).to_s, "musicid"=>rand(10000000000).to_s, "affiliateid"=>rand(10000000000).to_s, "other"=>rand(10000000000).to_s}}
+      client.set(json)
+    rescue => ex
+      p ex
+    end
+  }
+  endtime = Time.now
+  puts endtime - starttime
+end
+
+starttime = Time.now
+cli1 = Couchbase.connect(:bucket => "bigbucket", :hostname => "192.168.80.64", :username => 'suzuki', :password => 'suzuki')
+cli2 = Couchbase.connect(:bucket => "bigbucket", :hostname => "192.168.80.65", :username => 'suzuki', :password => 'suzuki')
+threadtest = nil
+tl = []
+10.times{
+  begin
+    threadtest = Thread.new{insert(cli1)}
+    threadtest = Thread.new{insert(cli2)}
+    tl.push(threadtest)
+  rescue => ex
+    p ex
+  end
+}
+#threadtest.join
+tl.each{|th|
+  th.join
+}
+cli1.disconnect
+cli2.disconnect
+endtime = Time.now
+puts endtime - starttime
+=end
+
 =begin
 # couchbase APIの速度試験
 require "json"
@@ -19,15 +114,15 @@ require "net/http"
 def api(u)
   st = Time.now
   res = Net::HTTP.get_response(URI.parse(u))
-  JSON.parse(res.body)["rows"][0]["value"]
+  p JSON.parse(res.body)["total_rows"]
   et = Time.now
   puts et - st
 end
 
-uri = "http://192.168.80.64:8092/njstest/_design/test/_view/heavytest/"
+uri = "http://192.168.80.64:8092/bigbucket/_design/view/_view/view/"
 threadtest = nil
 starttime = Time.now
-100.times{
+1.times{
   begin
     threadtest = Thread.new{api(uri)}
   end
@@ -36,7 +131,6 @@ threadtest.join
 endtime = Time.now
 puts endtime - starttime
 =end
-
 
 
 =begin
