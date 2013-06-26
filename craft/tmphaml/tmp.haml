@@ -1,0 +1,46 @@
+-# hashも使える
+  %div{style: "aaa"}
+
+-# 式展開
+  = 3 + 6
+
+-#
+  - jade = "おおお"
+  - al = "akid"
+  !!! 5
+  %div
+    あああ
+  %div いいい
+  %div<
+    ううう
+  %div(style="asdf")
+    えええ
+  / 一行コメント
+  /
+    コメント
+    コメント
+  -#
+    無変換コメント１
+  -# 無変換コメント２
+
+  %div.idid(style="#{jade}")
+    #{jade}
+
+  = jade
+  = al
+  %p= al
+
+  - if al === "akid"
+    aaa
+  - else
+    bbb
+
+  - if al === ""
+    aaa
+  - else
+    bbb
+
+  :sass
+    div
+      :width 200px
+      :color #aaa
