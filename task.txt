@@ -1,5 +1,5 @@
 ◆inbox
-・herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)
+＊herokuでsinatraをデプロイしてみる(git bashでないとうまくいかない)→できてる
 ・ruby ログ出力調査
 ・RSS管理する系を考察(d群、w群、m群)
 ・キャッシュの練習する
