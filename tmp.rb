@@ -14,9 +14,13 @@
 
 
 
-
-
-
+=begin
+# for文
+ar=[1,4,6]
+for i in 0..(ar.size) do
+  puts ar[i]
+end
+=end
 
 =begin
 # ラムダ式と並列処理練習
