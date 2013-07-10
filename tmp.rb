@@ -11,6 +11,192 @@
 
 
 
+=begin
+# ActiveSupport::Concernを使った例
+require "active_support"
+module Mod
+  # self.includedの代わり
+  extend ActiveSupport::Concern
+  
+  # クラスメソッド用(名前に注意)
+  module ClassMethods
+    def ope2(x)
+      x + 10
+    end
+  end
+  
+  # インスタンスメソッド用
+  def ope(x)
+    x * x
+  end
+end
+
+class MixinClass
+  include Mod
+end
+
+#puts MixinClass.ope(3)
+puts MixinClass.ope2(3)
+
+puts MixinClass.new.ope(4)
+#puts MixinClass.new.ope2(4)
+=end
+
+
+=begin
+# include時に両方に追加する
+module Mod
+  def self.included(base)
+    base.extend(ClaMe)
+  end
+  
+  # クラスメソッド用
+  module ClaMe
+    def ope2(x)
+      x + 10
+    end
+  end
+  
+  # インスタンスメソッド用
+  def ope(x)
+    x * x
+  end
+end
+
+class MixinClass
+  include Mod
+end
+
+#puts MixinClass.ope(3)
+puts MixinClass.ope2(3)
+
+puts MixinClass.new.ope(4)
+#puts MixinClass.new.ope2(4)
+=end
+
+
+=begin
+# module練習7
+# 特異メソッドを作る場合の構文
+#Mod = Class.new
+#class << Mod # class << クラス名
+class << (Mod = Class.new) # class << クラス名
+  def ope(x)
+    x * x
+  end
+end
+
+puts Mod.ope(3)
+=end
+
+=begin
+# module練習6
+# 特異メソッドのみのクラス
+class Mod
+  # 匿名モジュールを作成してextend
+  extend Module.new {
+    def ope(x)
+      x * x
+    end
+  }
+end
+
+puts Mod.ope(6)
+=end
+
+=begin
+# module練習5
+# extendの引数にはモジュールしか指定することができない
+# class Mod # wrong argument type Classになる
+module Mod
+  #def self.ope(x)
+  extend self
+  def ope(x)
+    x * x
+  end
+end
+
+puts Mod.ope(2)
+=end
+
+
+=begin
+# module練習4
+module Mod
+  def ope(x)
+    x * x
+  end
+end
+
+class MixinClass
+  #include Mod # インスタンスメソッド
+  extend Mod # 特異メソッド
+end
+
+#puts MixinClass.new.ope(3) # extendだとエラー
+puts MixinClass.ope(5) # includeだとエラー
+
+# インスタンスに追加するにはextendメソッドで
+m =  MixinClass.new.extend Mod
+puts m.ope(7)
+=end
+
+=begin
+# module練習3
+module Mod
+  def ope(x)
+    x * x
+  end
+  
+  # モジュールを関数のように実行
+  module_function:ope
+end
+
+#include Mod
+puts Mod.ope(4)
+include Mod
+puts ope(5)
+=end
+
+
+=begin
+# module練習2
+module Mod
+  def ope(x)
+    x * x
+  end
+end
+
+class MixinClass ;end
+#end
+
+m1 = MixinClass.new
+m2 = MixinClass.new
+
+# オブジェクト(インスタンス)にだけモジュール追加
+m1.extend Mod
+
+puts m1.ope(2)
+puts m2.ope(3) # エラー
+=end
+
+
+=begin
+# module練習1
+module Mod
+  def ope(x)
+    x * x
+  end
+end
+
+class MixinClass
+  # クラスにモジュールを追加
+  include Mod
+end
+
+m = MixinClass.new
+puts m.ope(2)
+=end
 
 
 
