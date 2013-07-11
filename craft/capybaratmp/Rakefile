@@ -1,0 +1,15 @@
+﻿require 'rubygems'
+require 'headless'
+require 'capybara'
+require 'cucumber'
+require 'cucumber/rake/task'
+
+Capybara.default_driver = :webkit
+Capybara.javascript_driver = :webkit
+
+headless = Headless.new(display:99)
+headless.start
+
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format pretty --format html -o features.html"
+end
