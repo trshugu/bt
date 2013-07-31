@@ -4,11 +4,21 @@
 =end
 
 
+require "tk"
 
 
 
+=begin
+# ruby/tk
+require "tk"
 
+button = TkButton.new
+button.text = 'exit'
+button.command = proc { exit }
+button.pack
 
+Tk.mainloop
+=end
 
 
 =begin
