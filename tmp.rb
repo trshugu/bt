@@ -4,6 +4,17 @@
 =end
 
 
+
+=begin
+# rubyでassert
+moge = "moge"
+raise "assert" unless moge == "moge" 
+
+a = 10
+b = 40
+raise "assert" unless 30 == a + b, '足したら30のはず'
+=end
+
 =begin
 # MariaDB
 require "mysql"
