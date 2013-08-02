@@ -4,7 +4,74 @@
 =end
 
 
-require "tk"
+
+
+
+
+=begin
+require "pg"
+
+db = PG::connect(:host => "localhost", :user => "ka-suzuki", :password => "a", :dbname => "tmp")
+
+db.exec("create temp table tmp (one int, two int)")
+db.exec("insert into tmp(one, two) values(1,2)")
+db.exec("insert into tmp(one, two) values(10,20)")
+
+res = db.exec("select * from tmp")
+
+res.each {|r|
+  puts r
+}
+=end
+
+=begin
+require "pg"
+
+conn = nil
+begin
+  # コネクションの取得
+  conn = PGconn.connect(:host => "localhost", :user => "ka-suzuki", :password => "a", :dbname => "tmp")
+  
+  # テーブルの作成
+  sql = "create temp table t_user(id integer not null, name text, primary key (id))"
+  res = conn.exec(sql)
+  
+  # データの登録
+  data = ["予定表", "?", "?", "ﾊﾝｶｸ"]
+  
+  index = 1
+  data.each do |name|
+    sql = "insert into t_user (id, name) values (" + index.to_s + ", '" + name + "')"
+    res = conn.exec(sql)
+    index = index + 1
+  end
+  
+  # データ取得
+  sql = "select id, name from t_user"
+  res = conn.exec(sql)
+  
+  res.each do |row|
+    puts row["id"].to_s + ":" + row["name"]
+  end
+  
+  # テーブル削除
+  sql = "drop table t_user"
+  res = conn.exec(sql)
+ensure
+  if nil != conn
+    conn.close
+  end
+end
+=end
+
+
+
+=begin
+require "pg"
+
+# コネクション
+db = PG::connect(:host => "localhost", :user => "ka-suzuki", :password => "a", :dbname => "tmp")
+=end
 
 
 
