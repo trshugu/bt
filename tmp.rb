@@ -4,16 +4,27 @@
 =end
 
 
+=begin
+# MariaDB
+require "mysql"
+db = Mysql.connect("localhost", "root", "12121212", "tmp")
+db.query("create temporary table tmp (one int, two int)")
+db.query("insert into tmp(one, two) values(1,2)")
+db.query("insert into tmp(one, two) values(10,20)")
 
+res = db.query("select * from tmp")
 
-
+res.each {|r|
+  puts r
+}
+=end
 
 =begin
 require "pg"
 
 db = PG::connect(:host => "localhost", :user => "ka-suzuki", :password => "a", :dbname => "tmp")
 
-db.exec("create temp table tmp (one int, two int)")
+db.exec("create temporary table tmp (one int, two int)")
 db.exec("insert into tmp(one, two) values(1,2)")
 db.exec("insert into tmp(one, two) values(10,20)")
 
