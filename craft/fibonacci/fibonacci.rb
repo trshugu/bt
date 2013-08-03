@@ -11,9 +11,8 @@ class Fibonacci
     raise if numberInt.class != Fixnum
     
     # 0‚Ìê‡‚Í0A1‚Ìê‡‚Í1‚ğ•Ô‹p
-    return 0 if numberInt == 0
-    return 1 if numberInt == 1
-
+    return numberInt if numberInt <= 1
+    
     if (numberInt > 2)
       sumNum = @beforeOne + @beforeTwo
       @beforeTwo = @beforeOne
