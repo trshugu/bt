@@ -3,6 +3,7 @@
 
 require "net/http"
 require "uri"
+require "parallel"
 require "./checklinkmodule.rb"
 
 # 計測開始
@@ -29,11 +30,10 @@ end
 File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
 
 # 一行読んでスレッドへ渡す
-checklink = Checklink.new()
 threads = []
 urilist.each do |uri|
   threads << Thread.new do
-    File::open(resultfile, "a").write(checklink.checkuri(uri))
+    File::open(resultfile, "a").write(Checklink.new().checkuri(uri))
   end
 end
 
@@ -41,6 +41,12 @@ end
 threads.each do |thread|
   thread.join
 end
+=begin
+Parallel.each(urilist, in_threads: 80) {|url|
+  File::open(resultfile, "a").write(Checklink.new().checkuri(url))
+}
+=end
+
 
 # 計測終了
 File::open("linklog.txt", "a").write((Time.now - starttime).to_f.to_s + "\n")

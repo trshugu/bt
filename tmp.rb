@@ -5,6 +5,20 @@
 
 
 
+
+=begin
+# parallelの使用
+require "parallel"
+
+Parallel.each(urilist, in_threads: 10) {|url|
+  puts "start download: #{url}"
+  File::open(resultfile, "a").write(Checklink.new().checkuri(url))
+  puts "end download: #{url}"
+}
+=end
+
+
+
 =begin
 # rubyでassert
 moge = "moge"
