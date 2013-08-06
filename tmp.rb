@@ -6,6 +6,49 @@
 
 
 
+
+
+
+=begin
+# 並列で画像取得
+require 'digest/md5'
+require 'open-uri'
+require 'thread'
+
+urls = [
+    'http://farm4.staticflickr.com/3052/3086132328_e2041be795.jpg',
+    'http://farm7.staticflickr.com/6053/6312937936_cebaf2feb9.jpg',
+    'http://farm1.staticflickr.com/54/131841577_0e67642c02.jpg',
+    'http://farm3.staticflickr.com/2293/2266151759_058e732577.jpg',
+    nil
+]
+
+q = Queue.new
+urls.each { |url| q.push(url) }
+
+max_thread = 2 # 最大スレッド数
+
+# max_threadで指定した数だけスレッドを開始
+Array.new(max_thread) do |i|
+  Thread.new { # スレッドを作成
+    begin
+      # 最後のnilになったらfalseになって終了
+      while url = q.pop(true)
+        puts "start download: #{url}"
+        img = open(url) rescue next
+        img.close
+        file_path = "./#{Digest::MD5.hexdigest(url)}.jpg"
+        File.rename(img.path, file_path)
+        puts "end download: #{url}"
+      end
+      q.push nil # 最後を表すnilを別スレッドのために残しておく
+    end
+  }
+end.each(&:join)
+puts "finish process"
+=end
+
+
 =begin
 # parallelの使用
 require "parallel"
