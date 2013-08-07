@@ -5,6 +5,67 @@
 
 
 
+
+=begin
+catch :label do
+  catch :label1 do
+    puts "This will print"
+  throw :label
+    puts "This won't print"
+  end
+  puts "Neither will this print"
+end
+=end
+
+
+=begin
+# Ruby での throw と catch
+catch :label do
+  puts "This will print"
+throw :label
+  puts "This will not print"
+end
+=end
+
+
+=begin
+# クラスのプライベート・メソッドにアクセスする
+class SendTest
+  private
+  def hello
+    puts "Saying Hello privately"
+  end
+end
+
+y = SendTest.new
+
+#y.hello
+y.send(:hello)
+=end
+
+=begin
+# send メソッドを使用してルーチンに引数を渡す
+class Test
+  def method1(s, y)
+    puts "S: #{s} Y: #{y}"
+  end
+end
+t = Test.new
+t.send(:method1, 23, 12)
+=end
+
+=begin
+# method_missing 
+class Test
+  def method_missing(method, *args)
+    puts "Method: #{method} Args: (#{args.join(', ')})"
+  end
+end
+
+t = Test.new
+t.f(23)
+=end
+
 =begin
 class SelfTest4
   def method1
