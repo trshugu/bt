@@ -5,8 +5,213 @@
 
 
 
+=begin
+class SelfTest4
+  def method1
+    self.method2
+  end
+  
+  def method3
+    method2
+  end
+  
+  private
+  def method2
+    puts "Inside private method"
+  end
+end
+
+y = SelfTest4.new
+#y.method1
+y.method3
+=end
+
+=begin
+class MyTest
+  class << self 
+    def test
+      puts "This is a class static method"
+    end
+  end
+end
+
+MyTest.test   # works fine 
+=end
+
+=begin
+class TestMe
+  def TestMe.test
+    puts "Yet another static member function"
+  end
+end
+
+TestMe.test  # works fine
+=end
 
 
+=begin
+class SelfTest
+  def self.test
+    puts "Hello World with self!"
+  end
+end
+
+class SelfTest2
+  def test
+    puts "This is not a class static method"
+  end
+end
+
+SelfTest.test
+SelfTest2.test
+=end
+
+=begin
+# シングルトンメソッド
+class Human
+end
+
+y = Human.new
+def y.paint
+  puts "Can paint"
+end
+
+y.paint
+
+z = Human.new
+#z.paint
+class << y
+  def sing
+  puts "Can sing"
+  end
+end
+y.sing
+puts y.singleton_methods
+=end
+
+=begin
+module Status
+  REQUEST = 1
+  APPROVED = 2
+  REJECTED = 3
+end
+
+STATUS_NAME = {
+  Status::REQUEST => 'リクエスト中',
+  Status::APPROVED => '承認',
+  Status::REJECTED => '拒否'
+}
+
+def status_text
+  status = Status::REQUEST
+  STATUS_NAME[self.status]
+end
+=end
+
+=begin
+# 川クラス
+class River
+  def initialize()
+    @left = Place.new(3, 3)
+    @right = Place.new(0, 0)
+    @left.moveBoat()
+    status_print(@left, @right)
+  end
+  
+  # 移動
+  def move(s, t)
+    if (@left.haveBoat() == true)
+      @left.setS(@left.getS - s)
+      @left.setT(@left.getT - t)
+      @right.setS(@right.getS + s)
+      @right.setT(@right.getT + t)
+    else
+      @left.setS(@left.getS + s)
+      @left.setT(@left.getT + t)
+      @right.setS(@right.getS - s)
+      @right.setT(@right.getT - t)
+    end
+    
+    @left.moveBoat()
+    @right.moveBoat()
+    check_state(@left)
+    check_state(@right)
+    status_print(@left, @right)
+  end
+end
+
+# 場所クラス
+class Place
+  def initialize(x, y)
+    @s = x
+    @t = y
+    @b = false
+  end
+  
+  def getS()
+    return @s
+  end
+  
+  def setS(i)
+    @s = i
+  end
+  
+  def getT()
+    return @t
+  end
+  
+  def setT(i)
+    @t = i
+  end
+  
+  def haveBoat()
+    return @b
+  end
+  
+  def moveBoat()
+    @b = !@b
+  end
+end
+
+# 状況判定
+def check_state(place)
+  s = place.getS
+  t = place.getT
+  
+  if (s !=0 && t !=0)
+    return (s >= t)
+  else
+    return true
+  end
+end
+
+# 文字出力
+def status_print(left, right)
+  result = ""
+  result += "S" * left.getS
+  result += "T" * left.getT
+  result += "/"
+  result += "S" * right.getS
+  result += "T" * right.getT
+  
+  puts result
+end
+
+
+
+river = River.new
+river.move(0,2)
+river.move(0,1)
+river.move(0,2)
+river.move(0,1)
+river.move(2,0)
+river.move(1,1)
+river.move(2,0)
+river.move(0,1)
+river.move(0,2)
+river.move(0,1)
+river.move(0,2)
+=end
 
 
 =begin

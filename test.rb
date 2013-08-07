@@ -6,11 +6,35 @@
 require 'test/unit'
 require './tmp'
 
+
+
+=begin
+class TestRb < Test::Unit::TestCase
+  def setup
+    @left = Place.new(3, 3)
+    @right = Place.new(1, 3)
+  end
+
+  def testCheckState
+    assert_equal(true, check_state(@left))
+    assert_equal(false, check_state(@right))
+  end
+  
+  def testMove
+    
+  end
+  
+end
+=end
+
+
+=begin
 class TestBetweenHour < Test::Unit::TestCase
   def testGetargs
     assert_not_nil(@bhTest.isBetweenHour(1,1,1))
   end
 end
+=end
 
 
 
