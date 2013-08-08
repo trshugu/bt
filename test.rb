@@ -7,6 +7,21 @@ require 'test/unit'
 require './tmp'
 
 
+class TestKalk < Test::Unit::TestCase
+  def testOperator
+    assert_equal(11, Kalk(6, 3, Operator::Plus) )
+    assert_equal(1, Kalk(6, 3, Operator::Minus) )
+    assert_equal(30, Kalk(6, 3, Operator::Multiplication) )
+    assert_equal(1, Kalk(6, 3, Operator::Division) )
+  end
+  
+  def testAbsolute
+    assert_equal(1, Kalk(2, 4, Operator::Minus) )
+    assert_equal(1, Kalk(4, 2, Operator::Minus) )
+  end
+  
+  
+end
 
 =begin
 class TestRb < Test::Unit::TestCase

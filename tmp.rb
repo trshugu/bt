@@ -3,6 +3,48 @@
 =begin
 =end
 
+module Operator
+  Plus = ->x,y{x+y}
+  Minus = ->x,y{x-y}
+  Multiplication = ->x,y{x*y}
+  Division = ->x,y{x/y}
+end
+
+def Matchstick(i)
+  case i
+    when 0
+      return 6
+    when 1
+      return 2
+    when 2
+      return 5
+    when 3
+      return 5
+    when 4
+      return 4
+    when 5
+      return 5
+    when 6
+      return 6
+    when 7
+      return 4
+    when 8
+      return 7
+    when 9
+      return 6
+  end
+end
+
+def Kalk(x, y, operator)
+  x = Matchstick(x)
+  y = Matchstick(y)
+  operator.call(x,y).abs
+end
+
+puts Kalk(2, 4, Operator::Plus)
+puts Kalk(2, 4, Operator::Minus)
+puts Kalk(4, 2, Operator::Minus)
+puts Kalk(6, 3, Operator::Division)
 
 
 
