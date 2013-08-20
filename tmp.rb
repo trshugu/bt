@@ -3,6 +3,7 @@
 =begin
 =end
 
+=begin
 module Operator
   Plus = ->x,y{x+y}
   Minus = ->x,y{x-y}
@@ -45,6 +46,7 @@ puts Kalk(2, 4, Operator::Plus)
 puts Kalk(2, 4, Operator::Minus)
 puts Kalk(4, 2, Operator::Minus)
 puts Kalk(6, 3, Operator::Division)
+=end
 
 
 
