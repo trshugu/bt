@@ -3,6 +3,39 @@
 =begin
 =end
 
+
+
+
+=begin
+# tsv2json
+require "json"
+head = ARGF.first.split("\t")
+head.shift
+line = nil
+ARGF.each{|l|
+  llist = l.strip.split("\t")
+  id = llist.shift
+  value = head.zip(llist).inject({}){|h,x| h[x[0]]=x[1];h}
+  line = Hash[id , value]
+  break
+}
+=end
+
+
+=begin
+# 上記のtsvをcouchbaseにインポート
+client = Couchbase.connect(:bucket => "ticket", :hostname => "192.168.80.64", :username => 'suzuki', :password => 'suzuki')
+list.each{|line|
+  begin
+    client.set(line)
+  rescue => ex
+    p ex
+  end
+}
+client.disconnect
+=end
+
+
 =begin
 module Operator
   Plus = ->x,y{x+y}
