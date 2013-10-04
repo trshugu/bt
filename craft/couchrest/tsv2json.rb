@@ -1,6 +1,7 @@
 require "json"
 require 'couchbase'
 
+# tsv to json
 head = ARGF.first.split("\t")
 head.shift
 list = []
@@ -13,7 +14,8 @@ ARGF.each{|l|
   list.push(line)
 }
 
-client = Couchbase.connect(:bucket => "ticket", :hostname => "192.168.xx.xx", :username => 'user', :password => 'pass')
+# json into couchbase
+client = Couchbase.connect(:bucket => "tick", :hostname => "192.168.xx.xx", :username => 'user', :password => 'pass')
 list.each{|line|
   begin
     client.set(line)
