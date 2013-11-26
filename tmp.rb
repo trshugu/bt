@@ -4,6 +4,19 @@
 =end
 
 
+
+
+
+
+=begin
+# リダイレクトの場合location確認
+require "net/http"
+response = Net::HTTP.get_response(URI.parse('http://yahoo.co.jp'))
+puts response["location"]
+response.each{|a,b|puts a+" : "+b}
+=end
+
+
 =begin
 # 文字列 ランダム
 def cacha
