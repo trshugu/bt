@@ -5,6 +5,32 @@
 
 
 
+# google api
+require 'google/api_client'
+require 'google/api_client/client_secrets'
+require 'google/api_client/auth/installed_app'
+
+client_secrets = Google::APIClient::ClientSecrets.load
+client = Google::APIClient.new(
+  :application_name => 'Example Ruby application',
+  :application_version => '1.0.0',
+)
+#client.authorization.access_token = '123'
+
+client.authorization.client_id = client_secrets.client_id
+client.authorization.client_secret = client_secrets.client_secret
+client.authorization.scope = 'https://www.googleapis.com/auth/tasks'
+client.authorization.redirect_uri = 'http://localhost'
+client.authorization.code = "puts self.class"
+client.authorization.access_token = "12"
+client.authorization.grant_type = "password"
+
+p client
+client.authorization.fetch_access_token!
+#tasks = client.discovered_api('tasks')
+
+#result = client.execute(:key => "123", :api_method => tasks.tasklists.list)
+#p result.data
 
 
 
