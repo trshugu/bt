@@ -5,6 +5,7 @@
 
 
 
+=begin
 # google api
 require 'google/api_client'
 require 'google/api_client/client_secrets'
@@ -15,23 +16,36 @@ client = Google::APIClient.new(
   :application_name => 'Example Ruby application',
   :application_version => '1.0.0',
 )
-#client.authorization.access_token = '123'
-
 client.authorization.client_id = client_secrets.client_id
 client.authorization.client_secret = client_secrets.client_secret
-client.authorization.scope = 'https://www.googleapis.com/auth/tasks'
-client.authorization.redirect_uri = 'http://localhost'
-client.authorization.code = "puts self.class"
-client.authorization.access_token = "12"
-client.authorization.grant_type = "password"
+client.authorization.redirect_uri = client_secrets.redirect_uris.first
+client.authorization.grant_type = "authorization_code"
+client.authorization.code = "4/hkRL1kXFneKFIE2as0O5J9Pd8dwP.ksB7soMdTQoQgrKXntQAax0kvFS0hQI"
+client.authorization.access_token = "ya29.1.AADtN_VR7Sjymuvv5cT7sGf-uK5qno6wnFlD8u1R3qRGMd-O_5dnRErSxMyUzOY"
+client.authorization.expires_in = "3600"
+client.authorization.refresh_token = "1/biPiPItefdlFwIucWicQXLAS7wy0zH8SjlWbx0OyvgY"
+#p client
 
-p client
-client.authorization.fetch_access_token!
-#tasks = client.discovered_api('tasks')
+#code取得
+#https://accounts.google.com/o/oauth2/auth?client_id=249746177458-9j8vjpn0l1bmea1v79pn1qrp83cej2oa.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%2Foauth2callback&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ftasks&response_type=code
+#http://localhost/oauth2callback?code=4/_TbOueEnA9fCj5Syvr1vEQMtMhfe.kpqS30fPh9MQgrKXntQAax2oZaishQI
 
-#result = client.execute(:key => "123", :api_method => tasks.tasklists.list)
+#https://accounts.google.com/o/oauth2/auth?client_id=249746177458-thq6je63map68fbkrr2ai5q54g04m9o4.apps.googleusercontent.com&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ftasks&response_type=code
+#4/ERuYzhhWDmNCN8xARPc7lJUdS1lD.wk2levn3CrsSgrKXntQAax0ymESthQI
+
+#client.authorization.fetch_access_token!
+#client.authorization.auto_refleash_token
+
+tasks = client.discovered_api('tasks')
+result = client.execute(:api_method => tasks.tasklists.list)
 #p result.data
 
+result2 = client.execute(
+  :api_method => tasks.tasks.list,
+  :parameters => {"tasklist" => result.data.items[0].id}
+)
+result2.data.items.each{|a|puts a.title}
+=end
 
 
 =begin
