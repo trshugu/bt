@@ -5,6 +5,47 @@
 
 
 
+
+
+
+
+=begin
+# post送信のパラメータ生成とAPI連携
+require 'digest/hmac'
+require 'json'
+require 'net/http'
+require 'uri'
+require 'base64'
+require 'rexml/document'
+
+uri = URI.parse("")
+
+nowtime = Time.now.strftime("%Y%m%d%H%M%S")
+paramhash = {
+  "timestamp" => nowtime
+}
+paramhash = Hash[paramhash.sort]
+paramhash["signature"] = Base64.strict_encode64(Digest::HMAC.digest(URI.encode_www_form(paramhash), 'sign', Digest::SHA1))
+
+request = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/x-www-form-urlencoded'})
+request.body = URI.encode_www_form(paramhash)
+
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+#http.set_debug_output $stderr
+
+response = nil
+http.start do |h|
+  response = h.request(request)
+end
+
+tokenxml = REXML::Document.new(response.body)
+=end
+
+
+
 =begin
 # google api
 require 'google/api_client'
