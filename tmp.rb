@@ -8,6 +8,102 @@
 
 
 
+=begin
+# シリアライズ
+require 'benchmark'
+require 'json'
+require 'yaml'
+require 'oj'
+require 'msgpack'
+# require 'rblineprof' 入らなかった
+
+TIMES = 100000
+
+def sample
+  ["hoge", rand, rand(100), rand(10), rand(10)]
+end
+
+Benchmark.bm do |x|
+  x.report("marshal") do
+    TIMES.times do
+      arr = sample
+      m = Marshal.dump(arr)
+      a = Marshal.load(m)
+    end
+  end
+
+  x.report("json") do
+    TIMES.times do
+      arr = sample
+      m = arr.to_json
+      a = JSON.parse(m)
+    end
+  end
+
+  x.report("oj") do
+    TIMES.times do
+      arr = sample
+      m = Oj.dump(arr)
+      a = Oj.load(m)
+    end
+  end
+
+  x.report("yaml") do
+    TIMES.times do
+      arr = sample
+      m = YAML.dump(arr)
+      a = YAML.load(m)
+    end
+  end
+
+  x.report("msgpack") do
+    TIMES.times do
+      arr = sample
+      m = arr.to_msgpack
+      a = MessagePack.unpack(m)
+    end
+  end
+end
+=end
+
+
+
+
+=begin
+# ログ出力
+require "logger"
+
+# ログ出力インスタンスを取得 (*) 標準出力を行う
+log = Logger.new(STDOUT)
+
+# プログラム名を取得
+log.progname = "TEST_PROG"
+
+# ログ出力
+log.debug("DebugLog")
+log.info("InfoLog")
+log.warn("WarnLog")
+
+# ログレベルを設定する (*) INFOレベル以上を出力
+log.level = Logger::INFO
+
+# ログ出力
+log.debug("DebugLog");
+log.info("InfoLog");
+log.warn("WarnLog");
+
+# 新しいログ出力インスタンスを生成 (*) ログファイルに吐く
+log = Logger.new("log.txt");
+
+# ログ出力
+value = "VALUE"
+log.debug("DebugLog #{value}");
+log.debug("AAAAA"){"BBBB"}
+log.info("InfoLog");
+log.warn("WarnLog");
+=end
+
+
 
 =begin
 # post送信のパラメータ生成とAPI連携
