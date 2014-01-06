@@ -11,7 +11,7 @@ extend Checklink
 
 log = Logger.new("log.txt")
 log.progname = "lc"
-log.level = Logger::DEBUG
+log.level = Logger::INFO
 
 # テキストを読み込む
 #file = $0.gsub("rb", "txt").split("/").pop
@@ -27,7 +27,7 @@ until File.exist?(file)
 end
 
 # 結果ファイル名(同じファイル名が存在していたら削除)
-resultfile = "resultrb_" + file
+resultfile = "zzresultrb_" + file
 if File.exist?(resultfile)
   File.delete(resultfile)
 end
@@ -45,24 +45,32 @@ end
 File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
 log.info(file + ":" + urilist.size.to_s + " count");
 
-# 計測開始
-starttime = Time.now
-
+# -----------------------------------------------------------------------------
 # URIチェック
+# -----------------------------------------------------------------------------
+
+=begin
+# ノンスレッド
+starttime = Time.now
 urilist.each do |uri|
   log.debug(uri);
   checked_uri = check_uri(uri)
   log.debug(checked_uri);
   File::open(resultfile, "a").write(checked_uri)
 end
-
+nonthreadtime = (Time.now - starttime).to_f.to_s
+=end
 
 =begin
 # 一行読んでスレッドへ渡す
+starttime = Time.now
 threads = []
 urilist.each do |uri|
   threads << Thread.new do
-    File::open(resultfile, "a").write(Checklink.new().checkuri(uri))
+    log.debug(uri);
+    checked_uri = check_uri(uri)
+    log.debug(checked_uri);
+    File::open(resultfile, "a").write(checked_uri)
   end
 end
 
@@ -70,10 +78,20 @@ end
 threads.each do |thread|
   thread.join
 end
-=begin
-Parallel.each(urilist, in_threads: 80) {|url|
-  File::open(resultfile, "a").write(Checklink.new().checkuri(url))
+threadtime = (Time.now - starttime).to_f.to_s
+=end
+
+
+# Parallelの使用
+starttime = Time.now
+Parallel.each(urilist, in_threads: 80) {|uri|
+  log.debug(uri);
+  checked_uri = check_uri(uri)
+  log.debug(checked_uri);
+  File::open(resultfile, "a").write(checked_uri)
 }
+paralleltime = (Time.now - starttime).to_f.to_s
+=begin
 =end
 
 
@@ -82,7 +100,9 @@ Parallel.each(urilist, in_threads: 80) {|url|
 
 # 計測終了
 #File::open("linklog.txt", "a").write((Time.now - starttime).to_f.to_s + "\n")
-log.info((Time.now - starttime).to_f.to_s);
+#log.info(nonthreadtime);
+#log.info(threadtime);
+log.info(paralleltime);
 
 
 
