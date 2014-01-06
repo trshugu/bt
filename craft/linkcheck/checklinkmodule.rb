@@ -2,22 +2,41 @@
 # coding: utf-8
 
 require "net/http"
-require "uri"
 
 # URIチェック(スレッド化され並列処理される)
-class Checklink
-  def checkuri(uri)
+module Checklink
+  def check_uri(uri, recursive = false)
     begin
-      response = Net::HTTP.get_response(URI.parse(uri))
+      parced_uri = URI.parse(uri)
+      response = Net::HTTP.get_response(parced_uri)
+      
       case response
-        when Net::HTTPSuccess, Net::HTTPRedirection
-          return
-          # return uri + " " + response.code.to_s + "\n"
+        when Net::HTTPSuccess
+          return nil
+          #return uri + " " + response.code.to_s + "\n"
+          
+        when Net::HTTPMovedPermanently
+        when Net::HTTPFound
+          if recursive
+            return uri + " too deep " + "\n"
+          else
+            if response["location"][/^http/]
+              return check_uri( response["location"], true)
+            else
+              return check_uri( parced_uri.scheme + "://" + parced_uri.host + response["location"], true)
+            end
+          end
+          
         else
           return uri + " " + response.code.to_s + "\n"
+          
       end
     rescue Exception => e
       return uri + " 例外\n"
     end
+  end
+  
+  def redirect_check(uri)
+    
   end
 end

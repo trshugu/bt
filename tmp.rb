@@ -5,7 +5,25 @@
 
 
 
+=begin
+# mutex
+require 'thread'
 
+m = Mutex.new
+ts = []
+3.times { |j|
+  ts << Thread.start {
+    m.synchronize { # ブロック内の処理が同期実行される。
+      5.times { |i|
+        puts "thread-" << j.to_s << " : " << i.to_s
+        sleep rand * 0.1
+      }
+    }
+  }
+}
+
+ts.each {|t| t.join }
+=end
 
 
 =begin
