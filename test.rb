@@ -1,13 +1,17 @@
 ﻿#!ruby
-# -*- coding: utf-8 -*-
+# coding: utf-8
 =begin
 =end
 
-require 'test/unit'
+# require 'test/unit'
+require 'minitest/unit'
 require './tmp'
 
+MiniTest::Unit.autorun
 
-class TestKalk < Test::Unit::TestCase
+
+=begin
+class TestKalk < MiniTest::Unit::TestCase
   def testOperator
     assert_equal(11, Kalk(6, 3, Operator::Plus) )
     assert_equal(1, Kalk(6, 3, Operator::Minus) )
@@ -22,6 +26,7 @@ class TestKalk < Test::Unit::TestCase
   
   
 end
+=end
 
 =begin
 class TestRb < Test::Unit::TestCase
