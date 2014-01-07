@@ -35,8 +35,4 @@ module Checklink
       return uri + " 例外\n"
     end
   end
-  
-  def redirect_check(uri)
-    
-  end
 end

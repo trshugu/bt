@@ -11,25 +11,29 @@ describe Checklink, "が" do
   end
 
   it "正常の場合" do
-    notfoundurl = "http://www.yahoo.co.jp/"
-    result = check_uri(notfoundurl)
+    url = "http://www.yahoo.co.jp/"
+    result = check_uri(url)
     result.should == nil
-    #result.chomp.should == notfoundurl + " 200"
+    #result.chomp.should == url + " 200"
   end
 
   it "404の場合" do
-    notfoundurl = "http://www.yahoo.co.jp/naiyon.html"
-    result = check_uri(notfoundurl)
-    result.chomp.should == notfoundurl + " 404"
+    url = "http://www.yahoo.co.jp/naiyon.html"
+    result = check_uri(url)
+    result.chomp.should == url + " 404"
   end
   
   it "例外の場合" do
-    raiseurl = "http://anoie.dinoe.doijo"
-    result = check_uri(raiseurl)
-    result.chomp.should == raiseurl + " 例外"
+    url = "http://anoie.dinoe.doijo"
+    result = check_uri(url)
+    result.chomp.should == url + " 例外"
   end
   
-  it "リダイレクトのチェック" do
-    
+  it "リダイレクト→正常の場合" do
+    url = "http://yahoo.co.jp/"
+    #locationurl = "http://www.yahoo.co.jp/"
+    result = check_uri(url)
+    #result.chomp.should == locationurl + " 200"
+    result.should == nil
   end
 end
