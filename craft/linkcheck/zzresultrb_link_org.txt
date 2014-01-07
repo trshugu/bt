@@ -1,0 +1,15 @@
+49件
+http://yahoo.co.jp 例外
+http://google.co.jp 例外
+http://anoie.dinoe.doijo 例外
+http://google.co.jp 例外
+http://yahoo.co.jp 例外
+http://www.yahoo.co.jp 例外
+http://www.yahoo.co.jp 例外
+http://anoie.dinoe.doijo 例外
+http://www.yahoo.co.jp/naiyon.html 404
+http://www.yahoo.co.jp/naiyon.html 404
+http://blog.livedoor.jp/masa2d/archives/50918571.html 404
+http://blog.livedoor.jp/masa2d/archives/50918571.html 404
+http://gihyo.jp/dev/serial/01/ruby/0023?ard=1389089765 too deep 
+http://gihyo.jp/dev/serial/01/ruby/0023?ard=1389089765 too deep 

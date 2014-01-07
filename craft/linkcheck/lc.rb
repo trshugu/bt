@@ -11,7 +11,7 @@ extend Checklink
 
 log = Logger.new("log.txt")
 log.progname = "lc"
-log.level = Logger::INFO
+log.level = Logger::DEBUG
 
 # テキストを読み込む
 #file = $0.gsub("rb", "txt").split("/").pop
