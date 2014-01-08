@@ -43,7 +43,7 @@ end
 # 無視リスト対応
 File.readlines("ignore.txt").each do |line|
   if urilist.find{|uri| line.chomp == uri}
-    log.info("find ignore:" + line)
+    log.warn("find ignore:" + line.chomp)
     urilist.delete(line.chomp)
   end
 end
