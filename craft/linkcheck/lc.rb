@@ -14,7 +14,6 @@ log.progname = "lc"
 log.level = Logger::DEBUG
 
 # テキストを読み込む
-#file = $0.gsub("rb", "txt").split("/").pop
 file = ARGV[0]
 if file == nil
   log.debug("argv nothing");
@@ -49,9 +48,8 @@ File.readlines("ignore.txt").each do |line|
 end
 
 # 総件数
-#File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
 File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
-log.info(file + ":" + urilist.size.to_s + " count");
+log.info(file + ":" + urilist.size.to_s + "count");
 
 # -----------------------------------------------------------------------------
 # URIチェック
