@@ -40,6 +40,14 @@ File.readlines(file).each do |line|
   end
 end
 
+# 無視リスト対応
+File.readlines("ignore.txt").each do |line|
+  if urilist.find{|uri| line.chomp == uri}
+    log.info("find ignore:" + line)
+    urilist.delete(line.chomp)
+  end
+end
+
 # 総件数
 #File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
 File::open(resultfile, "a").write(urilist.size.to_s + "件\n")
