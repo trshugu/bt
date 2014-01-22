@@ -4,8 +4,74 @@
 =end
 
 
+# EC2の立ち上げ立ち下げ
+require "aws"
+
+AWS.config(
+  :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+
+# ec2 = AWS::EC2.new
+
+ec2 = AWS::EC2.new(
+  :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+
+# インスタンス作成
+ec2.instances.create(:image_id => "ami-8c1fece5")
+
+# インスタンスIDの確認
+i = ec2.instances["i-12345678"]
+i.exists?
+
+# インスタンスの状態リスト取得
+ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
+# => { "i-12345678" => :running, "i-87654321" => :shutting_down 
 
 
+# Elastic IPs
+instance = ec2.instances['i-12345678']
+instance.ip_address
+
+#ip = ec2.elastic_ips.allocate
+#ip.ip_address
+
+# regions
+ec2.regions.map(&:name)
+
+AWS::EC2.new(:region => "us-west-1")
+
+
+# Availability Zones
+ec2.availability_zones.map(&:name)
+
+# Images
+ec2.images.with_owner("amazon").map(&:name)
+
+
+# sdk2
+require 'aws-sdk-core'
+
+Aws.config = { access_key_id: '...', secret_access_key: '...', region: 'us-west-2' }
+
+s3 = Aws::S3.new
+s3 = Aws.s3
+
+resp = s3.list_buckets
+puts resp.buckets.map(&:name)
+
+resp = s3.list_objects(bucket: 'aws-sdk-core', max_keys: 2)
+resp.contents.each do |object|
+  puts "#{object.key} => #{object.etag}"
+end
+
+
+
+=begin
+# Hash#mapをHashに入れる
+Hash[ 5.times.map{|a|[a,9]} ]
+5.times.inject( {} ){ |a,b| a.store(b,9);a }
+=end
 
 
 =begin
