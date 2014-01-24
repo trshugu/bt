@@ -4,6 +4,14 @@
 =end
 
 
+
+
+
+
+
+
+
+=begin
 # EC2の立ち上げ立ち下げ
 require "aws"
 
@@ -64,7 +72,7 @@ resp = s3.list_objects(bucket: 'aws-sdk-core', max_keys: 2)
 resp.contents.each do |object|
   puts "#{object.key} => #{object.etag}"
 end
-
+=end
 
 
 =begin

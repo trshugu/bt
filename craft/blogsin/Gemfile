@@ -1,0 +1,9 @@
+source 'http://rubygems.org'
+
+gem 'sinatra'
+gem 'atomutil'
+gem 'thin'
+gem 'twitter'
+gem 'slim'
+gem 'sass'
+gem 'eventmachine'
