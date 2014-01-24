@@ -7,3 +7,6 @@ gem 'twitter'
 gem 'slim'
 gem 'sass'
 gem 'eventmachine'
+gem 'tilt', '~> 1.4.1'
+ruby '1.9.3'
+
