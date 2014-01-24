@@ -8,6 +8,35 @@
 
 
 
+=begin
+require 'mail'
+
+mail = Mail.new
+mail.from = ''#不使用
+mail.to = ''
+mail.subject = 'testest'
+mail.body = 'Theimgetmpa body.'
+
+
+#mail.charset = 'ISO-2022-JP'
+#mail.subject = NKF.nkf('-M', '日本語のtitle')
+#mail.body = NKF.nkf('-j', '日本語の本文')
+
+mail.add_file 'as.jpg'
+
+
+mail.delivery_method :smtp, { 
+  address:   'smtp.gmail.com',
+  port:      587,
+  domain:    'example',
+  user_name: '',
+  password:  "",
+  authentication: 'plain',
+  enable_starttls_auto: true
+}
+mail.deliver!
+=end
+
 
 
 
