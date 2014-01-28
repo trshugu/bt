@@ -6,9 +6,14 @@
 
 
 
+
+
+
+=begin
 # daemon
 require "daemons"
 Daemons.run('./daemon.rb')
+=end
 
 =begin
 # activeMQ
