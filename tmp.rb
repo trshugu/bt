@@ -7,8 +7,6 @@
 
 
 
-
-
 =begin
 # sinatra自動リロード
 require 'sinatra'
