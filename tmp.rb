@@ -10,6 +10,53 @@
 
 
 =begin
+# sinatra自動リロード
+require 'sinatra'
+require 'slim'
+require "sinatra/reloader" if development?
+
+template :layout do
+<<EOF
+html
+  body
+    == yield
+EOF
+end
+
+template :index do
+<<EOF
+/ asdflkj
+.asdf asdf
+a[href="dsf"] asdfdddf
+.sdf sdfd
+tr
+  td df
+  td sdf
+  td = @val
+form(action='/' method='POST')
+  div.button
+    input type="hidden" name="para" value="jiji"
+    input type="submit" value="sub" 
+
+EOF
+end
+
+
+get '/' do
+  @val = "af"
+  slim :index
+end
+
+post '/' do
+  @val = params[:para]
+  slim :index
+end
+=end
+
+
+
+
+=begin
 # daemon
 require "daemons"
 Daemons.run('./daemon.rb')
