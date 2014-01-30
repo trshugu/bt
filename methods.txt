@@ -1,0 +1,12 @@
+Speak
+SpeakText
+GeneralDlg
+AudioPause
+AudioResume
+AudioReset
+WriteToWaveFile
+AboutBox
+GetTypeInfoCount
+GetTypeInfo
+GetIDsOfNames
+Invoke

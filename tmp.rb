@@ -4,6 +4,63 @@
 =end
 
 
+#TOSSRX.TOSSRXCtrl.1
+
+#TOSCSRX.TOSCSRXCtrl.1
+# ruby -r win32ole -e "ie = WIN32OLE.new('TOSSRX.TOSSRXCtrl.1');puts ie.ole_methods;"
+
+
+=begin
+# wave出力
+require 'win32ole'
+
+ts = WIN32OLE.new('TOSTTSX.TOSTTSXCtrl.1')
+ts.WriteToWaveFile("filefile.wav", "testest")
+=end
+
+
+
+=begin
+# コンポーネントの調べ方
+require 'win32ole'
+
+ie = WIN32OLE.new('TOSTTSX.TOSTTSXCtrl.1')
+puts  ie.ole_obj_help.to_s
+method = ie.ole_method_help('Speak')
+puts method.return_type
+method.params.each do |param|
+  str = ""
+  str.concat "[in] " if param.input?
+  str.concat "[out] " if param.output?
+  str.concat "[optional] " if param.optional?
+  str.concat "[retval] " if param.retval?
+  str.concat param.name
+  str.concat " = #{param.default}" if param.default
+  str.concat " As #{param.ole_type}"
+  puts str
+end
+
+# ruby -rwin32ole -e 'puts WIN32OLE_TYPE.progids'
+# ruby -r win32ole -e "ie = WIN32OLE.new('InternetExplorer.Application');puts ie.ole_methods;"
+=end
+
+
+=begin
+# IEの制御
+require 'win32ole'
+
+ie = WIN32OLE.new('InternetExplorer.Application')
+ie.Navigate("http://www.google.co.jp/")
+ie.Visible = true
+while ie.busy
+  sleep 1
+end
+q = ie.document.all.Item("q")
+q.Value = "ruby"
+btnG = ie.document.all.Item("btnG")
+btnG.click()
+=end
+
 
 
 
