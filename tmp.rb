@@ -4,10 +4,119 @@
 =end
 
 
-#TOSSRX.TOSSRXCtrl.1
+require 'win32ole'
+require 'win32/sound'
+include Win32
 
-#TOSCSRX.TOSCSRXCtrl.1
+ni = WIN32OLE.new('TOSCSRX.TOSCSRXCtrl.1')
+
+e = WIN32OLE_EVENT.new(ni)
+f = WIN32OLE_EVENT.new(ni)
+g = WIN32OLE_EVENT.new(ni)
+h = WIN32OLE_EVENT.new(ni)
+
+e.on_event("Interference"){|a|p "1234Inter" + a.to_s}
+f.on_event("Recognized"){|a|p "234Recog" + a.Name + a.Voice}
+g.on_event("UtteranceBegin"){|a|p "33434UttBeg"}
+h.on_event("UtteranceEnd"){|a|p "16767UttEnd"}
+
+WIN32OLE_EVENT.message_loop
+ni.ShowIndicator
+
+ni.Activate(2,0)
+filename = "posisi.wav"
+
+Win32::Sound.play( filename )
+sleep 1
+ni.Deactivate(2)
+
+WIN32OLE_EVENT.message_loop
+
+
+
+=begin
+# waveの扱い
+File.open("posisi.wav"){|file|
+  file.binmode
+  puts riff = file.read(4)
+  data_size = file.read(4).unpack('V')[0]
+  puts "#{data_size} (bytes)"
+  puts wave = file.read(4)
+  
+  if riff != 'RIFF' or wave != 'WAVE'
+    puts 'not wave file'
+    exit 1
+  end
+  
+  while !file.eof?
+    id = file.read(4)
+    chunk_size = file.read(4).unpack('V')[0]
+    puts "chunk id: #{id}, size: #{chunk_size}"
+    if id == 'fmt '
+      format_id = file.read(2)[0].to_i
+      puts "フォーマットID: #{format_id}"
+      channel_num = file.read(2)[0]
+      puts "チャンネル数: #{channel_num}"
+      hz = file.read(4).unpack('V').join.to_i
+      puts "サンプリングレート #{hz} (hz)"
+      byte_per_sec = file.read(4).unpack('V').join.to_i
+      puts "byte per sec #{byte_per_sec}"
+      block_size = file.read(2)[0].to_i
+      puts "ブロックサイズ #{block_size}"
+      bit_per_sample = file.read(2)[0].to_i
+      puts "bit per sample #{bit_per_sample}"
+    else
+      data = file.read(chunk_size) # 音が入っている部分
+    end
+  end
+}
+=end
+
+
+
+
+
+=begin
+# win32-soundの利用
+require 'win32ole'
+require 'Win32API'
+
+filename = "posisi.wav"
+
+require 'win32/sound'
+Win32::Sound.play( filename )
+
+#api=Win32API.new('winmm','waveOutSetVolume','PL','I')
+#api.call(-1,left*(16**4)+right)
+#OLE.ReadFromFile
+=end
+
+
+
+
+=begin
+# 認識
+require 'win32ole'
+
+ni = WIN32OLE.new('TOSCSRX.TOSCSRXCtrl.1')
+
+e = WIN32OLE_EVENT.new(ni)
+e.on_event("Interference"){|a|p "1234Inter" + a.to_s}
+e.on_event("Recognized"){|a|p "234Recog" + a.Name + a.Voice}
+e.on_event("UtteranceBegin"){|a|p "33434UttBeg"}
+e.on_event("UtteranceEnd"){|a|p "16767UttEnd"}
+
+WIN32OLE_EVENT.message_loop
+
+ni.Activate(2,0)
+ni.Deactivate(2)
+
+WIN32OLE_EVENT.message_loop
+
 # ruby -r win32ole -e "ie = WIN32OLE.new('TOSSRX.TOSSRXCtrl.1');puts ie.ole_methods;"
+=end
+
+
 
 
 =begin
