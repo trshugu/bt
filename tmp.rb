@@ -4,6 +4,13 @@
 =end
 
 
+
+
+
+
+
+
+=begin
 require 'win32ole'
 require 'win32/sound'
 include Win32
@@ -31,6 +38,7 @@ sleep 1
 ni.Deactivate(2)
 
 WIN32OLE_EVENT.message_loop
+=end
 
 
 
@@ -171,6 +179,20 @@ btnG.click()
 =end
 
 
+=begin
+# パターン作成
+def rundom(i)
+  (("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a).shuffle[0..i].join
+end
+
+# 配列格納
+arr = []
+1000000.times do
+  arr.push(rundom(7))
+end
+puts arr.size
+puts arr.uniq.size
+=end
 
 
 =begin
