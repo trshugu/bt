@@ -7,6 +7,12 @@
 
 
 
+=begin
+# beep
+require 'Win32API'
+d = Win32API.new('kernel32', 'Beep', %w(i i), 'i')
+d.call(262, 500)
+=end
 
 
 
