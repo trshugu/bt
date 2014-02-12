@@ -29,12 +29,12 @@ g = WIN32OLE_EVENT.new(ni)
 h = WIN32OLE_EVENT.new(ni)
 
 e.on_event("Interference"){|a|p "1234Inter" + a.to_s}
-f.on_event("Recognized"){|a|p "234Recog" + a.Name + a.Voice}
+f.on_event("Recognized"){|a|p "234Recog" + a.Name + "::" + a.Voice}
 g.on_event("UtteranceBegin"){|a|p "33434UttBeg"}
 h.on_event("UtteranceEnd"){|a|p "16767UttEnd"}
 
 WIN32OLE_EVENT.message_loop
-ni.ShowIndicator
+#ni.ShowIndicator
 
 ni.Activate(2,0)
 filename = "posisi.wav"
