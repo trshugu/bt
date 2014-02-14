@@ -1,10 +1,10 @@
 # coding: utf-8
 
-require './tmp.rb'
+require './rack.rb'
 require 'rack/lobster'
 
 map '/simple' do
-  run RackApp.new
+  run Rerack
 end
 
 map '/lobster' do
