@@ -5,6 +5,43 @@
 
 
 
+# rackのreqとres
+require "rack"
+require "rack/builder"
+require 'rack/request'
+require 'rack/response'
+
+module Rerack
+  extend self
+  
+  def call(env)
+    p env
+    req = Rack::Request.new(env)
+    
+    body = case req.request_method
+      when 'GET'
+        '<html><body><form method="POST"><input type="submit" value="submi" /></form></body></html>'
+      when 'POST'
+        '<html><body>kjsldf</body></html>'
+    end
+    
+    res = Rack::Response.new { |r|
+      r.status = 200
+      r['Content-Type'] = 'text/html;charset=utf-8'
+      r.write body
+    }
+    res.finish
+  end
+  
+end
+
+# Builderの利用
+app = Rack::Builder.new {
+  run Rerack
+}
+
+Rack::Handler::Thin.run app
+
 
 
 =begin
