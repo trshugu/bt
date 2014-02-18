@@ -7,6 +7,34 @@
 
 
 
+
+=begin
+require "net/http"
+require 'rexml/document'
+
+uri = ""
+
+parced_uri = URI.parse(uri)
+
+res = Net::HTTP.get_response(parced_uri)
+body = res.body if res.is_a?(Net::HTTPSuccess)
+
+xml = REXML::Document.new(body)
+hash = Hash.new
+xml.elements.each("response/data/id"){|id|
+  hash[id.text] = id.attributes["score"]
+}
+p hash
+=end
+
+=begin
+# 時間で分岐
+case Time.now.hour
+  when (4..6),16
+    puts true
+end
+=end
+
 =begin
 # メソッド拡張
 class String
