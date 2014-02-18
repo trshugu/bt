@@ -7,6 +7,35 @@
 
 
 
+=begin
+# メソッド拡張
+class String
+  def kkk
+    puts self.upcase
+  end
+end
+
+"asdf".kkk
+=end
+
+
+=begin
+# 確率制御 その2
+a=0
+b=0
+10000.times do
+  i = rand(100)
+  case rand(100)
+    when 0..98
+      a+=1
+    when 99..99
+      b+=1
+  end
+end
+p a
+p b
+=end
+
 
 =begin
 require 'time'
