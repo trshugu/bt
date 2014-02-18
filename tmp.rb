@@ -5,6 +5,46 @@
 
 
 
+
+
+
+
+
+
+=begin
+# DateTime
+require "date"
+a = DateTime.new(1993, 2, 24, 12, 30, 45)
+b = DateTime.parse('1993-02-24T12:30:45')
+b += 10
+b - a            #=> 10/1
+b.year           #=> 1993
+b.strftime('%a') #=> "Sat"
+
+yesterday = DateTime.now - 1
+=end
+
+
+
+=begin
+# 確率制御
+a=0
+b=0
+10000.times do
+  i = rand(100)
+  case
+    when i.between?(0,98)
+      a+=1
+    when i.between?(99,99)
+      b+=1
+  end
+end
+p a
+p b
+=end
+
+
+=begin
 # rackのreqとres
 require "rack"
 require "rack/builder"
@@ -41,6 +81,7 @@ app = Rack::Builder.new {
 }
 
 Rack::Handler::Thin.run app
+=end
 
 
 
