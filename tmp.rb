@@ -8,12 +8,44 @@
 
 
 
+=begin
+require 'time'
+require 'benchmark'
+
+Benchmark.bm(10) do |bm|
+  date = DateTime.parse('2012-10-01')
+  date_min = DateTime.parse('2012-01-01')
+  date_max = DateTime.parse('2012-12-31')
+  bm.report('between?') do
+    date.between?(date_min, date_max)
+  end
+end
+
+Benchmark.bm(10) do |bm|
+  dates = (DateTime.parse('2012-01-01')..DateTime.parse('2012-12-31'))
+  date = DateTime.parse('2012-10-01')
+  bm.report('cover?') do
+    dates.cover?(date)
+  end
+end
+
+Benchmark.bm(10) do |bm|
+  dates = (DateTime.parse('2012-01-01')..DateTime.parse('2012-12-31'))
+  date = DateTime.parse('2012-10-01')
+  bm.report('include?') do
+    dates.include?(date)
+  end
+end
+=end
+
 
 
 
 =begin
 # DateTime
 require "date"
+#require "time"でもいいっぽい
+
 a = DateTime.new(1993, 2, 24, 12, 30, 45)
 b = DateTime.parse('1993-02-24T12:30:45')
 b += 10
