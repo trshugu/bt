@@ -8,7 +8,60 @@
 
 
 
+
+
+
+
+
 =begin
+# jibugen
+def conjunction
+  res = case rand(100)
+    when 0..1
+      "が"
+    when 2..4
+      "と"
+    when 5..7
+      "を"
+    when 8..9
+      ""
+    else
+      "の"
+  end
+  return res
+end
+
+def getRandomOneline(path)
+  filelinecount = File.open(path, "r:utf-8").read.count("\n") + 1
+  oneline = File.open(path).readlines[rand(filelinecount)].chomp
+  
+  return oneline
+end
+
+
+def gen(word = "")
+  word += ""
+  word += conjunction unless word.size == 0
+  word += getRandomOneline("jiburi.txt")
+  
+  case rand(100)
+    when 0..15
+      word = gen(word)
+    else
+      word += conjunction unless word.size == 0
+      word += getRandomOneline("jiburi.txt")
+      return word
+  end
+end
+
+#puts gen
+puts conjunction
+=end
+
+
+
+=begin
+# xmlの取得
 require "net/http"
 require 'rexml/document'
 
