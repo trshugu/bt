@@ -17,6 +17,7 @@ d.call(262, 500)
 
 
 =begin
+=end
 require 'win32ole'
 require 'win32/sound'
 include Win32
@@ -34,7 +35,7 @@ g.on_event("UtteranceBegin"){|a|p "33434UttBeg"}
 h.on_event("UtteranceEnd"){|a|p "16767UttEnd"}
 
 WIN32OLE_EVENT.message_loop
-ni.ShowIndicator
+#ni.ShowIndicator
 
 ni.Activate(2,0)
 filename = "posisi.wav"
@@ -44,7 +45,6 @@ sleep 1
 ni.Deactivate(2)
 
 WIN32OLE_EVENT.message_loop
-=end
 
 
 
