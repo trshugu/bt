@@ -1,12 +1,12 @@
 # coding: utf-8
 
-require './tmp.rb'
+require './rack.rb'
 require 'test/unit'
 require 'rack/mock'
 
 class RackAppTest < Test::Unit::TestCase
   def setup
-    @app = RackApp.new
+    @app = Rerack
     @mr  = Rack::MockRequest.new(@app)
   end
 

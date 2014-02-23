@@ -7,6 +7,259 @@
 
 
 
+
+
+
+
+
+
+=begin
+# jibugen
+def conjunction
+  res = case rand(100)
+    when 0..1
+      "が"
+    when 2..4
+      "と"
+    when 5..7
+      "を"
+    when 8..9
+      ""
+    else
+      "の"
+  end
+  return res
+end
+
+def getRandomOneline(path)
+  filelinecount = File.open(path, "r:utf-8").read.count("\n") + 1
+  oneline = File.open(path).readlines[rand(filelinecount)].chomp
+  
+  return oneline
+end
+
+
+def gen(word = "")
+  word += ""
+  word += conjunction unless word.size == 0
+  word += getRandomOneline("jiburi.txt")
+  
+  case rand(100)
+    when 0..15
+      word = gen(word)
+    else
+      word += conjunction unless word.size == 0
+      word += getRandomOneline("jiburi.txt")
+      return word
+  end
+end
+
+#puts gen
+puts conjunction
+=end
+
+
+
+=begin
+# xmlの取得
+require "net/http"
+require 'rexml/document'
+
+uri = ""
+
+parced_uri = URI.parse(uri)
+
+res = Net::HTTP.get_response(parced_uri)
+body = res.body if res.is_a?(Net::HTTPSuccess)
+
+xml = REXML::Document.new(body)
+hash = Hash.new
+xml.elements.each("response/data/id"){|id|
+  hash[id.text] = id.attributes["score"]
+}
+p hash
+=end
+
+=begin
+# 時間で分岐
+case Time.now.hour
+  when (4..6),16
+    puts true
+end
+=end
+
+=begin
+# メソッド拡張
+class String
+  def kkk
+    puts self.upcase
+  end
+end
+
+"asdf".kkk
+=end
+
+
+=begin
+# 確率制御 その2
+a=0
+b=0
+10000.times do
+  i = rand(100)
+  case rand(100)
+    when 0..98
+      a+=1
+    when 99..99
+      b+=1
+  end
+end
+p a
+p b
+=end
+
+
+=begin
+require 'time'
+require 'benchmark'
+
+Benchmark.bm(10) do |bm|
+  date = DateTime.parse('2012-10-01')
+  date_min = DateTime.parse('2012-01-01')
+  date_max = DateTime.parse('2012-12-31')
+  bm.report('between?') do
+    date.between?(date_min, date_max)
+  end
+end
+
+Benchmark.bm(10) do |bm|
+  dates = (DateTime.parse('2012-01-01')..DateTime.parse('2012-12-31'))
+  date = DateTime.parse('2012-10-01')
+  bm.report('cover?') do
+    dates.cover?(date)
+  end
+end
+
+Benchmark.bm(10) do |bm|
+  dates = (DateTime.parse('2012-01-01')..DateTime.parse('2012-12-31'))
+  date = DateTime.parse('2012-10-01')
+  bm.report('include?') do
+    dates.include?(date)
+  end
+end
+=end
+
+
+
+
+=begin
+# DateTime
+require "date"
+#require "time"でもいいっぽい
+
+a = DateTime.new(1993, 2, 24, 12, 30, 45)
+b = DateTime.parse('1993-02-24T12:30:45')
+b += 10
+b - a            #=> 10/1
+b.year           #=> 1993
+b.strftime('%a') #=> "Sat"
+
+yesterday = DateTime.now - 1
+=end
+
+
+
+=begin
+# 確率制御
+a=0
+b=0
+10000.times do
+  i = rand(100)
+  case
+    when i.between?(0,98)
+      a+=1
+    when i.between?(99,99)
+      b+=1
+  end
+end
+p a
+p b
+=end
+
+
+=begin
+# rackのreqとres
+require "rack"
+require "rack/builder"
+require 'rack/request'
+require 'rack/response'
+
+module Rerack
+  extend self
+  
+  def call(env)
+    p env
+    req = Rack::Request.new(env)
+    
+    body = case req.request_method
+      when 'GET'
+        '<html><body><form method="POST"><input type="submit" value="submi" /></form></body></html>'
+      when 'POST'
+        '<html><body>kjsldf</body></html>'
+    end
+    
+    res = Rack::Response.new { |r|
+      r.status = 200
+      r['Content-Type'] = 'text/html;charset=utf-8'
+      r.write body
+    }
+    res.finish
+  end
+  
+end
+
+# Builderの利用
+app = Rack::Builder.new {
+  run Rerack
+}
+
+Rack::Handler::Thin.run app
+=end
+
+
+
+=begin
+# 再度rack
+require "rack"
+
+module Rerack
+  extend self
+  
+  def call(env)
+    p env
+    case env['REQUEST_METHOD']
+      when 'GET'
+        [
+          200,
+          { 'Content-Type' => 'text/html' },
+          ['<html><body><form method="POST"><input type="submit" value="submi" /></form></body></html>']
+        ]
+      when 'POST'
+        [
+          200,
+          { 'Content-Type' => 'text/html' },
+          ['<html><body>asfasdf</body></html>']
+        ]
+    end
+  end
+  
+end
+
+Rack::Handler::Thin.run Rerack
+=end
+
+
+
+
 =begin
 # beep
 require 'Win32API'
@@ -30,7 +283,7 @@ g = WIN32OLE_EVENT.new(ni)
 h = WIN32OLE_EVENT.new(ni)
 
 e.on_event("Interference"){|a|p "1234Inter" + a.to_s}
-f.on_event("Recognized"){|a|p "234Recog" + a.Name + a.Voice}
+f.on_event("Recognized"){|a|p "234Recog" + a.Name + "::" + a.Voice}
 g.on_event("UtteranceBegin"){|a|p "33434UttBeg"}
 h.on_event("UtteranceEnd"){|a|p "16767UttEnd"}
 

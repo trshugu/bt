@@ -1,21 +1,21 @@
 class BetweenHour
   def isBetweenHour(beginHour, endHour, checkHour)
-    # Žó‚¯Žæ‚Á‚½’l‚ª”’l‚©Šm”F
+    # å—ã‘å–ã£ãŸå€¤ãŒæ•°å€¤ã‹ç¢ºèª
     if (beginHour.class != Fixnum || endHour.class != Fixnum || checkHour.class != Fixnum)
       raise
     end
     
-    # ”ÍˆÍŠO‚Ì’l‚ðŽw’è‚µ‚½ê‡ƒGƒ‰[
+    # ç¯„å›²å¤–ã®å€¤ã‚’æŒ‡å®šã—ãŸå ´åˆã‚¨ãƒ©ãƒ¼
     if (beginHour >= 24 || endHour >= 24 || checkHour >= 24 || beginHour < 0 || endHour < 0 || checkHour < 0)
       raise
     end
     
-    # ŠJŽnŽž‚ÆI—¹Žž‚ª“¯‚¶ê‡‚ÍŠÜ‚Ü‚ê‚é
+    # é–‹å§‹æ™‚åˆ»ã¨çµ‚äº†æ™‚åˆ»ãŒåŒã˜å ´åˆã¯å«ã¾ã‚Œã‚‹
     if (beginHour == checkHour && checkHour == endHour)
       return true
     end
     
-    # ŽžŠÔ‚ðƒ‹[ƒv‚³‚¹A‚»‚Ì’†‚ÉcheckHour‚ª‚ ‚é‚©‚Ç‚¤‚©‚ðŠm”F‚·‚éˆ—‚É‚µ‚½
+    # æ™‚é–“ã‚’ãƒ«ãƒ¼ãƒ—ã•ã›ã€ãã®ä¸­ã«checkHourãŒã‚ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºèªã™ã‚‹å‡¦ç†ã«ã—ãŸ
     until beginHour == endHour
       if (checkHour == beginHour)
         return true
