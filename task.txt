@@ -14,7 +14,6 @@
 
 
 
-
 2013/02/07 12:34
 vagrantƒƒ‚
 vagrant box add precise32 http://files.vagrantup.com/precise32.box
