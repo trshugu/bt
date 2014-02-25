@@ -288,6 +288,7 @@ d.call(262, 500)
 
 
 =begin
+=end
 require 'win32ole'
 require 'win32/sound'
 include Win32
@@ -315,7 +316,6 @@ sleep 1
 ni.Deactivate(2)
 
 WIN32OLE_EVENT.message_loop
-=end
 
 
 
