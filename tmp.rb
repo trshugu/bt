@@ -12,6 +12,24 @@
 
 
 
+=begin
+# memcacheテスト
+require "memcache"
+memcache = MemCache.new("localhost:11211")
+
+puts memcache.set "keyone","itiiti"
+puts memcache.get "keyone"
+puts memcache.set "keytwo","nini"
+puts memcache.get "keytwo"
+
+# 構造化データ
+require "json"
+tmpjson = {:id => 1, :user => "shin", :time => Time.now, :body => "hello redmemcis!"}
+puts memcache.set "tj", tmpjson.to_json
+puts JSON.parse(memcache.get("tj"))
+=end
+
+
 
 =begin
 # jibugen
