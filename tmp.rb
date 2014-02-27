@@ -8,8 +8,31 @@
 
 
 
+=begin
+# arelを使ったOR条件
+if params[:hoge_id]||params[:hoge_name]||params[:foo_title]||params[:foo_id]
+  arel = BaaModel.arel_table
+  arel_where = arel[:hoge_name].matches( params[:hoge_name] == "" ? "" : "%#{params[:hoge_name]}%" )
+    .or(arel[:hoge_id].eq(params[:hoge_id]))
+    .or(arel[:foo_title].matches( params[:foo_title] == "" ? "" :"%#{params[:foo_title]}%" ))
+    .or(arel[:foo_id].eq(params[:foo_id]))
+  @search_result = BaaModel.where(arel_where) # "20178508"
+end
+=end
 
 
+
+=begin
+# railsの検証と本番の切り替え
+case ENV['RAILS_ENV']
+  when "development"
+    #開発環境
+  when "production"
+    #本番環境
+  when "test"
+    #テスト環境
+end
+=end
 
 
 =begin
@@ -1607,7 +1630,7 @@ starttime = Time.now
 client = Couchbase.connect(:bucket => "bigbucket", :hostname => "localhost", :username => 'suzuki', :password => 'suzuki')
 75000000.times{
   begin
-    json = {"bigdatatest" + rand(10000000000).to_s => {"artistid"=>rand(10000000000).to_s, "musicid"=>rand(10000000000).to_s, "affiliateid"=>rand(10000000000).to_s, "other"=>rand(10000000000).to_s}}
+    json = {"bigdatatest" + rand(10000000000).to_s => {"hogeid"=>rand(10000000000).to_s, "fooid"=>rand(10000000000).to_s, "affiliateid"=>rand(10000000000).to_s, "other"=>rand(10000000000).to_s}}
     client.set(json)
     #client.get("stressTest" + rand(1000000000).to_s)
   rescue => ex
@@ -1626,7 +1649,7 @@ def insert(client)
   puts "start" + client.hostname
   100.times{
     begin
-      json = {"bigdatatest" + rand(10000000000).to_s => {"artistid"=>rand(10000000000).to_s, "musicid"=>rand(10000000000).to_s, "affiliateid"=>rand(10000000000).to_s, "other"=>rand(10000000000).to_s}}
+      json = {"bigdatatest" + rand(10000000000).to_s => {"hogeid"=>rand(10000000000).to_s, "fooid"=>rand(10000000000).to_s, "affiliateid"=>rand(10000000000).to_s, "other"=>rand(10000000000).to_s}}
       client.set(json)
     rescue => ex
       p ex
