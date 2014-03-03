@@ -6,6 +6,37 @@
 
 
 
+=begin
+# gracenote rhythm
+require "net/http"
+require "json"
+
+uri = "https://c.web.cddbp.net/webapi/json/1.0/register?client="
+parced_uri = URI.parse(uri)
+res = Net::HTTP.get_response(parced_uri)
+
+body = res.body if res.is_a?(Net::HTTPSuccess)
+body_json = JSON.parse body
+user_id = body_json["RESPONSE"][0]["USER"][0]["VALUE"] if body_json["RESPONSE"][0]["STATUS"] == "OK"
+
+#uri =  "https://c6.web.cddbp.net/webapi/json/1.0/radio/create?artist_name=" + URI.encode_www_form_component("宇多田ヒカル".encode("UTF-8")) + "&lang=jpn&client=30&user=" + user_id
+uri =  "https://c3.web.cddbp.net/webapi/json/1.0/radio/create?artist_name=traxman&select_extended=tempo&return_count=100&lang=jpn&client=30&user=" + user_id
+parced_uri = URI.parse(uri)
+res = Net::HTTP.get_response(parced_uri)
+body = res.body if res.is_a?(Net::HTTPSuccess)
+body_json = JSON.parse body
+radio_id = body_json["RESPONSE"][0]["RADIO"][0]["ID"] if body_json["RESPONSE"][0]["STATUS"] == "OK"
+
+body_json["RESPONSE"][0]["ALBUM"].each do |h| 
+  unless h["TRACK"][0]["TEMPO"] == nil
+    if h["TRACK"][0]["TEMPO"][0]["VALUE"][/1/]
+      print h["TRACK"][0]["ARTIST"] == nil ? "" :h["TRACK"][0]["ARTIST"][0]["VALUE"] + ": "
+      print h["TRACK"][0]["TITLE"] == nil ? "" :h["TRACK"][0]["TITLE"][0]["VALUE"] + ": "
+      puts h["TRACK"][0]["TEMPO"] == nil ? "" : h["TRACK"][0]["TEMPO"][0]["VALUE"]
+    end
+  end
+end
+=end
 
 
 =begin
@@ -311,7 +342,6 @@ d.call(262, 500)
 
 
 =begin
-=end
 require 'win32ole'
 require 'win32/sound'
 include Win32
@@ -339,6 +369,7 @@ sleep 1
 ni.Deactivate(2)
 
 WIN32OLE_EVENT.message_loop
+=end
 
 
 
