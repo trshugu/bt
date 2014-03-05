@@ -6,6 +6,16 @@
 
 
 
+
+
+
+
+=begin
+# アセットパイプラインのプリコンパイル
+rake assets:precompile RAILS_ENV=production
+=end
+
+
 =begin
 # gracenote rhythm
 require "net/http"
