@@ -6,7 +6,41 @@
 
 
 
+=begin
+# Botロガー作成
+require "./botlogger"
+Botlogger.log(File.basename($0))
+=end
 
+
+=begin
+# 自分自身のファイル名
+puts File.basename($0)
+=end
+
+=begin
+# ログローテーションテスト
+require "logger"
+
+log = Logger.new("log.txt",1, 1 * 1024 * 1024)
+log.formatter= proc do |s,d,p,m|
+  "#{s[0]},#{d.strftime('%Y/%m/%d %H:%M:%S') } #{m.to_s}\n"
+end
+log.info("InfoLog")
+=end
+
+
+
+=begin
+# propertiesをcliからデコードするワンライナー
+# ruby -pne "$_.scan(/(\\u[\w\d]{4})/).each{|utf|$_.sub!(utf[0],(utf[0][2,4]).to_i(16).chr('UTF-8'))}" app.properties
+=end
+
+
+=begin
+# 長文を分割するワンライナー
+ruby -pne "$_.split('、').each{|s|File::open('tmp','a').write(s.to_s+\"\n\")}" 01.txt
+=end
 
 
 
