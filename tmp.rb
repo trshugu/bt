@@ -6,6 +6,79 @@
 
 
 
+
+
+
+
+
+
+
+=begin
+# 自分自身のメソッドを知る
+class Object
+  def current_method
+    caller.first.scan(/`(.*)'/).to_s
+  end
+end
+
+def metho
+  current_method
+end
+
+puts metho
+=end
+
+
+
+
+
+=begin
+# 自分自身のクラス名を知る
+class Mine
+  def name
+    self.class.name
+  end
+end
+
+puts Mine.new.name
+=end
+
+
+
+
+
+=begin
+# rssチェッカー
+require 'open-uri'
+require 'rss'
+
+rsslists  = [
+  "http://releasepress.jp/feed",
+  "http://pr.yahoo.co.jp/release/rss/rss.xml",
+  "http://www.jaxa.jp/rss/press_j.rdf",
+  "http://prtimes.jp/index.rdf",
+]
+
+# テスト用
+rsslists  = ["http://releasepress.jp/feed"]
+
+feeds = []
+rsslists.each { |rssurl| 
+  rss = open(rssurl){ |file| RSS::Parser.parse(file.read) }
+  rss.items.each_with_index{|item,i| 
+    break if i >= 20
+    
+    # タイトルを1行にする
+    feeds.push(item.title.gsub(/(\r\n|\r|\n)/, "") + "\n" + item.link + "\n" + ">>\n" + item.description[0,400] + "\n<<")
+  }
+}
+
+#@pressentry = feeds[rand(feeds.size)]
+puts @pressentry = feeds[rand(feeds.size)]
+=end
+
+
+
 =begin
 # Botロガー作成
 require "./botlogger"

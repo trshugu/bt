@@ -16,6 +16,28 @@ MiniTest::Unit.autorun
 
 
 
+
+
+=begin
+# specにおける日本語での記述に関する応用
+class Object
+  def current_method
+    # 文字変換含む
+    caller.first.encode(Encoding::Windows_31J).scan(/`(.*)'/).to_s
+  end
+end
+
+class TestNihongo < MiniTest::Unit::TestCase
+  def testあのくたらさんみゃくさんぼだい
+    puts self.class.name
+    puts current_method
+    assert_equal 1,1
+  end
+end
+=end
+
+
+
 =begin
 class TestKalk < MiniTest::Unit::TestCase
   def testOperator
