@@ -8,9 +8,12 @@
 
 
 
-
-
-
+=begin
+# __FILE__だとファイル名も含まれるのでこうする
+puts __FILE__
+puts Dir.pwd
+puts File.expand_path("../README", __FILE__)
+=end
 
 
 =begin
