@@ -1,0 +1,2 @@
+module SpispiHelper
+end
