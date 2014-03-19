@@ -8,6 +8,34 @@
 
 
 
+
+
+
+=begin
+# rubyでenum風
+module Status
+  REQUEST = 1
+  APPROVED = 2
+  REJECTED = 3
+  
+  def self.all
+    self.constants.map{|name| self.const_get(name) }
+  end
+end
+
+STATUS_NAME = {
+  Status::REQUEST => 'requesting...',
+  Status::APPROVED => 'approve',
+  Status::REJECTED => 'reject'
+}
+
+puts status = Status::REQUEST
+puts STATUS_NAME[status]
+puts Status.constants
+puts Status.all
+=end
+
+
 =begin
 # __FILE__だとファイル名も含まれるのでこうする
 puts __FILE__
