@@ -10,6 +10,63 @@
 
 
 
+=begin
+# Javaの多態性に関しての考察2
+class One
+  def to
+    self.s
+  end
+end
+
+class Da < One
+  def s
+    puts "aaa"
+  end
+end
+class Du < One
+  def s
+    puts "uuu"
+  end
+end
+
+o=One.new
+a=Da.new
+u=Du.new
+
+a.to
+u.to
+=end
+
+
+
+
+=begin
+# Javaの多態性に関しての考察
+class One
+  def to(d)
+    d.s
+  end
+end
+
+class Da
+  def s
+    puts "aaa"
+  end
+end
+class Du
+  def s
+    puts "uuu"
+  end
+end
+
+o=One.new
+a=Da.new
+u=Du.new
+
+o.to a
+o.to u
+=end
+
 
 =begin
 # rubyでPOST
