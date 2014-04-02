@@ -9,6 +9,106 @@
 
 
 
+=begin
+# extend
+module TestModule
+  def say
+    p "hello"
+  end
+end
+
+class Ec
+  extend TestModule
+end
+e = Ec.new
+#e.say
+Ec.say
+e.extend TestModule
+e.say
+=end
+
+
+
+=begin
+# モジュール関数
+module TestModule
+  def say
+    p "hello"
+  end
+  
+  # モジュールの特異メソッド
+  def self.say
+    p "self"
+  end
+  
+  module_function :say
+end
+
+# 特異メソッドとして呼び出し
+TestModule.say
+
+include TestModule
+class TestClass
+  def saysay
+    say
+  end
+end
+
+# インスタンスからも呼べる
+TestClass.new.saysay
+=end
+
+
+
+=begin
+# mix-inに関しての考察 モジュール
+module Tm
+  def say
+    puts "instance"
+  end
+  
+  def self.say
+    puts "self"
+  end
+end
+
+# 特異メソッドが呼び出される
+Tm.say
+
+# mix-in
+class Ic
+  include Tm
+end
+
+i = Ic.new
+i.say
+=end
+
+
+=begin
+# mix-inに関しての考察 継承
+class Sup
+  def super_say
+    puts "super"
+  end
+end
+
+class Sub < Sup
+  def sub_say
+    puts "sub"
+  end
+  
+  def super_say
+    puts "sub_super"
+    super
+  end
+end
+
+sb = Sub.new
+sb.sub_say
+sb.super_say
+=end
+
 
 =begin
 # Javaの多態性に関しての考察2
