@@ -1,11 +1,152 @@
 #!ruby
 # coding: utf-8
 =begin
+
+
+
 =end
 
 
 
 
+
+=begin
+# extendとmodule_function
+module Ex
+  # moduleメソッドのみ
+  module ModuleMethods
+    def method1 ;puts "Ex1"; end
+    def method2 ;puts "Ex2"; end
+  end
+  
+  extend ModuleMethods
+end
+
+module Mf
+  def method1 ;puts "Mf1"; end
+  def method2 ;puts "Mf2"; end
+  
+  module_function :method1
+  module_function :method2
+end
+
+Ex.method1
+Ex.method2
+Mf.method1
+Mf.method2
+
+extend Ex
+extend Mf
+=end
+
+
+=begin
+# ASCII文字変換
+module Flip
+  @A = ["A", "B", "C", "D", "E", "F", "G",
+    "H", "I", "J", "K", "L", "M", "N", "O",
+    "P", "Q", "R", "S", "T", "U", "V", "W",
+    "X", "Y", "Z", "a", "b", "c", "d", "e",
+    "f", "g", "h", "i", "j", "k", "l", "m",
+    "n", "o", "p", "q", "r", "s", "t", "u",
+    "v", "w", "x", "y", "z", "0", "1", "2",
+    "3", "4", "5", "6", "7", "8", "9", ".",
+    ",", "-", ":", ";", "!", "?", "&", "(",
+    ")", "<", ">", "[", "]", "_", "‾", "{",
+    "}", "∴", "∵", " "]
+  @B = ["ᗄ", "ᗺ", "Ɔ", "ᗡ", "Ǝ", "Ⅎ", "⅁",
+    "H", "I", "ᒋ", "丬", "⅂", "W", "N", "O", 
+    "Ԁ", "Ό", "ᴚ", "S", "⊥", "Ո", "Λ", "M",
+    "X", "⅄", "Z", "ɐ", "q", "ɔ", "p", "ə",
+    "ɟ", "ɓ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ",
+    "u", "o", "d", "b", "ɹ", "s", "ʇ", "n",
+    "ʌ", "ʍ", "x", "ʎ", "z", "0", "⇂", "Ƨ",
+    "ε", "ᔭ", "5", "9", "L", "8", "6", "˙",
+    "‘", "-", ":", "؛", "¡", "¿", "⅋", ")",
+    "(", ">", "<", "]", "[", "‾", "_", "}",
+    "{", "∵", "∴", " "]
+  
+  @T = @A.zip(@B)
+  @H = Hash[ @T ]
+  @Hi = @H.invert
+  
+  def self.flip(str)
+    str.chars.map { |chr| @H[chr] }.join.reverse
+  end
+  
+  def self.unflip(str)
+    str.chars.map { |chr| @Hi[chr] }.join.reverse
+  end
+  
+end
+
+puts Flip.flip("DJhugu")
+puts Flip.unflip(Flip.flip("DJhugu"))
+=end
+
+
+=begin
+# module_function
+module Mf
+  extend self
+  def foo
+    p "modulefunction"
+  end
+  
+  #module_function :foo
+end
+
+module M
+  extend self
+  def baa
+    p "baa"
+  end
+  
+  def self.baa
+    p "self"
+  end
+  
+  module_function :baa
+end
+
+Mf.foo
+M.baa
+
+
+class C
+  include Mf
+  include M
+  
+  def hoge
+    p "hoge"
+  end
+end
+
+C.new.hoge
+C.new.baa
+#C.new.foo
+
+#C.hoge
+#C.baa
+#C.foo
+
+class D
+  extend Mf
+  extend M
+  
+  def huga
+    p "huga"
+  end
+end
+
+D.new.huga
+#D.new.baa
+#D.new.foo
+
+#D.hoge
+D.baa
+#D.foo
+=end
 
 
 
