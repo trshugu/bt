@@ -6,6 +6,22 @@
 
 
 
+# ModelAPIの作成
+require 'sinatra'
+require "sinatra/reloader" if development?
+
+get '/' do
+  @val = params[:aaa] ? params[:aaa] : ""
+  "done" + @val
+end
+
+get '/write/:val' do
+  File::open("api.txt", "r+").write(params[:val])
+  "done"
+end
+
+
+
 
 =begin
 # extendとmodule_function

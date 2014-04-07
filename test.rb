@@ -14,8 +14,42 @@ MiniTest::Unit.autorun
 
 
 
+# ModelAPIの作成
+require 'rack/test'
 
+class TestApi < MiniTest::Unit::TestCase
+  include Rack::Test::Methods
+  
+  def app
+    Sinatra::Application
+  end
+  
+  def testResponse
+    get '/'
+    assert last_response.ok?
+    assert_equal 'done', last_response.body
+  end
+  
+  def testQuery
+    get '/?aaa=bbb'
+    assert last_response.ok?
+    assert_equal 'donebbb', last_response.body
+  end
+  
+  def testWriteFile
+    expect = "testwrite"
+    get "/write/" + expect
+    assert last_response.ok?
+    assert_equal 'done', last_response.body
+    
+    assert_equal expect, File::open("api.txt", "r").read
+  end
+end
 
+# リクエストを受け取りstringをFileに追記する
+# 
+# 
+# 
 
 
 =begin
