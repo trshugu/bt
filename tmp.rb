@@ -20,6 +20,21 @@ get '/write/:val' do
   "done"
 end
 
+get '/sina' do
+  File::open("api.txt", "r").read
+end
+
+post '/sina' do
+  File::open("api.txt", "r+").write("nothing")
+end
+
+get '/sina/:id' do
+  File::open("api.txt", "r+").write(params[:id])
+end
+
+options '/sina' do
+  "done"
+end
 
 
 

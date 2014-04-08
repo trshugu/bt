@@ -46,10 +46,6 @@ class TestApi < MiniTest::Unit::TestCase
   end
 end
 
-# リクエストを受け取りstringをFileに追記する
-# 
-# 
-# 
 
 
 =begin
