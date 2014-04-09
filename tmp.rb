@@ -38,6 +38,25 @@ end
 
 
 
+
+=begin
+# case式の判定 最終行が改行でも最後のコマンドが格納される
+result = ""
+val = "one"
+result = case val
+  when "one"
+    "ooo"
+    
+  when "two"
+    "ttt"
+    
+end
+
+puts result
+=end
+
+
+
 =begin
 # extendとmodule_function
 module Ex
