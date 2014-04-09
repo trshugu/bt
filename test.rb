@@ -14,6 +14,10 @@ MiniTest::Unit.autorun
 
 
 
+
+
+
+=begin
 # ModelAPIの作成
 require 'rack/test'
 
@@ -44,7 +48,58 @@ class TestApi < MiniTest::Unit::TestCase
     
     assert_equal expect, File::open("api.txt", "r").read
   end
+  
+  def testSinaGet
+    get "/sina/"
+    assert last_response.ok?
+    assert_equal 'sina', last_response.body
+  end
+  
+  def testSinaGetId
+    get "/sina/:id"
+    assert last_response.ok?
+    assert_equal 'sina', last_response.body
+  end
+  
+  def testSinaPost
+    post "/sina/"
+    assert last_response.ok?
+    assert_equal 'done', last_response.body
+    
+    assert_equal "sina", File::open("sina.txt", "r").read
+  end
+  
+  def testSinaPostId
+    post "/sina/", :id=>"aaa"
+    assert last_response.ok?
+    assert_equal 'done', last_response.body
+    
+    assert_equal "sina", File::open("sina.txt", "r").read
+  end
+  
+  def testSinaPut
+    put "/sina/"
+    assert last_response.ok?
+    assert_equal 'done', last_response.body
+    
+    assert_equal "sina", File::open("sina.txt", "r").read
+  end
+  
+  def testSinaDelete
+    delete "/sina/"
+    assert last_response.ok?
+    assert_equal 'done', last_response.body
+    
+    assert_equal "sina", File::open("sina.txt", "r").read
+  end
+  
+  def testSinaOption
+    options "/sina/"
+    assert last_response.ok?
+    assert_equal 'done', last_response.body
+  end
 end
+=end
 
 
 

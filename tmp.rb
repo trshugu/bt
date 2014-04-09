@@ -6,6 +6,11 @@
 
 
 
+
+
+
+
+=begin
 # ModelAPIの作成
 require 'sinatra'
 require "sinatra/reloader" if development?
@@ -16,25 +21,46 @@ get '/' do
 end
 
 get '/write/:val' do
-  File::open("api.txt", "r+").write(params[:val])
+  File::open("api.txt", "w") do |f|
+    f.write(params[:val])
+  end
   "done"
 end
 
-get '/sina' do
-  File::open("api.txt", "r").read
-end
-
-post '/sina' do
-  File::open("api.txt", "r+").write("nothing")
+get '/sina/' do
+  File::open("sina.txt", "r").read
 end
 
 get '/sina/:id' do
-  File::open("api.txt", "r+").write(params[:id])
+  File::open("sina.txt", "r").read
 end
 
-options '/sina' do
+post '/sina/' do
+  puts params[:id]
+  File::open("sina.txt", "w") do |f|
+    f.write("sina")
+  end
   "done"
 end
+
+put '/sina/' do
+  File::open("sina.txt", "w") do |f|
+    f.write("sina")
+  end
+  "done"
+end
+
+delete '/sina/' do
+  File::open("sina.txt", "w") do |f|
+    f.write("sina")
+  end
+  "done"
+end
+
+options '/sina/' do
+  "done"
+end
+=end
 
 
 
