@@ -13,8 +13,24 @@ MiniTest::Unit.autorun
 
 
 
+=begin
+# ajax用json返却api
+require 'rack/test'
 
-
+class TestApi < MiniTest::Unit::TestCase
+  include Rack::Test::Methods
+  
+  def app
+    Sinatra::Application
+  end
+  
+  def testResponse
+    get '/'
+    assert last_response.ok?
+    assert_equal '{"result"=>"done"}', last_response.body
+  end
+end
+=end
 
 
 =begin
