@@ -7,17 +7,19 @@
 
 
 
-=begin
-=end
 
+
+
+=begin
 # ajax用json返却api
 require 'sinatra'
 require "sinatra/reloader" if development?
 require "json"
 
 get '/' do
-  '{"result"=>"done"}'
+  '{"result":"done"}'
 end
+=end
 
 
 =begin
