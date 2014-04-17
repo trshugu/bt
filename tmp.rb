@@ -6,7 +6,15 @@
 
 
 
-
+=begin
+# メアドチェック
+mail_address="aaa@bbb.ccc"
+if mail_address[/^[a-zA-Z0-9_\#!$%&`'*+\-{|}~^\/=?\.]+@[a-zA-Z0-9_\#!$%&`'*+\-{|}~^\/=?\.]+$/]
+  puts :ok
+else
+  puts :ng
+end
+=end
 
 =begin
 # unixtimeの出し方
