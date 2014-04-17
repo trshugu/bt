@@ -8,6 +8,10 @@
 
 
 
+=begin
+# unixtimeの出し方
+puts Time.now.to_i
+=end
 
 
 =begin
