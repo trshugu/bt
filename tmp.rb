@@ -7,6 +7,11 @@
 
 
 =begin
+# 標準入力を標準出力へ
+puts gets
+=end
+
+=begin
 # メアドチェック
 mail_address="aaa@bbb.ccc"
 if mail_address[/^[a-zA-Z0-9_\#!$%&`'*+\-{|}~^\/=?\.]+@[a-zA-Z0-9_\#!$%&`'*+\-{|}~^\/=?\.]+$/]
