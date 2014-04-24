@@ -6,6 +6,88 @@
 
 
 
+=begin
+# 文字連結
+require 'digest/md5'
+require 'benchmark'
+
+
+digest = Digest::MD5.hexdigest("die")
+# ダイジェストを並べて2Mくらいにする
+
+Benchmark.bm do |b|
+  # これは要求が実現できてなかった
+  result = "22"
+  b.report {
+    16000000.times.each{
+      result ||= "#{result}#{digest}"
+    }
+  }
+  
+  result = ""
+  b.report {
+    5600000.times.each{
+       result.concat(digest)
+    }
+  }
+  
+  # これが一番はやかった
+  result = ""
+  b.report {
+    5600000.times.each{
+       result << digest
+    }
+  }
+  
+  result = ""
+  b.report {
+    10000.times.each{
+       result = "#{result}#{digest}"
+    }
+  }
+  
+end
+=end
+
+
+=begin
+# Redisテストその2
+require "redis"
+redis = Redis.new(:host => "127.0.0.1", :db => "asdf.db")
+#aws = Redis.new(:host => "suzuki-redis.d2qtpp.0001.apne1.cache.amazonaws.com")
+
+def bench(redis)
+  puts redis.set "tmpkey","tmpvalue"
+  puts redis.get "tmpkey"
+  puts redis.set "tmpkeysec","tmpvalueni"
+  puts redis.get "tmpkeysec"
+
+  # 複数キー指定
+  puts redis.mget "tmpkey","tmpkeysec"
+
+  # リスト操作
+  #puts redis.rpush "あああ", "this is my first tweet."
+  #puts redis.lrange "あああ", 0, 100
+  #10.times {|i| redis.rpush("tw", "times")}
+  #redis.lrange "あああ", 0, 20
+
+  # 計測しつつ1000回繰り返す
+  st =  Time.now
+  1000.times {|i| redis.rpush("ttt", "million#{i}")}
+  et = Time.now
+  puts et - st
+
+  # 構造化データ
+  require "json"
+  tmpjson = {:id => 1, :user => "shin", :time => Time.now, :body => "hello redis!"}
+  puts redis.set "tj", tmpjson.to_json
+  puts JSON.parse(redis.get("tj"))
+end
+
+bench(redis)
+#bench(aws)
+=end
+
 
 =begin
 # sequel + logger
@@ -2851,8 +2933,9 @@ sai *ARGV[0].to_i
 
 =begin
 # Redisテスト
+
 require "redis"
-redis = Redis.new(:host => "192.168.64.133")
+redis = Redis.new(:host => "127.0.0.1")
 
 puts redis.set "tmpkey","tmpvalue"
 puts redis.get "tmpkey"
