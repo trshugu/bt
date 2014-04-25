@@ -6,6 +6,9 @@
 
 
 
+
+
+
 =begin
 # 文字連結
 require 'digest/md5'
