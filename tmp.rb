@@ -6,7 +6,95 @@
 
 
 
+=begin
+# 任意のIDのセット数をn回繰り返してプロットする
+file = File::open('result_' + Time.now.to_i.to_s + ".csv" ,'a:windows-31j')
+file.write(",1回,2回,3回,4回,5回,6回,7回,8回,9回,10回,11回,12回,13回,14回,15回,16回,17回,18回,19回,20回\n")
 
+# アイテム数(10,20,30,50,80,100,130,200,400,800)
+item_counts = [10,20,30,50,80,100,130,200,400,800]
+
+item_counts.each do |ic|
+  # 1回試行→20回試行
+  test_counts = []
+  20.times do |i|
+    print "\n#{ic}個を#{i+1}回試行"
+    average = 0
+    
+    # 200回繰り返してノイズ低減
+    noise_reduction_val = 0
+    noise_reduction = 0
+    4.times do |n|
+      print "\nノイズ低減用 #{n+1}回目 "
+      # アイテム作成
+      items = CreateItem(ic)
+      
+      # 同じセットの繰り返し
+      val = 0
+      set_average = 0
+      print "#{i+1}:"
+      (i+1).times do |j|
+        print "■"
+        
+        # 100リクエスト
+        urilist = []
+        50.times do
+          urilist.push(URI.parse(webs[rand(webs.size)] + items[rand(items.size)]))
+        end
+        
+        val = ParallelAccess(urilist) + val
+        # 同じセットの繰り返しの中でのアベレージ
+        set_average = val / (j + 1)
+      end
+      
+      # ノイズ低減用のアベレージ
+      noise_reduction_val = set_average + noise_reduction_val
+      noise_reduction = noise_reduction_val / (n + 1)
+    end
+    test_counts.push(noise_reduction.to_s)
+  end
+  
+  file.write("#{ic}個,#{test_counts.join(",")}\n")
+end
+=end
+
+
+
+=begin
+# ランダムIDのセット作成
+def random(i)
+  (("a".."z").to_a + (0..9).to_a).shuffle[0..i].join
+end
+
+def CreateItem(count)
+  items = []
+  count.times do
+    items.push(random(8))
+  end
+  return items
+end
+=end
+
+
+=begin
+# キャッシュ検討用並列アクセス
+def ParallelAccess(urilist)
+  starttime = Time.now
+  
+  Parallel.each(urilist, in_threads: 100) {|uri|
+    begin
+      res = Net::HTTP.get_response(uri)
+      body = res.body if res.is_a?(Net::HTTPSuccess)
+    rescue => ex
+      puts ex
+    end
+  }
+  
+  endtime = Time.now
+  # ミリ秒を返すことに
+  return ((endtime - starttime) * 1000).to_i
+end
+=end
 
 
 =begin
@@ -1178,14 +1266,14 @@ btnG.click()
 
 =begin
 # パターン作成
-def rundom(i)
+def random(i)
   (("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a).shuffle[0..i].join
 end
 
 # 配列格納
 arr = []
 1000000.times do
-  arr.push(rundom(7))
+  arr.push(random(7))
 end
 puts arr.size
 puts arr.uniq.size
