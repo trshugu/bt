@@ -6,6 +6,37 @@
 
 
 
+
+=begin
+# アクセスモードの確認
+r = File::open("read.txt", "r") # 存在しないとエラー
+rp = File::open("readplus.txt", "r+")  # 存在しないとエラー
+
+#r.write("00") # 書き込み権限がないのでエラー
+rp.write("00") # うわがき
+puts rp.read.class
+
+w = File::open("write.txt", "w")
+wp = File::open("writeplus.txt", "w+")
+
+w.write("00") # うわがき
+wp.write("00") # うわがき
+
+#puts w.read.class # 読み込み権限がないのでエラー
+puts wp.read.class
+
+
+a = File::open("apend.txt", "a")
+ap = File::open("apendplus.txt", "a+")
+
+a.write("00")
+ap.write("00")
+
+#puts a.read.class # 読み込み権限がないのでエラー
+puts ap.read.class
+=end
+
+
 =begin
 # 任意のIDのセット数をn回繰り返してプロットする
 file = File::open('result_' + Time.now.to_i.to_s + ".csv" ,'a:windows-31j')
