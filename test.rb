@@ -11,7 +11,18 @@ require './tmp'
 MiniTest::Unit.autorun
 
 
-
+class TestMedian < MiniTest::Unit::TestCase
+  def testOdd
+    val = [1,2,3]
+    assert_equal 2, val.median
+  end
+  
+  def testEven
+    val = [1,2,3,4]
+    assert_equal 2.5, val.median
+  end
+  
+end
 
 =begin
 # ajax用json返却api

@@ -7,6 +7,41 @@
 
 
 
+
+
+=begin
+# 中央値の算出
+class Array
+  def median
+    array = self.sort
+    mid, mod = size.divmod(2)
+    if mod == 0
+      array[mid - 1, 2].inject(:+) / 2.0
+    else
+      array[mid]
+    end
+  end
+end
+
+med = [1,3,2,4]
+med.sort!
+puts med.median
+#p med.size.divmod(2)
+#puts med.size.divmod(2).inject(0){|sum,x| sum+x }
+#puts med[med.size.divmod(2).inject(0){|sum,x| sum+x }]
+
+#puts [].median
+#puts 5.divmod(2).inject(0){|sum,x| sum+x }
+=end
+
+
+=begin
+# 配列からランダムに出力
+puts [1,2,3,4].sample
+p [1,2,3,4].sample(2)
+=end
+
+
 =begin
 # アクセスモードの確認
 r = File::open("read.txt", "r") # 存在しないとエラー
