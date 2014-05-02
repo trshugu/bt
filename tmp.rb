@@ -6,8 +6,21 @@
 
 
 
-
-
+=begin
+# gage 微妙
+cnt = 19
+n = 0
+tenp = cnt / 10.0
+(cnt).times do |i|
+  sleep 0.2
+  n = n + 1
+  
+  if n >= tenp
+    print "|"
+    n = 0
+  end
+end
+=end
 
 =begin
 # 中央値の算出
