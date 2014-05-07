@@ -6,6 +6,20 @@
 
 
 
+
+
+
+=begin
+# ファイルからランダムに一行抽出
+path = "test.txt"
+path = File.expand_path('../', __FILE__) + "/" + path
+oneline = File.open(path, "r:utf-8").readlines.sample.chomp
+puts oneline
+=end
+
+
+
+
 =begin
 # gage 微妙
 cnt = 19
