@@ -336,6 +336,8 @@ require "sinatra/reloader" if development?
 require "json"
 
 get '/' do
+  #p request
+  #puts headers
   '{"result":"done"}'
 end
 =end
