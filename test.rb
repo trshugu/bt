@@ -11,6 +11,7 @@ require './tmp'
 MiniTest::Unit.autorun
 
 
+=begin
 class TestMedian < MiniTest::Unit::TestCase
   def testOdd
     val = [1,2,3]
@@ -23,6 +24,7 @@ class TestMedian < MiniTest::Unit::TestCase
   end
   
 end
+=end
 
 =begin
 # ajax用json返却api
