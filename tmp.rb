@@ -8,6 +8,42 @@
 
 
 
+=begin
+# __END__ その2
+arr = []
+if Object.const_defined?(:DATA)
+  DATA.each_line do |l|
+    arr.push(l.chomp)
+  end
+end
+p arr
+=end
+
+
+=begin
+#  __END__ 以降をアクセスする File オブジェクト
+arr = []
+
+flg = DATA.gets if Object.const_defined?(:DATA)
+while flg
+  arr.push(flg.chomp) if flg
+  flg = DATA.gets
+end
+
+p arr
+=end
+
+=begin
+# 文字列配列の末尾に追加
+class Array
+  def add(str)
+    each do |value|
+      value.concat(str)
+    end
+  end
+end
+=end
+
 
 =begin
 # ファイルからランダムに一行抽出

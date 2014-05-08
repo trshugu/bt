@@ -12,6 +12,30 @@ MiniTest::Unit.autorun
 
 
 =begin
+# 文字列配列の末尾に追加
+class TestTextArrayAdd < MiniTest::Unit::TestCase
+  def testTextArrayAdd
+    strArray = []
+    strArray.push("abc")
+    strArray.push("def")
+    strArray.push("eij")
+    strArray.add("/add")
+    
+    expect_strArray = []
+    expect_strArray.push("abc")
+    expect_strArray.push("def")
+    expect_strArray.push("eij")
+    expect_strArray.map!{|s|s+"/add"}
+    
+    assert_equal expect_strArray, strArray
+  end
+  
+end
+=end
+
+
+
+=begin
 class TestMedian < MiniTest::Unit::TestCase
   def testOdd
     val = [1,2,3]
