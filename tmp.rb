@@ -8,6 +8,144 @@
 
 
 
+
+=begin
+# メソッド定義メソッド
+def def_method(name, klass=self.class, &body)
+  blk = block_given? ? body : ->{ "#{name}: not implemented yet." }
+  klass.class_eval { define_method("#{name}", blk) }
+end
+
+# Numericに通過メソッド追加
+currencies = %w(¥ € £ $).zip [:JPY, :EUR, :GBP, :USD]
+currencies.each do |cur, sym|
+  def_method(cur, Numeric) do
+    int, dec = Exchange(self, sym).to_s.split('.')
+    dec = dec ? ".#{dec[/.{1,2}/]}" : ''
+    cur + int.reverse.scan(/.{1,3}/).join(',').reverse + dec
+  end
+end
+
+def Exchange(num, _for_)
+  num * {USD:1.0, JPY:81.3, EUR:0.76, GBP:0.62}[_for_]
+end
+
+puts 123.45.¥ # => "¥10,036.48"
+puts 1000000.¥ # => "¥81,300,000.0"
+puts 123.€ # => "€93.48"
+puts 1000000.€ # => "€760,000.0"
+puts 123.45.£ # => "£76.53"
+puts 1000000.£ # => "£620,000.0"
+=end
+
+
+=begin
+# マルチバイトメソッド
+def あああ
+  puts "aaa"
+end
+
+あああ
+=end
+
+
+=begin
+# クラスメソッド定義
+class << Calc = Class.new
+  def >>(exp)
+    eval exp
+  end
+  
+  def bote
+    "jin"
+  end
+  
+  def ==(iko)
+    "ikoru"
+  end
+end
+
+puts Calc.>> '1 + 2'
+puts Calc >> '10 ** 2'
+puts Calc.bote
+puts Calc=="sdf"
+=end
+
+
+=begin
+# 無限大定数
+#(1..1.0/0).each{|a|p a}
+
+sequence = 1..Float::INFINITY
+p sequence.take(10)
+seq = sequence.to_enum
+p 100.times.map { seq.next } 
+
+p 1.step(1.0/0, 1.5).take(20)
+=end
+
+
+=begin
+# 汚染
+o = [1,4,6]
+puts o.tainted?
+o.taint
+puts o.tainted?
+o.untaint
+puts o.tainted?
+
+# 信頼
+o = [1,4,6]
+puts o.untrusted?
+o.untrust
+puts o.untrusted?
+o.trust
+puts o.untrusted?
+=end
+
+
+=begin
+# 汚染と信頼
+o = [1,4,6]
+
+puts "00"
+puts o.tainted?
+puts o.untrusted?
+
+o.taint
+
+puts "01"
+puts o.tainted?
+puts o.untrusted?
+
+o.untaint
+o.untrust
+
+puts "10"
+puts o.tainted?
+puts o.untrusted?
+
+o.taint
+
+puts "11"
+puts o.tainted?
+puts o.untrusted?
+
+
+o.taint
+o.untrust
+
+puts o.tainted?
+puts o.untrusted?
+
+o.untaint
+o.trust
+
+puts o.tainted?
+puts o.untrusted?
+=end
+
+
 =begin
 # __END__ その2
 arr = []
