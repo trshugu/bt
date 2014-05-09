@@ -8,6 +8,78 @@
 
 
 
+=begin
+# redis ハッシュ型とキーバリュー型
+require "redis"
+require 'benchmark'
+redis = Redis.new
+
+def kvs_type
+  redis = Redis.new
+  redis.flushdb
+  10000.times {|i| redis.set("kvs#{i}", "million#{i}")}
+  redis.dbsize
+end
+
+def hash_type
+  redis = Redis.new
+  redis.flushdb
+  10000.times {|i| redis.hset("key", "field#{i}", "million#{i}")}
+  redis.dbsize
+end
+
+# メモリの消費はhash型の方が少ないかもしれないがスピードは同等
+Benchmark.bmbm do |b|
+  b.report { kvs_type }
+  b.report { hash_type }
+end
+=end
+
+
+=begin
+# redis ハッシュ型
+require "redis"
+redis = Redis.new
+
+#puts redis.set "tmpkey", "tmpvalue"
+#puts redis.hset "tmphashkey", "hashkey", "tmpvalue"
+puts redis.dbsize
+puts redis.hset "tmphashkey", "hashkey", "tmpvalue"
+puts redis.hset "tmphashkey", "hashkey3", "tmpvalueeee"
+puts redis.dbsize
+
+puts redis.hlen "tmphashkey"
+p redis.hkeys "tmphashkey"
+p redis.hvals "tmphashkey"
+puts redis.hgetall "tmphashkey"
+
+puts redis.flushdb
+puts redis.dbsize
+=end
+
+
+
+=begin
+# ベンチマークあれこれ
+require 'benchmark'
+
+puts Benchmark::CAPTION
+puts Benchmark.measure { "a-newcomer" * 10000000 }
+puts Benchmark.realtime { "a-newcomer"* 10000000 }
+
+n = 1000000
+Benchmark.bm(7, "title") do |x|
+  e = x.report { (1..n).each{String.new("a-newcomer")} }
+  x.report { n.times{String.new("a-newcomer")}     }
+  x.report { 1.upto(n){String.new("a-newcomer")}   }
+  x.report("each:")  { (1..n).each{String.new("a-newcomer")} }
+  x.report("times:") { n.times{String.new("a-newcomer")}     }
+  x.report("upto:")  { 1.upto(n){String.new("a-newcomer")}   }
+  
+  [e]
+end
+=end
+
 
 =begin
 # メソッド定義メソッド
