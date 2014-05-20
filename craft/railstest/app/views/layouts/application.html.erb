@@ -6,10 +6,10 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 <script type="text/javascript">
-$(document).on('page:fetch', function(e) { alert("fetch") });
-$(document).on('page:change', function(e) { alert("change") });
-$(document).on('page:restore', function(e) { alert("restore") });
-$(document).on('page:load', function(e) { alert("load") });
+//$(document).on('page:fetch', function(e) { alert("fetch") });
+//$(document).on('page:change', function(e) { alert("change") });
+//$(document).on('page:restore', function(e) { alert("restore") });
+//$(document).on('page:load', function(e) { alert("load") });
 
 
 </script>
@@ -17,6 +17,6 @@ $(document).on('page:load', function(e) { alert("load") });
 <body>
 
 <%= yield %>
-
+aa<%= @aaa %>aa
 </body>
 </html>
