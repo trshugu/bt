@@ -13,4 +13,40 @@ asdfdsf
 
 <%= mail_to("a@a.a", "mojiretu", :body=> 'あ
 い\nう' )  %>
+<br><br>
+konnten
+purobai(inde)<br>
+<br>
+
+<% provide(:purobai, "p1") %>
+<% provide(:purobai, "p2") %>
+<% content_for(:konten, "k1")%>
+<% content_for(:konten, "k2")%>
+
+<% provide(:plo, "kieru"){"ploplo"} %>
+<% provide(:plo, "kieru"){"ploplo"} %>
+<% content_for(:blo, {:flush=>"naninani"}) {"bloblo"}%>
+<% content_for(:blo, {:flush=>"naninani"}) {"bloblo"}%>
+<% content_for(:blo2, {:sh=>"naninani"}) {"bloblo"}%>
+<% content_for(:blo2, {:sh=>"naninani"}) {"bloblo"}%>
+
+<br>
+naka<br>
+<%= provide(:purobai) %><br>
+<%= provide(:purobai).class %><br>
+<%= yield(:purobai) %><br>
+<%= yield(:purobai).class %><br>
+<br>
+<%= content_for(:konten) %><br>
+<%= content_for(:konten).class %><br>
+<%= yield(:konten) %><br>
+<%= yield(:konten).class %><br>
+
+<%= content_for(:plo) %><br>
+<%= content_for(:blo) %><br>
+<%= content_for(:blo2) %><br>
+
+<br>
+naka<br>
+
 

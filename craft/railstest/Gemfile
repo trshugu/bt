@@ -46,4 +46,5 @@ end
 
 gem "rspec"
 gem "rspec-rails"
-gem "thin"
+#gem "thin"
+gem "puma"
