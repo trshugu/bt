@@ -1,0 +1,18 @@
+doctype
+html lang="ja" xml:lang="ja" xmlns="http:/.w3.org/1999/xhtml"
+  head
+    == javascript_include_tag "jquery-2.1.0.min"
+    == javascript_include_tag "jquery.pjax"
+    == javascript_include_tag "application"
+  body
+    | hell
+    .rand
+      = @res
+      .time
+    br
+    div id="tmp"
+      | tmp
+    a id="pjs" href="./cont"
+      | pja
+    div id="cont"
+      | contoncontoncon

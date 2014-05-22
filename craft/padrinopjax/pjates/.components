@@ -1,0 +1,9 @@
+---
+:orm: none
+:test: none
+:mock: none
+:script: jquery
+:renderer: slim
+:stylesheet: none
+:namespace: Pjates
+:migration_format: number
