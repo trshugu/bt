@@ -1,0 +1,1 @@
+rabbit tmp.md --allotted-time=1m
