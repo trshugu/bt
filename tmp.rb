@@ -8,6 +8,16 @@
 
 
 
+
+=begin
+# module
+extend MC if require "./module_create"
+puts MC.get
+
+puts get
+=end
+
+
 =begin
 # redis ハッシュ型とキーバリュー型
 require "redis"
