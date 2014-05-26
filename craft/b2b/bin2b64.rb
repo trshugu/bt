@@ -1,22 +1,22 @@
 #!ruby
 # -*- coding: utf-8 -*-
-# ‘ÎÛƒtƒ@ƒCƒ‹‚ğ“ÇƒoƒCƒiƒŠ‚ÅŠJ‚«Apack('m')‚ÅBase64‚É‚µo—Íæ‚É‘‚«‚±‚Ş
+# å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ãƒã‚¤ãƒŠãƒªã§é–‹ãã€pack('m')ã§Base64ã«ã—å‡ºåŠ›å…ˆã«æ›¸ãã“ã‚€
 require 'pathname'
 open(Pathname(ARGF.filename).sub_ext(".txt").to_s, "w").write([open(ARGF.filename, "rb").read].pack('m'))
 
 
 
 =begin
-# binƒtƒ@ƒCƒ‹‚ğ“ü—Í
+# binãƒ•ã‚¡ã‚¤ãƒ«ã‚’å…¥åŠ›
 #binmsg = open("a.msg", "rb")
-# bin->base64‚É•ÏŠ·
+# bin->base64ã«å¤‰æ›
 #while(bin = binmsg.read(4))
 #  base64_text = binmsg.pack('i*')
 #  
 #end
-# Base64‚ÈƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ğo—Í
+# Base64ãªãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡ºåŠ›
 open("result_b64.txt", "w") {|file|
   file.write([open("a.msg", "rb").read].pack('m'))
 }
 =end
-#ƒƒ“ƒ‰ƒCƒi[‚É‚µ‚½‚¯‚Ç“Ç‚İ‚É‚­‚¢‚ËEEE
+#ãƒ¯ãƒ³ãƒ©ã‚¤ãƒŠãƒ¼ã«ã—ãŸã‘ã©èª­ã¿ã«ãã„ã­ãƒ»ãƒ»ãƒ»

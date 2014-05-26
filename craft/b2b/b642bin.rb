@@ -1,19 +1,19 @@
 #!ruby
 # -*- coding: utf-8 -*-
-# ‘ÎÛƒtƒ@ƒCƒ‹‚ğŠJ‚«Aunpack('m')[0]‚ÅƒoƒCƒiƒŠ‚É‚µo—Íæ‚É‘‚«‚±‚Ş
+# å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã€unpack('m')[0]ã§ãƒã‚¤ãƒŠãƒªã«ã—å‡ºåŠ›å…ˆã«æ›¸ãã“ã‚€
 require 'pathname'
 open(Pathname(ARGF.filename).sub_ext(".bin").to_s, "wb").write(File.read(ARGF.filename, :encoding => Encoding::UTF_8).unpack('m')[0])
 
 
 
 =begin
-# Base64ƒtƒ@ƒCƒ‹‚ğ“ü—Í
+# Base64ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å…¥åŠ›
 open("oauth.txt").each {|line|
-  lineH
+  lineï¼Ÿ
 }
-# base64->bin‚É•ÏŠ·
-# bin‚ÈƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚ğo—Í
+# base64->binã«å¤‰æ›
+# binãªãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡ºåŠ›
 open("result.txt", "a+") {|file|
-  file.write(#‚È‚©‚İ + "\n")
+  file.write(#ãªã‹ã¿ + "\n")
 }
 =end

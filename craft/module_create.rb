@@ -1,9 +1,10 @@
 # coding: utf-8
 
+# anokutara
 module MC
-  extend self
-
   def get
-    return "gegege"
+    :gegege
   end
+
+  module_function :get
 end
