@@ -7,7 +7,16 @@
 
 
 
-
+# 環境依存の設定を取得する
+path = "kankyo.txt"
+kankyo = File.open(path).readline.chomp if File.exist?(path)
+if kankyo == "kankyo"
+  puts "json!"
+  require "json"
+else
+  puts "yaml!"
+  require "yaml"
+end
 
 =begin
 # module
