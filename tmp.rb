@@ -7,6 +7,124 @@
 
 
 
+
+
+=begin
+# redis 限界値チェック
+require "redis"
+redis = Redis.new :timeout => 0
+#redis.flushall
+#redis.flushdb
+
+#require "memcache"
+#memcache = MemCache.new("localhost:11211")
+#memcache.flush_all
+
+# 4294967295
+# 2147483647
+# 1073741824
+
+# 2147483646(longまで)
+#b = 1073741824
+b =  200000000
+def rrr(i)
+redis = Redis.new :timeout => 0
+redis.flushall
+redis.flushdb
+puts i
+b =  100000000 * i
+str = "a" * b
+hstr = "h" * b
+
+puts redis.set(str, "str")
+redis.get(str)
+
+# 60_000_000でtimeoutが発生
+puts redis.hset(hstr, "hstr", "hstr")
+redis.hget(hstr, "hstr")
+end
+
+rrr 6
+rrr 7
+rrr 8
+rrr 9
+rrr 10
+
+
+# memcacheはkeyが250文字、valが1048489文字で終了
+#puts memcache.set("str", str)
+#memcache.get(str)
+=end
+
+
+
+
+=begin
+# redis vs memcached
+require "redis"
+require "memcache"
+require 'benchmark'
+redis = Redis.new
+memcache = MemCache.new("localhost:11211")
+
+def kvs_type_set
+  redis = Redis.new
+  redis.flushdb
+  1000.times {|i| redis.set("kvs#{i}", "million#{i}")}
+  redis.dbsize
+end
+
+def hash_type_set
+  redis = Redis.new
+  redis.flushdb
+  1000.times {|i| redis.hset("key", "field#{i}", "million#{i}")}
+  redis.dbsize
+end
+
+def kvs_memc_set
+  memcache = MemCache.new("localhost:11211")
+  memcache.flush_all
+  1000.times {|i| memcache.set("kvs#{i}", "million#{i}")}
+end
+
+def kvs_type_get
+  redis = Redis.new
+  redis.flushdb
+  1000.times {|i| redis.set("kvs#{i}", "million#{i}")}
+  1000.times {|i| redis.get("kvs#{i}")}
+  redis.dbsize
+end
+
+def hash_type_get
+  redis = Redis.new
+  redis.flushdb
+  1000.times {|i| redis.hset("key", "field#{i}", "million#{i}")}
+  1000.times {|i| redis.hget("key", "field#{i}")}
+  redis.dbsize
+end
+
+def kvs_memc_get
+  memcache = MemCache.new("localhost:11211")
+  memcache.flush_all
+  1000.times {|i| memcache.set("kvs#{i}", "million#{i}")}
+  1000.times {|i| memcache.get("kvs#{i}")}
+end
+
+# メモリの消費はhash型の方が少ないかもしれないがスピードは同等
+Benchmark.bm do |b|
+  b.report { kvs_type_set }
+  b.report { hash_type_set }
+  b.report { kvs_memc_set }
+  b.report { kvs_type_get }
+  b.report { hash_type_get }
+  b.report { kvs_memc_get }
+end
+=end
+
+
+
+
+
 =begin
 # 環境依存の設定を取得する
 path = "kankyo.txt"
