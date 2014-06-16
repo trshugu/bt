@@ -9,6 +9,20 @@
 
 
 
+
+=begin
+# yamlによる設定の分離
+require 'yaml'
+
+config = YAML.load_file('config.yaml')
+# yaml = YAML.load(str)
+puts config
+puts config["ichi"]
+=end
+
+
+
+
 =begin
 # redis 限界値チェック
 require "redis"
