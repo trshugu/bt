@@ -7,7 +7,15 @@
 
 
 
-
+=begin
+# > dev/null 2>&1 に於けるSTDOUTとSTDERR
+$> = File.open("stdio.txt", "w")
+$stderr = $>
+puts "test1"
+puts "test2"
+$>.puts("std")
+$stderr.puts("err")
+=end
 
 
 =begin
