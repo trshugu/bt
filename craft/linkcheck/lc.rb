@@ -88,6 +88,8 @@ threadtime = (Time.now - starttime).to_f.to_s
 =end
 
 
+=begin
+=end
 # Parallelの使用
 starttime = Time.now
 Parallel.each(urilist, in_threads: 80) {|uri|
@@ -97,9 +99,28 @@ Parallel.each(urilist, in_threads: 80) {|uri|
   File::open(resultfile, "a").write(checked_uri)
 }
 paralleltime = (Time.now - starttime).to_f.to_s
-=begin
-=end
 
+
+=begin
+# Parallelをマルチプロセスで使用→forkを利用するのがwinでは不可。
+require 'win32/process'
+require 'windows/synchronize'
+require 'windows/process'
+require 'windows/handle'
+
+include Windows::Synchronize
+include Windows::Process
+include Windows::Handle
+
+starttime = Time.now
+Parallel.each(urilist, in_processes: 4) {|uri|
+  log.debug(uri);
+  checked_uri = check_uri(uri)
+  log.debug(checked_uri);
+  File::open(resultfile, "a").write(checked_uri)
+}
+paralleltime = (Time.now - starttime).to_f.to_s
+=end
 
 
 
