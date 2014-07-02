@@ -6,6 +6,29 @@
 
 
 
+=begin
+=end
+# fluentdのwebAPI
+require 'uri'
+require 'net/http'
+require 'json'
+require 'msgpack'
+
+#uri = "http://192.168.88.129:8888/debug?json="
+#json = {:id => 1, :user => "sin", :time => Time.now, :body => "hell fluent json"}
+#uri = uri + URI.encode(json.to_json)
+
+uri = "http://192.168.88.129:8888/debug?msgpack="
+#mp = {:id => 1, :user => "sin", :time => Time.now.to_s, :body => "hell fluent msgpack"}
+mp = {""=>[1,3,5]}
+uri = uri + URI.encode(mp.to_msgpack)
+
+parced_uri = URI.parse(uri)
+p parced_uri
+
+res = Net::HTTP.get_response(parced_uri)
+body = res.body if res.is_a?(Net::HTTPSuccess)
+
 
 =begin
 # > dev/null 2>&1 に於けるSTDOUTとSTDERR
