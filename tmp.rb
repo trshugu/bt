@@ -5,6 +5,80 @@
 
 
 
+=begin
+# ならない
+def multi_process2(ary, concurrency = 10, qsize = nil)
+  q = (qsize) ? SizedQueue.new(qsize) : Queue.new
+  
+  producer = Thread.start(q, concurrency){ |p_q, p_c|
+    ary.each_with_index do |item, index|
+      q.enq [ item, index, true]
+    end
+    
+    p_c.times{ q.enq [nil, nil, false] }
+  }
+  
+  workers = []
+  concurrency.times do
+    workers << Thread.start(q) { |w_q|
+      task, index, flag = w_q.deq
+      while flag
+        yield task, index
+        task, index, flag = w_q.deq
+      end
+    }
+  end
+  
+  producer.join
+  workers.each{|w| w.join }
+end
+
+100.times {
+  a = (1..10000).to_a
+  total = 0
+  multi_process2(a) do |item, index|
+    total += item
+  end
+  puts total
+}
+=end
+
+
+=begin
+# インクリメントの場合
+require "parallel"
+
+@value = 0
+
+def increment
+  @value = @value + 1
+end
+
+loops = 1000 * 1000 * 1000
+#loops = 1000
+
+th1 = -> {
+  loops.times do
+    increment
+  end
+}
+
+th2 = -> {
+  loops.times do
+    increment
+  end
+}
+
+Parallel.each([th1,th2], in_threads: 5) {|rambda|
+  begin
+    rambda.call
+  rescue => ex
+    puts ex
+  end
+}
+
+puts @value
+=end
 
 
 =begin
@@ -21,7 +95,7 @@ end
 
 
 #loops = 1000 * 1000 * 1000
-loops = 1000 * 1000 * 10
+loops = 1000 * 1000 * 100
 
 th1 = -> {
   loops.times do
@@ -37,7 +111,7 @@ th2 = -> {
   end
 }
 
-Parallel.each([th1,th2], in_threads: 2) {|rambda|
+Parallel.each([th1,th2], in_threads: 5) {|rambda|
   begin
     rambda.call
   rescue => ex
@@ -45,6 +119,7 @@ Parallel.each([th1,th2], in_threads: 2) {|rambda|
   end
 }
 =end
+
 
 
 
