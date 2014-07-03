@@ -6,8 +6,50 @@
 
 
 
+
 =begin
+# 32bitアウトオブオーダーテスト→そもそも発想が違う
+require "parallel"
+
+value = 10000000001
+
+def check(value)
+  if (value != 10000000000 && value != -10000000000)
+    puts "natttaa"
+  end
+end
+
+
+#loops = 1000 * 1000 * 1000
+loops = 1000 * 1000 * 10
+
+th1 = -> {
+  loops.times do
+    value = 10000000000
+    check(value)
+  end
+}
+
+th2 = -> {
+  loops.times do
+    value = -10000000000
+    check(value)
+  end
+}
+
+Parallel.each([th1,th2], in_threads: 2) {|rambda|
+  begin
+    rambda.call
+  rescue => ex
+    puts ex
+  end
+}
 =end
+
+
+
+
+=begin
 # fluentdのwebAPI
 require 'uri'
 require 'net/http'
@@ -28,6 +70,7 @@ p parced_uri
 
 res = Net::HTTP.get_response(parced_uri)
 body = res.body if res.is_a?(Net::HTTPSuccess)
+=end
 
 
 =begin
