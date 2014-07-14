@@ -5,6 +5,64 @@
 
 
 
+
+
+
+
+=begin
+# reopen
+#STDERR.reopen File.open('/dev/null', 'w')
+STDERR.reopen File.open('NUL', 'w')
+puts "stderr reopen"
+STDOUT.reopen File.open('NUL', 'w')
+puts "stdout reopen"
+=end
+
+
+=begin
+# パターンマッチ
+Nega = Object.new
+def Nega.===(n)
+  n < 0
+end
+
+case -1
+  when Nega then "negativa"
+  else "zero of motto"
+end
+
+Even = Object.new
+
+def Even.===(n)
+  n % 2 == 0
+end
+
+class And
+  def initialize(p1, p2)
+    @p1 = p1
+    @p2 = p2
+  end
+  
+  def ===(o) 
+    (@p1 === o) && (@p2 === o)
+  end
+  
+  def &(p)
+    And.new(self, p)
+  end
+end
+
+def Even.&(p) 
+  And.new(self, p) 
+end 
+
+case -2 
+  when Even & ((-5)..(-1)) then "ok" 
+end 
+=end
+
+
+
 =begin
 # ならない
 def multi_process2(ary, concurrency = 10, qsize = nil)
