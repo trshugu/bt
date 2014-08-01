@@ -5,7 +5,246 @@
 
 
 
+=begin
+=end
+# ActiveObjectPattern
+require 'thread'
 
+Thread.abort_on_exception = "yes"
+
+##### CLIENT #####
+class CalcClient
+  def initialize(proxy, num)
+    @proxy = proxy
+    @num = num
+  end
+
+  def start()
+    future_result = @proxy.calc(@num)
+    @real_result = future_result.getResult()
+    puts("Calc     Result:" + @real_result.getRealValue().to_s)
+  end
+end
+
+class PrintStrClient
+  def initialize(proxy, str)
+    @proxy = proxy
+    @str = str
+  end
+
+  def start()
+    @proxy.printStr(@str)
+  end
+end
+
+##### SERVER #####
+class Proxy
+  def initialize(scheduler, servant)
+    @scheduler = scheduler
+    @servant = servant
+  end
+
+  # servantのメソッドと同一
+  def calc(num)
+    future = FutureResult.new()
+    @scheduler.invoke(CalcRequest.new(@servant, future, num))
+    return future
+  end
+
+  # future不要なため、スケジューラに処理を移譲するのみ
+  def printStr(str)
+    @scheduler.invoke(PrintRequest.new(@servant, str))
+  end
+end
+
+# proxy作成後にActiveObjectFactory内でstartされる
+class Scheduler
+  def initialize(queue)
+    @queue = queue
+  end
+
+  def invoke(request)
+    puts "put!!!"
+    @queue.putRequest(request)
+  end
+
+  def start()
+    puts "sche start!"
+    Thread.start do
+      # クライアントスレッドが終了した時点で終了する(joinさせていないため)
+      loop do
+        puts "looploop!"
+        request = @queue.takeRequest()
+        request.execute()
+      end
+    end
+  end
+end
+
+class ActivationQueue
+  def initialize(max_request_size)
+    @queue = Array.new
+    @max_request_size = max_request_size
+    @mutex = Mutex.new
+    @cv = ConditionVariable.new
+  end
+
+  def putRequest(request)
+    puts "put kita!"
+    @mutex.synchronize do
+      while  @queue.size >= @max_request_size
+        @cv.wait(@mutex)
+      end
+    
+      @queue.push(request)
+      @cv.broadcast
+    end
+   end
+
+  def takeRequest()
+    puts "taketake"
+    @mutex.synchronize do
+      while @queue.size() == 0
+        @cv.wait(@mutex)
+      end
+      request = @queue.shift
+      @cv.broadcast
+      return request
+    end
+  end
+end
+
+
+class Request
+  def initialize(servant, future)
+    @servant = servant
+    @future = future
+  end
+end
+
+
+class CalcRequest < Request
+  def initialize(servant, future, num)
+    super(servant, future)
+    @num = num
+  end
+
+  def execute()
+    real_result = @servant.calc(@num)
+    @future.setResult(real_result)
+  end
+end
+
+
+class PrintRequest < Request
+  def initialize(servant, str)
+    # 結果を得る必要はないのでfutureはnilで初期化
+    super(servant, nil)
+    @str = str
+  end
+
+  def execute()
+    @servant.printStr(@str)
+  end
+end
+
+# 実際に処理をするクラス
+class Servant
+  def calc(num)
+    answer = num * 10
+    sleep 1
+    return RealResult.new(answer)
+  end
+
+  def printStr(str)
+    puts("PrintStr Result:" + str.to_s)
+  end
+end
+
+# requestが格納する結果クラス
+class FutureResult
+  def initialize()
+    @mutex = Mutex.new
+    @cv = ConditionVariable.new
+    @is_ready = false
+  end
+
+  def setResult(real_result)
+    @mutex.synchronize do
+      @real_result = real_result
+      @is_ready = true
+      @cv.broadcast
+    end
+  end
+
+  def getResult()
+    @mutex.synchronize do
+      while !@is_ready
+        @cv.wait(@mutex)
+      end
+    end
+
+    return @real_result
+  end
+end
+
+# servantが格納する結果クラス
+class RealResult
+  def initialize(value)
+    @value = value
+  end
+
+  def getRealValue()
+    return @value
+  end
+end
+
+class ActiveObjectFactory
+  def createActiveObject()
+    # リクエストをキューイングするインスタンスの作成
+    queue = ActivationQueue.new(10)
+
+    # キューへの出し入れをスケジューリングするインスタンスの作成
+    scheduler = Scheduler.new(queue)
+
+    # 実処理を担うインスタンスの作成
+    servant = Servant.new()
+
+    # クライアントからの処理を受け付ける窓口の役割を担うインスタンスの作成
+    proxy = Proxy.new(scheduler, servant)
+    scheduler.start()
+    return proxy
+  end
+end
+
+### main的な処理
+
+# サーバ側の処理に必要なインスタンスの作成
+active_object_factory = ActiveObjectFactory.new()
+proxy = active_object_factory.createActiveObject();
+
+# クライアント側の処理に必要なインスタンスの作成
+threads = Array.new
+
+threads << Thread.start do
+  calc_client_thread = CalcClient.new(proxy, 1)
+  calc_client_thread.start()
+end
+
+threads << Thread.start do
+  print_str_client_thread = PrintStrClient.new(proxy, 1)
+  print_str_client_thread.start()
+end
+ 
+threads << Thread.start do
+  calc_client_thread = CalcClient.new(proxy, 2)
+  calc_client_thread.start()
+end
+
+
+threads.each do |t|
+  t.join
+end
 
 
 
