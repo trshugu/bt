@@ -6,7 +6,6 @@
 
 
 =begin
-=end
 # ActiveObjectPattern
 require 'thread'
 
@@ -245,6 +244,7 @@ end
 threads.each do |t|
   t.join
 end
+=end
 
 
 
