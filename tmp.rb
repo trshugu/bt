@@ -4,9 +4,63 @@
 =end
 
 
+# consumer
+require 'amqp'
+
+module Mq
+  extend self
+  
+  def runConsume
+    config = {
+      :host => 'localhost'
+    }
+    AMQP.start(config) do |connection|
+      channel = AMQP::Channel.new(connection)
+      queue = channel.queue('', :auto_delete => true)
+      exchange = channel.direct 'ex.direct'
+      
+      queue.bind(exchange, :routing_key => 'tasks').subscribe do |headers, payload|
+        puts payload
+        if (payload == "stop")
+          puts "stooooop!"
+          connection.close { EventMachine.stop }
+        end
+      end
+      
+      stopper = Proc.new { connection.close { EventMachine.stop } }
+      Signal.trap "INT", stopper
+    end
+  end
+
+  def runProduce(sig = nil)
+    config = {
+      :host => 'localhost'
+    }
+    AMQP.start(config) do |connection, open_ok|
+      channel = AMQP::Channel.new(connection)
+      exchange = channel.direct 'ex.direct'
+      msg = (sig) ? "stop" : 'Hello, world' 
+      exchange.publish(msg, :routing_key => 'tasks') do
+        puts "sent: #{msg}"
+        connection.close { EventMachine.stop }
+      end
+    end
+  end
+
+end
+
+include Mq
+if(ARGV[0] == "c")
+  puts "c"
+  runConsume
+else
+  puts "p"
+  runProduce(ARGV[0])
+end
+
+
 
 =begin
-
 require 'thread'
 class Que
   def initialize
