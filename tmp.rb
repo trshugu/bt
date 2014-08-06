@@ -6,6 +6,89 @@
 
 
 =begin
+
+require 'thread'
+class Que
+  def initialize
+    @flg = true
+    @req = []
+  end
+  
+  def stop
+    @flg = false
+  end
+  
+  # true時実行
+  def start
+    Thread.start do
+      puts "start"
+      puts @flg
+      while @flg
+        #puts "www"
+        take = @req.shift
+        puts take if take
+      end
+      puts "escape!!!"
+    end
+  end
+  
+  def pus(str)
+    @req.push(str)
+  end
+end
+
+q=Que.new
+q.start()
+sleep 1
+puts q.pus(rand(1000))
+puts q.pus(rand(1000))
+
+sleep 1
+q.stop()
+puts "end"
+=end
+
+
+
+=begin
+# mixin trait
+module Mixin
+  extend self
+  
+  @pro = "pro"
+  attr_accessor :pro
+  
+  def don
+    puts @pro
+    puts "don"
+    @pro = "change"
+    puts @pro
+  end
+  
+end
+
+class Moto
+  include Mixin
+  
+  def bon
+    puts "bon"
+    Mixin.don
+    puts Mixin.pro
+  end
+end
+
+a = Moto.new
+puts a.bon
+
+Mixin.don
+puts Mixin.pro
+
+b = Moto.new
+puts b.bon
+=end
+
+
+=begin
 # ActiveObjectPattern
 require 'thread'
 
