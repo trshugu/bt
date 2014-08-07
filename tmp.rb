@@ -4,6 +4,51 @@
 =end
 
 
+
+
+
+
+
+=begin
+# amqp二回目
+require 'amqp'
+
+module Mq
+  extend self
+  
+  def run(msg = nil)
+    config = { :host => 'localhost' }
+    
+    AMQP.start(config) do |connection|
+      @connection = connection
+      @channel = AMQP::Channel.new(@connection)
+      @exchange = @channel.direct 'ex.direct'
+      (msg) ? publish(msg) : subscribe
+    end
+  end
+  
+  def publish(msg)
+    @exchange.publish(msg, :routing_key => 'tasks') do
+      puts "sent: #{msg}"
+      @connection.close { EventMachine.stop }
+    end
+  end
+  
+  def subscribe
+    @channel.queue.bind(@exchange, :routing_key => 'tasks').subscribe do |headers, payload|
+      puts payload
+      @connection.close { EventMachine.stop } if (payload == "stop")
+    end
+  end
+  
+end
+
+Mq.run(ARGV[0])
+=end
+
+
+
+=begin
 # consumer
 require 'amqp'
 
@@ -14,11 +59,12 @@ module Mq
     config = {
       :host => 'localhost'
     }
+    
     AMQP.start(config) do |connection|
       channel = AMQP::Channel.new(connection)
-      queue = channel.queue('', :auto_delete => true)
       exchange = channel.direct 'ex.direct'
       
+      queue = channel.queue('', :auto_delete => true)
       queue.bind(exchange, :routing_key => 'tasks').subscribe do |headers, payload|
         puts payload
         if (payload == "stop")
@@ -26,20 +72,18 @@ module Mq
           connection.close { EventMachine.stop }
         end
       end
-      
-      stopper = Proc.new { connection.close { EventMachine.stop } }
-      Signal.trap "INT", stopper
     end
   end
 
-  def runProduce(sig = nil)
+  def runProduce(msg)
     config = {
       :host => 'localhost'
     }
-    AMQP.start(config) do |connection, open_ok|
+    
+    AMQP.start(config) do |connection|
       channel = AMQP::Channel.new(connection)
       exchange = channel.direct 'ex.direct'
-      msg = (sig) ? "stop" : 'Hello, world' 
+      
       exchange.publish(msg, :routing_key => 'tasks') do
         puts "sent: #{msg}"
         connection.close { EventMachine.stop }
@@ -57,6 +101,7 @@ else
   puts "p"
   runProduce(ARGV[0])
 end
+=end
 
 
 
