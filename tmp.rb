@@ -8,6 +8,54 @@
 
 
 
+=begin
+# amqp四回目
+require "amqp"
+
+module Mq
+  extend self
+  
+  def run(msg = nil)
+    AMQP.start do
+      connection = AMQP.connect
+      channel  = AMQP::Channel.new(connection)
+      exchange = channel.direct('asf')
+      
+      channel.queue('q').bind(exchange).subscribe do |payload|
+        puts payload
+        connection.close { EventMachine.stop }
+      end
+      
+      channel.direct('asf').publish(msg, :routing_key => 'q')
+      #connection.close { EventMachine.stop }
+    end
+  end
+end
+
+Mq.run(ARGV[0])
+=end
+
+=begin
+# amqp三回目
+require "amqp"
+
+EventMachine.run do
+  connection = AMQP.connect(:host => '127.0.0.1')
+  puts "Connected to AMQP broker. Running #{AMQP::VERSION} version of the gem..."
+
+  channel  = AMQP::Channel.new(connection)
+  queue    = channel.queue("amqpgem.examples.helloworld", :auto_delete => true)
+  exchange = channel.direct("")
+
+  queue.subscribe do |payload|
+    puts "Received a message: #{payload}. Disconnecting..."
+    connection.close { EventMachine.stop }
+  end
+
+  exchange.publish "Hell, world!", :routing_key => queue.name
+end
+=end
+
 
 =begin
 # amqp二回目
@@ -49,7 +97,6 @@ Mq.run(ARGV[0])
 
 
 =begin
-# consumer
 require 'amqp'
 
 module Mq
