@@ -8,6 +8,24 @@
 
 
 
+
+
+=begin
+# DynamoDBlocal
+require "aws-sdk-core"
+
+d = Aws::DynamoDB::Client.new(
+  access_key_id: '...',
+  secret_access_key: '...',
+  region: 'us-east-1',
+  endpoint: "http://localhost:8000"
+)
+
+=end
+
+
+
+
 =begin
 # amqp四回目
 require "amqp"
