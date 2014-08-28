@@ -10,6 +10,119 @@
 
 
 
+
+
+=begin
+# daemon化
+Process.daemon(nochdir=true) if ARGV[0] == "-D"
+
+puts "anokutara"
+sleep 10
+puts "end"
+=end
+
+
+=begin
+# 複数コネクション
+require "em-websocket"
+
+#connections = []
+# 配列ではなくEventMachineオブジェクトを生成
+connections = EM::Channel.new
+
+EM::WebSocket.start(host: "localhost", port: 3000) do |ws_conn|
+  ws_conn.onopen do
+    # 接続してきたコネクションを格納
+    #connections << ws_conn
+    # EventMachine#subscribeを用い、コネクションオブジェクトと処理を登録
+    connections.subscribe{|message| ws_conn.send(message) }
+  end
+
+
+  ws_conn.onmessage do |message|
+    puts message
+    # 全てのコネクションに対してメッセージを送信
+    #connections.each{|conn|
+    #  conn.send(message)
+    #}
+    # onopen内で登録した処理を呼び出し
+    connections.push(message)
+  end
+  puts "riun"
+end
+=end
+
+
+
+=begin
+# websocket
+require "em-websocket"
+
+
+EM.run {
+  EM::WebSocket.run(:host => "localhost", :port => 8089) do |ws|
+    ws.onopen { |handshake|
+      puts "open"
+      p handshake
+      ws.send "Hell #{handshake.path}"
+    }
+
+    ws.onclose { puts "closed" }
+
+    ws.onmessage { |msg|
+      puts "message: #{msg}"
+      ws.send "Pong: #{msg}"
+    }
+    
+    p ws
+    puts "run"
+  end
+  puts "run guy"
+}
+=end
+
+
+=begin
+# EventMachineテスト 2
+require "eventmachine"
+
+module Es
+  def receive_data(data)
+    puts 
+    puts data
+    puts "kitade"
+    send_data(data)
+  end
+end
+
+class Ser < EM::Connection
+  attr_accessor :status, :options
+  
+  def receive_data(data)
+    puts "#{@status} -- #{data}"
+    puts options
+    send_data("hell\n")
+  end
+end
+
+EM.run do
+  host = "localhost"
+  port = "8088"
+  
+  EM::start_server host,port,Ser do |conn|
+    puts conn
+    puts "conn"
+    conn.options = {:my => 'options'}
+    conn.status = :OK
+  end
+  
+  puts "start"
+end
+=end
+
+
+
+
 =begin
 # DynamoDBlocal
 require "aws-sdk-core"
