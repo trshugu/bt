@@ -6,19 +6,201 @@
 
 
 
-
-
-
+=begin
+# cool.io2
+require 'rubygems'
+require 'cool.io'
+ 
+cool.io.server 'localhost', 4321 do
+  on_connect do
+    puts "#{remote_addr}:#{remote_port} connected"
+    puts "cone sle"
+    sleep 1
+    write "bouce"
+  end
+ 
+  on_close do
+    puts "#{remote_addr}:#{remote_port} disconnected"
+  end
+ 
+  on_read do |data|
+    puts "Got: #{data}"
+    puts "read sle"
+    sleep 1
+    write "sadf"
+    close
+  end
+ 
+  on_resolve_failed do
+    puts "Error: Couldn't resolve #{remote_host}"
+  end
+ 
+  on_connect_failed do
+    puts "Error: Connection refused to #{remote_host}:#{remote_port}"
+  end
+end
+ 
+puts "start"
+cool.io.run
+=end
 
 
 
 =begin
+# cool.io
+require 'cool.io'
+
+ADDR = 'localhost'
+PORT = 4321
+
+cool.io.connection :echo_server_connection do
+  on_connect do
+    puts "#{remote_addr}:#{remote_port} connected"
+  end
+
+  on_close do
+    puts "#{remote_addr}:#{remote_port} disconnected"
+  end
+
+  on_read do |data|
+    write data
+  end
+end
+
+puts "Echo server listening on #{ADDR}:#{PORT}"
+cool.io.server ADDR, PORT, :echo_server_connection
+cool.io.run
+=end
+
+
+
+=begin
+# celluloid テスト4
+require 'celluloid'
+
+class Receiver
+  include Celluloid
+
+  def initialize
+    async.wait
+  end
+
+  def wait
+    loop do
+      sleep 2
+      message = receive{|msg|
+        msg.is_a? String
+      }
+      puts "received: #{message}"
+      puts "tugiwomatu"
+    end
+  end
+end
+
+receiver = Receiver.new
+
+receiver.mailbox << "one"
+receiver.mailbox << 1
+receiver.mailbox << "two"
+sleep 10
+=end
+
+
+=begin
+# celluloid テスト3
+require 'celluloid'
+require 'open-uri'
+
+class Crawler
+  include Celluloid
+
+  def initialize(url)
+    @url = url
+  end
+
+  def get
+    open(@url).read
+  end
+end
+
+URLS = ["http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+"http://yahoo.co.jp",
+]
+
+futures = URLS.map do |url|
+  puts "korekore"
+  Crawler.new(url).future.get
+end
+
+futures.each do |future|
+  puts "soresore"
+  #puts future.value
+end
+=end
+
+
+=begin
+# celluloid テスト2
+require 'celluloid'
+
+class Counter
+  include Celluloid
+  attr_reader :count
+  
+  def initialize
+    @count = 0
+  end
+  
+  def increment(n = 1)
+    sleep 1
+    @count += n
+  end
+end
+
+actor = Counter.new
+puts actor.count 
+puts actor.increment 
+p actor.async.increment(41) 
+puts actor.increment 
+puts actor.increment 
+puts actor.increment 
+puts actor.count
+=end
+
+
+=begin
 # daemon化
-Process.daemon(nochdir=true) if ARGV[0] == "-D"
+require "win32/daemon"
+include Win32
+
+#Process.daemon(nochdir=true) if ARGV[0] == "-D"
+puts "start"
+
+
+class D < Daemon
+  def sevice_main
+    puts "maimiamai"
+  end
+end
+
+
+a=D.new
+a.mainloop
 
 puts "anokutara"
-sleep 10
+sleep 1
 puts "end"
+
+puts "true end"
 =end
 
 
