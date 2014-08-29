@@ -7,6 +7,20 @@
 
 
 =begin
+# ping
+require 'net/ping'
+
+pinger = Net::Ping::External.new("yao.com.jp")
+
+if pinger.ping?
+  puts 'reachable'
+else
+  puts 'unreachable'
+end
+=end
+
+
+=begin
 # cool.io2
 require 'rubygems'
 require 'cool.io'
