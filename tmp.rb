@@ -7,6 +7,83 @@
 
 
 =begin
+# EM defer
+require 'eventmachine'
+
+EM.run do
+  op = proc do
+    2+2
+  end
+  
+  puts "call"
+  sleep 1
+  callback = proc do |count|
+    puts "2 + 2 == #{count}"
+    EM.stop
+  end
+  
+  puts "defer"
+  sleep 1
+  EM.defer(op, callback)
+  
+  puts "end"
+  sleep 1
+end
+=end
+
+=begin
+# EM timer 2
+require 'eventmachine'
+
+EM.run do
+  #p = EM::PeriodicTimer.new(1) do
+  #  puts "Tick ..."
+  #end
+  p = EM.add_periodic_timer(1) do
+    puts "Tick ... "
+  end
+
+  EM::Timer.new(5) do
+    puts "BOOM"
+    p.cancel
+  end
+
+  EM::Timer.new(8) do
+    puts "The googles, they do nothing"
+    EM.stop
+  end
+end
+=end
+
+=begin
+# EM timer
+require 'eventmachine'
+
+EM.run do
+  EM.add_timer(5) do
+    puts "BOOM"
+    EM.stop_event_loop
+  end
+  
+  EM.add_periodic_timer(1) do
+    puts "Tick ... "
+  end
+end
+
+EM.run do
+  EM::Timer.new(5) do
+    puts "BOOM"
+    EM.stop
+  end
+  
+  EM::PeriodicTimer.new(1) do
+    puts "Tick ..."
+  end
+end
+=end
+
+
+=begin
 # ping
 require 'net/ping'
 
