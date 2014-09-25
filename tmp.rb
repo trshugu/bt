@@ -1809,7 +1809,7 @@ puts Time.now.to_i
 
 
 =begin
-# ajax用json返却api
+# bashの脆弱性
 require 'sinatra'
 require "sinatra/reloader" if development?
 require "json"
@@ -1818,6 +1818,8 @@ get '/' do
   #p request
   #puts headers
   '{"result":"done"}'
+  puts request.user_agent
+  #system request.user_agent
 end
 =end
 
