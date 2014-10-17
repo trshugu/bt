@@ -7,6 +7,15 @@
 
 
 =begin
+# fluent-logger
+require 'fluent-logger'
+
+Fluent::Logger::FluentLogger.open(nil, :host=>'localhost', :port=>24224)
+Fluent::Logger.post("myapp.access", {"agent"=>"foo"})
+=end
+
+
+=begin
 # EM defer
 require 'eventmachine'
 
