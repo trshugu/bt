@@ -7,6 +7,21 @@
 
 
 =begin
+# 閏
+arr = [1000,1992,2000,2001]
+arr.each{|i|
+  if (i % 4 == 0 && i % 100 != 0) || i % 400 == 0
+    puts i.to_s + " is a leap year"
+  else
+    puts i.to_s + " is not a leap year"
+  end
+}
+=end
+
+
+
+
+=begin
 # fluent-logger
 require 'fluent-logger'
 
