@@ -4,6 +4,8 @@
 =end
 
 
+=begin
+=end
 # fluent4
 require 'fluent-logger'
 
