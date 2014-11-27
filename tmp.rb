@@ -4,6 +4,24 @@
 =end
 
 
+# fluent4
+require 'fluent-logger'
+
+starttime = Time.now
+Fluent::Logger::FluentLogger.open("tag", :host=>'localhost', :port=>24224)
+
+mes = "ruby"
+count = 10000 * 100
+
+count.times do |i|
+  unless Fluent::Logger.post("nakami", {"agent" + mes =>"foo" + i.to_s})
+    puts "log error"
+  end
+end
+
+endtime = Time.now
+puts endtime - starttime
+
 
 =begin
 # fluent3
