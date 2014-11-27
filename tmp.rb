@@ -5,6 +5,53 @@
 
 
 
+=begin
+# fluent3
+require 'fluent-logger'
+require "parallel"
+starttime = Time.now
+Fluent::Logger::FluentLogger.open("tag", :host=>'localhost', :port=>24224)
+
+def potter(mes, count)
+  count.times do |i|
+    unless Fluent::Logger.post("nakami", {"agent" + mes =>"foo" + i.to_s})
+      puts "log error"
+    end
+  end
+end
+
+tharr = []
+7.times do |i|
+  tharr.push -> { potter i.to_s * 3 ,  100000 }
+end
+
+Parallel.each(tharr, in_threads: 1) {|rambda|
+  begin
+    rambda.call
+  rescue => ex
+    puts ex
+  end
+}
+
+endtime = Time.now
+puts endtime - starttime
+=end
+
+
+
+
+=begin
+# fluent2
+require 'fluent-logger'
+require "logger"
+
+Fluent::Logger::FluentLogger.open("tag", :host=>'localhost', :port=>24224)
+unless Fluent::Logger.post("nakami", {"agent"=>"foo"})
+  puts "log error"
+end
+=end
+
+
 
 =begin
 # 閏
