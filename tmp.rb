@@ -5,7 +5,6 @@
 
 
 =begin
-=end
 # fluent4
 require 'fluent-logger'
 
@@ -23,6 +22,7 @@ end
 
 endtime = Time.now
 puts endtime - starttime
+=end
 
 
 =begin
