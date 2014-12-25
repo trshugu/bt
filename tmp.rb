@@ -4,6 +4,15 @@
 =end
 
 
+
+
+=begin
+# シェルで起動するようにした
+puts "dgen".methods
+=end
+
+
+
 =begin
 # fluent4
 require 'fluent-logger'
