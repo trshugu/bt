@@ -6,6 +6,23 @@
 
 
 
+
+
+
+=begin
+# メソッド拡張 2
+class Integer
+  def plus(x)
+    self + x
+  end
+end
+
+puts 1.plus(1)
+puts 1.plus 1
+=end
+
+
+
 =begin
 # シェルで起動するようにした
 puts "dgen".methods
